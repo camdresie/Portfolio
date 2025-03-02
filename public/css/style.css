@@ -119,6 +119,7 @@ a:hover{
   width: 300px;
   top: 0;
   left: 0;
+  transition: transform 0.3s ease;
 }
 
 .portfolio-me .cell.shrink {
@@ -385,7 +386,7 @@ html {
 .off-canvas-content {
   min-height: 100vh;
   background: var(--dark-bg);
-  margin-left: 300px !important;
+  margin-left: 0 !important;
   padding: 0;
 }
 
@@ -844,5 +845,152 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 .portfolio-me::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.5);
+}
+
+/* Mobile-first responsive adjustments */
+
+/* Sidebar/Navigation adjustments */
+.portfolio-me {
+  position: fixed;
+  width: 300px;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Main content area adjustments */
+.off-canvas-content {
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+/* Add media queries for responsive layout */
+@media screen and (max-width: 63.9375em) {
+  /* Mobile sidebar */
+  .portfolio-me {
+    transform: translateX(-100%);
+    z-index: 1000;
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .portfolio-me.is-open {
+    transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Mobile header */
+  .title-bar {
+    display: block;
+    background: var(--dark-surface);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  /* Mobile content adjustments */
+  .portfolio-intro {
+    padding: 2rem 1.5rem;
+  }
+
+  .portfolio-intro h1 {
+    font-size: 2rem;
+  }
+
+  .portfolio-index {
+    padding: 1rem;
+  }
+
+  /* Project grid adjustments */
+  .grid-container {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  /* Project meta section */
+  .portfolio-project .cell.small-6.medium-9.large-9,
+  .portfolio-project .cell.portfolio-meta.small-6.medium-2.large-3 {
+    width: 100%;
+  }
+
+  /* Project images */
+  .portfolio-project .image {
+    margin: 1rem 0;
+  }
+
+  /* Improve touch targets */
+  .button {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .tech-tags {
+    gap: 0.75rem;
+  }
+
+  .tech-tag {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  .portfolio-index {
+    padding: 1rem 2rem;
+  }
+
+  .portfolio-intro {
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 64em) {
+  .portfolio-me {
+    transform: none;
+    position: fixed;
+  }
+
+  .off-canvas-content {
+    margin-left: 300px !important;
+  }
+
+  .title-bar {
+    display: none;
+  }
+}
+
+/* Style Foundation's title-bar and menu icon */
+.title-bar {
+  background: var(--dark-surface);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.title-bar-title {
+  color: var(--text-primary);
+}
+
+.menu-icon::after {
+  background: var(--text-primary);
+  box-shadow: 0 7px 0 var(--text-primary), 0 14px 0 var(--text-primary);
+}
+
+/* Improve project card layout on mobile */
+@media screen and (max-width: 39.9375em) {
+  .portfolio-index .cell {
+    margin-bottom: 1.5rem;
+  }
+
+  .portfolio-index .thumbnail {
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-index .cell:hover {
+    transform: translateY(-4px);
+  }
 }
 
