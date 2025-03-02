@@ -459,7 +459,7 @@
     "pmProjects": {
         "categories": [
             {
-                "name": "Contract Management Solutions",
+                "name": "New Product Development",
                 "projects": [
                     {
                         "id": "pm-accord",
@@ -468,8 +468,8 @@
                         "timeline": "2024 - 2025",
                         "role": "Co-Lead Product Manager",
                         "team": "27 members (14 Engineers, 2 Machine Learning Engineers, 3 Designers, 3 PMs, 2 Legal SMEs, 3 QA)",
-                        "overview": "Accord revolutionizes how legal teams handle contract negotiations by combining AI-powered analysis, real-time collaboration, and automated workflow management into a single platform.",
-                        "challenge": "Enterprise legal teams were struggling with fragmented tools, manual processes, and lack of visibility into contract negotiations, resulting in delays and increased costs.",
+                        "overview": "Accord revolutionizes how legal teams handle contract negotiations by combining AI-powered analysis and editing of contracts with aggregate reporting tools for compliance and tracking.",
+                        "challenge": "Enterprise legal teams at private equity firms were struggling with fragmented tools, manual processes, and lack of visibility into contract negotiations, resulting in delays and increased costs.",
                         "images": [
                             {
                                 "url": "./static/images/Accord/accord0square.jpg",
@@ -477,7 +477,19 @@
                             },
                             {
                                 "url": "./static/images/Accord/accord1.png",
-                                "caption": "Accord Platform Interface"
+                                "caption": "Accord Contract Overview Page"
+                            },
+                            {
+                                "url": "./static/images/Accord/accord2.png",
+                                "caption": "Accord Digital Playbooks"
+                            },
+                            {
+                                "url": "./static/images/Accord/accord3.png",
+                                "caption": "Accord Markup Builder"
+                            },
+                            {
+                                "url": "./static/images/Accord/accord4.png",
+                                "caption": "Accord Contract Summaries"
                             }
                         ],
                         "image_urls": {
@@ -490,7 +502,7 @@
                         "approach": [
                             {
                                 "title": "User Research & Discovery",
-                                "description": "Conducted 50+ interviews with legal professionals, analyzed existing workflows, and identified key pain points in contract negotiation processes."
+                                "description": "Conducted interviews with legal and private equity professionals, analyzed existing workflows, and identified key pain points in contract negotiation processes."
                             },
                             {
                                 "title": "Strategy Development",
@@ -498,19 +510,13 @@
                             },
                             {
                                 "title": "MVP Development",
-                                "description": "Led agile development of core features including document comparison, comment management, and approval workflows."
-                            },
-                            {
-                                "title": "Beta Testing & Iteration",
-                                "description": "Ran beta program with 10 enterprise clients, gathering feedback and iterating on key features."
+                                "description": "Took a co-development approach, working with 12 of our private equity customers to develop a solution highly-tailored to their needs. Led agile development of core features including AI summarization of contracts and iterations on AI negotiation tools."
                             }
                         ],
                         "outcomes": [
-                            "Reduced contract negotiation time by 40%",
-                            "Increased user satisfaction score from 6.5 to 8.9",
-                            "Successfully onboarded 50+ enterprise clients",
-                            "95% user retention rate",
-                            "Generated $2M ARR within first year"
+                            "Reduced contract negotiation time by 67%",
+                            "Decreased new employee onboarding time by 50%",
+                            "Sold first license of new software before launch, evidencing the high demand for our solution."
                         ],
                         "technologies": [
                             "Product Strategy",
@@ -518,125 +524,133 @@
                             "Agile",
                             "Stakeholder Management",
                             "Contract Lifecycle Management"
-                        ],
-                        "learnings": [
-                            "Early stakeholder alignment is crucial for complex enterprise products",
-                            "Importance of balancing automation with human oversight",
-                            "Value of continuous user feedback in shaping product direction",
-                            "Need for robust change management in enterprise deployments"
-                        ]
-                    },
-                    {
-                        "id": "pm-contract-summaries",
-                        "project_name": "Contract Summaries & Reporting Platform",
-                        "description": "Developed an AI-powered platform for automated contract analysis and summary generation, reducing review time by 60%.",
-                        "timeline": "2021 - 2022",
-                        "role": "Senior Product Manager",
-                        "team": "8 members (4 Engineers, 1 Designer, 1 PM, 2 ML Engineers)",
-                        "overview": "An intelligent platform that automatically analyzes contracts, generates comprehensive summaries, and provides actionable insights through customizable reports.",
-                        "approach": [
-                            {
-                                "title": "Market Analysis",
-                                "description": "Analyzed competing solutions and identified gap in automated contract analysis market."
-                            },
-                            {
-                                "title": "ML Model Development",
-                                "description": "Collaborated with ML team to develop and train models for contract analysis."
-                            },
-                            {
-                                "title": "UI/UX Design",
-                                "description": "Created intuitive interfaces for viewing and managing contract summaries."
-                            }
-                        ],
-                        "outcomes": [
-                            "60% reduction in contract review time",
-                            "85% accuracy in automated summary generation",
-                            "30% increase in team productivity",
-                            "Successful integration with major CLM systems"
-                        ],
-                        "technologies": [
-                            "Machine Learning",
-                            "Natural Language Processing",
-                            "Analytics",
-                            "Legal Tech",
-                            "API Design"
                         ]
                     }
                 ]
-            },
+            },      
             {
                 "name": "AI/ML Solutions",
                 "projects": [
                     {
                         "id": "pm-ml-taxonomies",
-                        "project_name": "ML-Powered Document Taxonomies",
+                        "project_name": "ML Contract Taxonomies",
                         "description": "Created an intelligent document classification system using machine learning, improving processing accuracy by 75%.",
-                        "timeline": "2022 - 2023",
-                        "role": "Product Manager, AI/ML",
-                        "team": "10 members (3 ML Engineers, 4 Backend, 2 Frontend, 1 PM)",
-                        "overview": "Developed a sophisticated ML system for automatically categorizing and organizing legal documents based on content, structure, and metadata.",
+                        "timeline": "2022 - 2024",
+                        "role": "Lead Product Manager",
+                        "team": "8 members (3 ML Engineers, 4 SMEs, 1 PM)",
+                        "overview": "Developed a patented methodology for breaking down contracts into the most legally relevant component parts. These taxonomies have gone on to power many parts of the Ontra app, including Digital Playbooks, Markup Builder, and Contract Summaries while providing the necessary framework for conducting robust evaluation of model performance.",
                         "approach": [
                             {
-                                "title": "Data Collection",
-                                "description": "Gathered and labeled 100,000+ documents for model training."
+                                "title": "Data Collection and Labeling",
+                                "description": "Developed methodologies with team members to reduce the number of required documents to label in order to aid in model evaluation and ensure accuracy of solutions."
                             },
                             {
-                                "title": "Model Development",
-                                "description": "Iteratively developed and refined ML models for classification."
+                                "title": "Legal Taxonomies",
+                                "description": "Collaborated with legal SMEs to develop detailed contract taxonomies that are used across the Ontra platform."
                             },
                             {
-                                "title": "Integration",
-                                "description": "Implemented API endpoints and user interfaces for taxonomy management."
+                                "title": "Prompt Engineering",
+                                "description": "Developed process for SMEs to prompt engineer to improve the performance of tools across the Ontra ecosystem."
                             }
                         ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Taxonomies/taxonomy0square.jpg"
+                        },
                         "outcomes": [
-                            "75% improvement in classification accuracy",
-                            "90% reduction in manual categorization time",
-                            "Successfully processed 1M+ documents",
-                            "Integrated with 5 major document management systems"
+                            "Wide adoption of taxonomies across the Ontra platform",
+                            "Patent granted for the methodology developed",
+                            "Successfully processed over 1M+ contracts using these taxonomies to aid in contract analysis"                        
                         ],
                         "technologies": [
                             "Machine Learning",
-                            "Data Strategy",
-                            "Python",
-                            "TensorFlow",
-                            "REST APIs"
+                            "Generative AI",
+                            "OpenAI",
+                            "Data Labeling",
+                            "Prompt Engineering"
                         ]
                     },
                     {
                         "id": "pm-openai",
-                        "project_name": "OpenAI Integration Suite",
+                        "project_name": "OpenAI Integration",
                         "description": "Led the integration of OpenAI technologies across product suite, enhancing document analysis and user productivity.",
                         "timeline": "2023",
                         "role": "Technical Product Manager",
                         "team": "6 members (3 Engineers, 1 ML Specialist, 1 Designer, 1 PM)",
-                        "overview": "Integrated OpenAI's GPT models to enhance document analysis, summarization, and content generation capabilities across our product suite.",
+                        "overview": "Integrated OpenAI's GPT models to our product to enhance document analysis, summarization, and content generation capabilities across our product suite.",
                         "approach": [
                             {
                                 "title": "Use Case Analysis",
-                                "description": "Identified key opportunities for AI integration across products."
+                                "description": "Identified key opportunities for AI enhancement across products."
                             },
                             {
-                                "title": "Prototype Development",
-                                "description": "Created POCs for various AI-enhanced features."
+                                "title": "Hackathon Development",
+                                "description": "Led hackathon to verify the viability of using GPT models to enhance our product."
                             },
                             {
                                 "title": "Production Implementation",
                                 "description": "Rolled out AI features across product suite."
                             }
                         ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/OpenAI/openai0square.jpg"
+                        },
                         "outcomes": [
-                            "50% improvement in document processing speed",
-                            "80% user satisfaction with AI-powered features",
-                            "25% reduction in manual data entry",
-                            "Successful deployment across 3 product lines"
+                            "67% improvement in contract processing speed",
+                            "More than 25x improvement in innovation speed",
+                            "Successful deployment across 4 product lines"
                         ],
                         "technologies": [
                             "OpenAI API",
                             "GPT Models",
-                            "API Integration",
-                            "Python",
-                            "Node.js"
+                            "Stakeholder Alignment"
+                        ]
+                    },
+                    {
+                        "id": "pm-intake-ai",
+                        "project_name": "Intake AI Models",
+                        "description": "Developed a suite of AI models for intelligent document processing, enabling automated classification of document types, processing speed prediction, and project name extraction to streamline the legal document intake process.",
+                        "timeline": "2022",
+                        "role": "Product Manager",
+                        "team": "7 members (1 ML Engineers, 5 Engineers, 1 PM)",
+                        "overview": "Created an intelligent document intake system that uses multiple AI models to automatically classify documents, predict processing requirements, and extract key information, significantly improving the efficiency of our legal network's document processing workflow.",
+                        "approach": [
+                            {
+                                "title": "Model Development",
+                                "description": "Developed and trained three specialized AI models: document type classification, processing speed prediction, and project name extraction."
+                            },
+                            {
+                                "title": "Integration",
+                                "description": "Seamlessly integrated the AI models into the existing document intake workflow to provide real-time processing insights."
+                            },
+                            {
+                                "title": "Performance Optimization",
+                                "description": "Continuously refined models based on feedback from the legal network to improve accuracy and processing speed."
+                            }
+                        ],
+                        "images": [
+                            {
+                                "url": "./static/images/Intake/intake1.jpg",
+                                "caption": "Document Type Classification and Project Name Extraction"
+                            },
+                            {
+                                "url": "./static/images/Intake/intake2.jpg", 
+                                "caption": "Document Type Classification and Rush Classification"
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Intake/intake0square.jpeg"
+                        },
+                        "outcomes": [
+                            "Automated classification of more than 30 document types with high accuracy",
+                            "Reduced document processing time by predicting resource requirements",
+                            "Improved project organization through automated name extraction",
+                            "Streamlined workflow for legal network"
+                        ],
+                        "technologies": [
+                            "Machine Learning",
+                            "Natural Language Processing",
+                            "Document Classification",
+                            "Information Extraction"
                         ]
                     }
                 ]
@@ -645,75 +659,158 @@
                 "name": "Digital Transformation Tools",
                 "projects": [
                     {
-                        "id": "pm-playbooks",
-                        "project_name": "Digital Playbooks Platform",
-                        "description": "Created a dynamic platform for digital process documentation and team collaboration, increasing process adoption by 85%.",
-                        "timeline": "2021 - 2022",
-                        "role": "Product Manager",
-                        "team": "7 members (3 Engineers, 2 Designers, 1 PM, 1 Content Strategist)",
-                        "overview": "Developed an interactive platform for creating, managing, and sharing digital playbooks that guide teams through complex processes and procedures.",
+                        "id": "pm-contract-summaries",
+                        "project_name": "Contract Summaries & Reporting",
+                        "description": "Developed an AI-powered platform for automated contract analysis and summary generation, reducing review time by 60%.",
+                        "timeline": "2024",
+                        "role": "Lead Product Manager",
+                        "team": "8 members (4 Engineers, 1 UX Designer, 1 PM, 1 ML Engineer, 1 QA)",
+                        "overview": "An intelligent platform that automatically analyzes contracts and extracts fully-customizable key data points, generates comprehensive summaries, and provides actionable insights through customizable reports.",
+                        "images": [
+                            {
+                                "url": "./static/images/Summaries/summaries0square.png",
+                                "caption": "A completed contract summary for an NDA"
+                            },
+                            {
+                                "url": "./static/images/Summaries/summaries1.jpg", 
+                                "caption": "A completed contract summary for a term sheet"
+                            },
+                            {
+                                "url": "./static/images/Summaries/summaries2.jpg",
+                                "caption": "A completed contract summary for a term sheet"
+                            },
+                            {
+                                "url": "./static/images/Summaries/summaries3.png",
+                                "caption": "Accord Markup Builder"
+                            },
+                            {
+                                "url": "./static/images/Summaries/summaries4.jpg",
+                                "caption": "Accord Contract Summaries"
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Summaries/summaries0square.png",
+                            "gallery": [
+                                "./static/images/Summaries/accord0square.jpg",
+                                "./static/images/Summaries/accord1.png"
+                            ]
+                        },
                         "approach": [
                             {
-                                "title": "User Research",
-                                "description": "Conducted extensive research on process documentation needs."
+                                "title": "Product Discovery",
+                                "description": "Analyzed market and customer willingness to pay for new Accord platform and identified that automated summaries were a key offering to enhance perceived value of solution and increase willingness to pay."
                             },
                             {
-                                "title": "Platform Design",
-                                "description": "Created intuitive authoring and viewing experiences."
+                                "title": "ML Model Development",
+                                "description": "Collaborated with ML team and legal SMEs to develop processes for creating high-quality starter templates,verifying model outputs, and prompt engineering to enhance performance."
                             },
                             {
-                                "title": "Analytics Integration",
-                                "description": "Implemented tracking for process adoption and completion."
+                                "title": "UI/UX Design",
+                                "description": "Collaborated with team and UX Designer to create intuitive interfaces for creating summary templates, viewing completed summaries, and managing contract summaries."
                             }
                         ],
                         "outcomes": [
-                            "85% increase in process adoption rates",
-                            "70% reduction in training time",
-                            "95% user satisfaction score",
-                            "Successfully deployed to 100+ teams"
+                            "60% reduction in contract review time for complex agreements",
+                            "Nearly 100% accuracy in automated summary generation for simple agreements",
+                            "85% or greater accuracy in automated summary generation for complex agreements"
+                        ],
+                        "technologies": [
+                            "Machine Learning",
+                            "Generative AI",
+                            "Natural Language Processing",
+                            "Legal Tech"
+                        ]
+                    },
+                    {
+                        "id": "pm-playbooks",
+                        "project_name": "Digital Negotiation Playbooks",
+                        "description": "Created a dynamic platform for digital process documentation and team collaboration, increasing process adoption by 85%.",
+                        "timeline": "2023",
+                        "role": "Product Manager",
+                        "team": "9 members (5 Engineers, 1 Machine Learning Engineer, 1 UX Designer, 1 PM, 1 QA)",
+                        "overview": "Developed an interactive platform for creating, managing, and sharing digital playbooks that guide lawyers through complex contract negotiations. These playbooks also serve as the backing for our AI Playbook Suggestions in the Markup Builder tool.",
+                        "approach": [
+                            {
+                                "title": "User Research",
+                                "description": "Conducted extensive research on requirements for digital playbooks for both legal network members, the customers they serve, and internal teams."
+                            },
+                            {
+                                "title": "Platform Design",
+                                "description": "Created intuitive authoring and viewing experiences for both legal network members and internal teams."
+                            },
+                            {
+                                "title": "Analytics Integration",
+                                "description": "Implemented tracking commonality of positions and how often negotiated outcomes align with playbook preferences."
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Digital Playbooks/Playbooks.png"
+                        },
+                        "images": [
+                            {
+                                "url": "./static/images/Digital Playbooks/Playbooks.png",
+                                "caption": "Digital Playbooks"
+                            },
+                            {
+                                "url": "./static/images/Digital Playbooks/Playbooks2.jpg",
+                                "caption": "Digital Playbooks Builder"
+                            }
+                        ],
+                        "outcomes": [
+                            "Successful deployment across 100% of accounts",
+                            "Key element in 67% reduction in negotiation time using Markup Builder",
+                            "Significant reduction in time to onboard new team members with codified negotiation preferences."
                         ],
                         "technologies": [
                             "Process Design",
+                            "Aggressive Prioritization",
+                            "Stakeholder Collaboration",
                             "Collaboration Tools",
-                            "Analytics",
-                            "React",
-                            "Node.js"
+                            "Analytics"
                         ]
                     },
                     {
                         "id": "pm-markup",
                         "project_name": "Markup Builder",
-                        "description": "Built an intuitive markup tool for document review and collaboration, streamlining the review process by 45%.",
-                        "timeline": "2022",
-                        "role": "Product Manager",
-                        "team": "5 members (2 Engineers, 1 Designer, 1 PM, 1 QA)",
-                        "overview": "Created a sophisticated yet user-friendly tool for adding, managing, and collaborating on document markups and annotations.",
+                        "description": "Built an AI-powered markup tool for document review and collaboration that leverages historical precedents to automate contract editing. The tool combines traditional markup capabilities with innovative AI Precedent Suggestions that analyze past edits to automatically suggest and apply relevant changes, streamlining the review process and dramatically reducing negotiation time.",
+                        "timeline": "2024 - 2025",
+                        "role": "Staff Product Manager",
+                        "team": "10 members (5 Engineers, 1 UX Designer, 1 PM, 2 Machine Learning Engineers, 1 QA)",
+                        "overview": "Created a sophisticated yet user-friendly method for utilizing AI to assist in contract editing. Markup Builder's AI Precedent Suggestions feature analyzes historical contract edits to automatically identify and apply relevant changes from similar past negotiations, creating a scalable solution for AI-assisted contract editing that works across any contract type.",
                         "approach": [
                             {
                                 "title": "Competitive Analysis",
-                                "description": "Analyzed existing markup tools and identified gaps."
+                                "description": "Analyzed existing markup tools and identified gaps in the market for AI-assisted contract editing based on negotiated precedent."
+                            },
+                            {
+                                "title": "AI Integration",
+                                "description": "Developed AI Precedent Suggestions using proprietary internal algorithm and OpenAI to analyze historical edits and automatically suggest relevant changes."
                             },
                             {
                                 "title": "UX Development",
-                                "description": "Designed intuitive markup interface and collaboration features."
-                            },
+                                "description": "Integrated with existing intuitive markup interface that seamlessly integrates AI suggestions with manual editing capabilities."
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Markup Builder/markupbuilder0square.png"
+                        },
+                        "images": [
                             {
-                                "title": "Integration",
-                                "description": "Implemented integration with major document formats."
+                                "url": "./static/images/Markup Builder/markupbuilder0square.png",
+                                "caption": "Markup Builder"
                             }
                         ],
                         "outcomes": [
-                            "45% faster document review process",
-                            "75% reduction in review-related emails",
-                            "90% user adoption rate",
-                            "Successfully integrated with 3 major document systems"
+                            "67% reduction in time to negotiate routine contracts",
+                            "Created scalable solution for contract editing assistance with AI that scales across any contract type",
+                            "Reduced onboarding requirements by 1000%",
+                            "Reduced time to value from 3 weeks to 1 day"
                         ],
                         "technologies": [
-                            "Document Management",
-                            "Collaboration",
-                            "UX Research",
-                            "JavaScript",
-                            "Canvas API"
+                            "OpenAI",
+                            "Generative AI",
+                            "Search Algorithms",
+                            "User Research"
                         ]
                     }
                 ]

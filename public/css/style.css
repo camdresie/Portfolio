@@ -1671,12 +1671,18 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   max-width: 800px;
   margin: 0 auto;
   overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .slide {
   display: none;
   width: 100%;
   animation: fade 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  text-align: center;
 }
 
 .slide.active {
@@ -1688,6 +1694,28 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   height: auto;
   border-radius: var(--border-radius-md);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.slide-caption {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 1rem 0 1.5rem;
+  text-align: center;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.slide:hover .slide-caption {
+  opacity: 1;
+  color: var(--text-primary);
 }
 
 .nav-button {
