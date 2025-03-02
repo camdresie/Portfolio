@@ -3,32 +3,46 @@ extends layout.pug
 //- This pug template dynamically renders all of the data on a given project by pulling from the data.json file.
 //- All information, including the project name, description, technologies, links, and images. 
 
-block content 
+block content
   nav.nav
     a(href='/')
       span &larr; Back to Portfolio
-  article.grid-container.portfolio-intro.portfolio-project
-    .grid-x
-      .cell.small-6.medium-9.large-9
 
-        h1= thisProject.project_name
-        p.lead.text-light
-          | #{thisProject.description}
+  article.portfolio-project
+    .grid-container
+      .grid-x.grid-margin-x
+        .cell.small-12.medium-9.large-9
+          h1= thisProject.project_name
+          p.lead.text-light= thisProject.description
+          
+          if thisProject.image_urls && thisProject.image_urls.length > 0
+            section.project-section.project-gallery
+              h2 Project Gallery
+              .slideshow-container
+                each imageUrl, index in thisProject.image_urls
+                  .slide(class=index === 0 ? 'active' : '')
+                    img(src=imageUrl.startsWith('./static') ? imageUrl.substring(1) : imageUrl alt=thisProject.project_name)
+                if thisProject.image_urls.length > 1
+                  button.nav-button.prev(onclick='changeSlide(-1)') &#10094;
+                  button.nav-button.next(onclick='changeSlide(1)') &#10095;
+                  .dots-container
+                    each _, index in thisProject.image_urls
+                      span.dot(onclick=`currentSlide(${index})` class=index === 0 ? 'active' : '')
 
-      .cell.portfolio-meta.small-6.medium-2.large-3
-        h6 Technologies
-        ul
-          each technology in thisProject.technologies
-            li= technology
-        if thisProject.live_link
-          a.button.expanded(href=`${thisProject.live_link}` target='_blank') Live Demo
-        if thisProject.github_link
-          a.button.expanded(href=`${thisProject.github_link}` target='_blank') GitHub Repo
-    
-    //- Display project images with corrected absolute paths
-    if thisProject.image_urls.length > 1
-        img.image(src=`/static${thisProject.image_urls[1].replace('./static', '')}`)
-    if thisProject.image_urls.length > 2
-        img.image(src=`/static${thisProject.image_urls[2].replace('./static', '')}`)
-    if thisProject.image_urls.length > 3
-        img.image(src=`/static${thisProject.image_urls[3].replace('./static', '')}`)
+        .cell.small-12.medium-3.large-3.sidebar
+          .project-meta
+            h3 Project Details
+            
+            .meta-item
+              h4 Technologies
+              .tech-container
+                each technology in thisProject.technologies
+                  span.tech-tag= technology
+
+            if thisProject.live_link
+              .meta-item
+                a.button.expanded(href=`${thisProject.live_link}` target='_blank') Live Demo
+
+            if thisProject.github_link
+              .meta-item
+                a.button.expanded(href=`${thisProject.github_link}` target='_blank') GitHub Repo

@@ -465,11 +465,28 @@
                         "id": "pm-accord",
                         "project_name": "Accord - Contract Negotiation Platform",
                         "description": "Led end-to-end development of a revolutionary contract negotiation platform, reducing negotiation time by 40% and improving collaboration between legal teams.",
-                        "timeline": "2022 - 2023",
-                        "role": "Lead Product Manager",
-                        "team": "12 members (3 Engineers, 2 Designers, 1 PM, 2 Legal SMEs, 4 QA)",
+                        "timeline": "2024 - 2025",
+                        "role": "Co-Lead Product Manager",
+                        "team": "27 members (14 Engineers, 2 Machine Learning Engineers, 3 Designers, 3 PMs, 2 Legal SMEs, 3 QA)",
                         "overview": "Accord revolutionizes how legal teams handle contract negotiations by combining AI-powered analysis, real-time collaboration, and automated workflow management into a single platform.",
                         "challenge": "Enterprise legal teams were struggling with fragmented tools, manual processes, and lack of visibility into contract negotiations, resulting in delays and increased costs.",
+                        "images": [
+                            {
+                                "url": "./static/images/Accord/accord0square.jpg",
+                                "caption": "Accord Platform Overview"
+                            },
+                            {
+                                "url": "./static/images/Accord/accord1.png",
+                                "caption": "Accord Platform Interface"
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Accord/accord0square.jpg",
+                            "gallery": [
+                                "./static/images/Accord/accord0square.jpg",
+                                "./static/images/Accord/accord1.png"
+                            ]
+                        },
                         "approach": [
                             {
                                 "title": "User Research & Discovery",

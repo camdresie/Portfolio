@@ -8,9 +8,10 @@ block content
   article.portfolio-project
     .grid-container
       .grid-x.grid-margin-x
-        .cell.small-6.medium-9.large-9
-          h1= project.project_name
-          p.lead.text-light= project.overview
+        .cell.small-12.medium-9.large-9
+          .header-content
+            h1= project.project_name
+            p.lead.text-light= project.overview
           
           if project.challenge
             section.project-section
@@ -33,7 +34,30 @@ block content
                 each outcome in project.outcomes
                   li= outcome
 
-        .cell.small-6.medium-3.large-3.sidebar
+          if project.images && project.images.length > 0
+            section.project-section.project-gallery
+              h2 Project Gallery
+              .slideshow-container
+                each image, index in project.images
+                  .slide(class=index === 0 ? 'active' : '')
+                    img(src=image.url.startsWith('./static') ? image.url.substring(1) : image.url alt=image.caption)
+                    if image.caption
+                      p.caption= image.caption
+                if project.images.length > 1
+                  button.nav-button.prev(onclick='changeSlide(-1)') &#10094;
+                  button.nav-button.next(onclick='changeSlide(1)') &#10095;
+                  .dots-container
+                    each _, index in project.images
+                      span.dot(onclick=`currentSlide(${index})` class=index === 0 ? 'active' : '')
+
+          if project.learnings
+            section.project-section
+              h2 Key Learnings
+              ul.learnings-list
+                each learning in project.learnings
+                  li= learning
+
+        .cell.small-12.medium-3.large-3.sidebar
           .project-meta
             h3 Project Details
             
@@ -57,21 +81,4 @@ block content
                 h4 Tools & Methods
                 .tech-container
                   each tech in project.technologies
-                    span.tech-tag= tech
-
-      if project.images
-        section.project-section.project-gallery
-          h2 Project Gallery
-          .gallery-grid
-            each image in project.images
-              .gallery-item
-                img(src=image.url alt=image.caption)
-                if image.caption
-                  p.caption= image.caption
-
-      if project.learnings
-        section.project-section
-          h2 Key Learnings
-          ul.learnings-list
-            each learning in project.learnings
-              li= learning 
+                    span.tech-tag= tech 
