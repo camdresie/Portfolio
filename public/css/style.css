@@ -1040,3 +1040,59 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   z-index: 1010;
 }
 
+/* Category styling */
+.category-section {
+  margin: 4rem 0 2rem;
+  position: relative;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.category-header h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 0;
+  padding-right: 1rem;
+  background: var(--dark-bg);
+  position: relative;
+  z-index: 2;
+}
+
+.category-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    transparent 80%
+  );
+  z-index: 1;
+}
+
+.category-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 39.9375em) {
+  .category-section {
+    margin: 3rem 0 1.5rem;
+  }
+
+  .category-header h2 {
+    font-size: 1.5rem;
+  }
+}
+

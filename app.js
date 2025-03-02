@@ -26,7 +26,8 @@ app.use('/static', express.static('public'));
 
 app.get('/', (req, res) => {
     const projects = data.projects;
-    const templateData = { projects };
+    const categories = data.categories;
+    const templateData = { projects, categories };
     res.render('index', templateData);
 })
 
