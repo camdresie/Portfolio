@@ -120,6 +120,7 @@ a:hover{
   top: 0;
   left: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1010;
 }
 
 .portfolio-me .cell.shrink {
@@ -179,6 +180,8 @@ a:hover{
   transition: all 0.2s ease;
   display: inline-block;
   margin-top: auto;
+  position: relative;
+  z-index: 1003;
   }
 
   .portfolio-me a:hover{
@@ -262,6 +265,8 @@ a:hover{
     box-shadow: 
       0 4px 6px rgba(0, 0, 0, 0.1),
       0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1003;
   }
   
   .portfolio-index .cell:hover {
@@ -375,6 +380,7 @@ html {
 /* Fix sidebar width and positioning */
 .position-left {
   width: 300px;
+  z-index: 1010;
 }
 
 .position-left.reveal-for-large {
@@ -856,6 +862,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   height: 100vh;
   overflow-y: auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1010;
 }
 
 /* Main content area adjustments */
@@ -997,11 +1004,39 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 /* Reduce overlay opacity */
 .js-off-canvas-overlay {
-  background: rgba(0, 0, 0, 0.3);  /* Reduce from default 0.5 to 0.3 */
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1005;
 }
 
 /* If you want it even lighter, you could go with: */
 .js-off-canvas-overlay {
   background: rgba(0, 0, 0, 0.2);  /* Even lighter option */
+}
+
+/* Make all interactive elements in sidebar clickable */
+.portfolio-me * {
+  pointer-events: auto !important;
+}
+
+/* Ensure all interactive elements in sidebar work */
+.portfolio-me a,
+.portfolio-me button,
+.portfolio-me .cell {
+  position: relative;
+  z-index: 1015;
+  pointer-events: auto !important;
+}
+
+/* Foundation off-canvas fixes */
+.off-canvas {
+  z-index: 1010;
+}
+
+.off-canvas.is-transition-overlap {
+  z-index: 1010;
+}
+
+.off-canvas.is-open {
+  z-index: 1010;
 }
 
