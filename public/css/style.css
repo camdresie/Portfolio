@@ -1050,7 +1050,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 /* Category styling */
 .category-section {
-  margin: 2rem 0 2rem;
+  margin: 2rem 0;
   position: relative;
 }
 
@@ -1059,36 +1059,51 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 }
 
 .category-header {
-  margin: 2rem 0 1rem;
-  padding-bottom: 0.5rem;
+  margin: 0 0 2rem;
+  padding: 0 3rem 0.5rem;
   border-bottom: 2px solid var(--accent);
 }
 
+.category-header h2,
 .category-header h3 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--text-primary);
   margin: 0;
-}
-
-.projects-grid {
-  margin-bottom: 3rem;
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 .category-description {
   color: var(--text-secondary);
   font-size: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 3rem 2rem;
   max-width: 800px;
 }
 
 /* Responsive adjustments */
-@media screen and (max-width: 39.9375em) {
-  .category-section {
-    margin: 3rem 0 1.5rem;
+@media screen and (max-width: 63.9375em) {
+  .category-header {
+    padding: 0 1.5rem 0.5rem;
   }
-
+  
+  .category-header h2,
   .category-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+  }
+  
+  .category-description {
+    margin: 1rem 1.5rem 2rem;
+  }
+}
+
+@media screen and (max-width: 39.9375em) {
+  .category-header {
+    padding: 0 1rem 0.5rem;
+  }
+  
+  .category-description {
+    margin: 1rem 1rem 2rem;
   }
 }
 
@@ -1452,6 +1467,147 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   .portfolio-project .lead {
     font-size: 1.1rem;
     margin-bottom: 2rem;
+  }
+}
+
+/* Projects grid consistency */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.projects-grid a.cell {
+  background: var(--dark-surface);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-grid a.cell:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(99, 102, 241, 0.3),
+    0 0 0 2px rgba(99, 102, 241, 0.4),
+    0 0 50px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent);
+  background: linear-gradient(
+    135deg,
+    var(--dark-surface),
+    rgba(99, 102, 241, 0.15)
+  );
+}
+
+.projects-grid .thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1rem;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects-grid .cell:hover .thumbnail {
+  transform: scale(1.05);
+}
+
+.projects-grid h5 {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.projects-grid p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.projects-grid .tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.projects-grid .tech-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.projects-grid .cell:hover .tech-tag {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: var(--text-primary);
+}
+
+/* Category styling consistency */
+.category-section {
+  margin: 3rem 0;
+}
+
+.category-header {
+  margin: 0 0 2rem;
+  padding: 0 3rem;
+}
+
+.category-header h2,
+.category-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+
+.category-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 1rem 0 2rem;
+  padding: 0 3rem;
+  max-width: 800px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 63.9375em) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .category-header,
+  .category-description {
+    padding: 0 1.5rem;
+  }
+}
+
+@media screen and (max-width: 39.9375em) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .category-header,
+  .category-description {
+    padding: 0 1rem;
   }
 }
 

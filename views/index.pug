@@ -20,40 +20,33 @@ block content
     //- Product Management Section
     .portfolio-content(data-content="product")
       each category in pmProjects.categories
-        .category-header
-          h3= category.name
-        .projects-grid
-          each project in category.projects
-            a(href=`/project/${project.id}`).cell
-              .thumbnail
-                if project.image_urls && project.image_urls.thumbnail
-                  img.thumbnail-image(src=project.image_urls.thumbnail)
-                else
-                  img.thumbnail-image(src="/static/images/placeholder-project.jpg")
-              h5= project.project_name
-              p= project.description
-              .technologies
-                each tech in project.technologies
-                  span.tech-tag= tech
-              if project.live_link
-                a.button-link(href=project.live_link) Live Demo
-              if project.github_link
-                a.button-link(href=project.github_link) GitHub
+        .category-section
+          .category-header
+            h3= category.name
+          if category.description
+            p.category-description= category.description
+          .projects-grid
+            each project in category.projects
+              a.cell(href=`/project/${project.id}`)
+                img.thumbnail(src=project.image_urls && project.image_urls.thumbnail ? project.image_urls.thumbnail : "/static/images/placeholder-project.jpg")
+                h5= project.project_name
+                .tech-tags
+                  each tech in project.technologies
+                    span.tech-tag= tech
     
     //- Engineering Section
     .portfolio-content.hidden(data-content="engineering")
       each category in categories
         .category-section
           .category-header
-            h2= category.name
-          p.category-description= category.description
-          .grid-x.grid-margin-x.grid-margin-y
+            h3= category.name
+          if category.description
+            p.category-description= category.description
+          .projects-grid
             each project in projects.filter(p => p.category === category.id)
-              .cell.small-12.medium-6.large-4
-                .project-card
-                  a(href=`/project/${project.id}`)
-                    img.thumbnail(src=project.image_urls[0])
-                    h5= project.project_name
-                    .tech-tags
-                      each tech in project.technologies.slice(0, 3)
-                        span.tech-tag= tech
+              a.cell(href=`/project/${project.id}`)
+                img.thumbnail(src=project.image_urls[0])
+                h5= project.project_name
+                .tech-tags
+                  each tech in project.technologies
+                    span.tech-tag= tech
