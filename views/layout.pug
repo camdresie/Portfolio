@@ -13,14 +13,17 @@ html(class="no-js" lang="en" dir="ltr")
     link(rel='stylesheet', href='/static/css/foundation.css')
     link(rel='stylesheet', href='/static/css/style.css')
   body
+    .geometric-pattern
+    .page-transition-overlay
+      .geometric-loader
+      .accent-line
+      .accent-line
     #my-info.off-canvas.position-left.reveal-for-large.portfolio-me(data-off-canvas='')
       .grid-y.grid-padding-x(style='height: 100%;')
         block sidebar
-          br
           .cell.shrink
             img.thumbnail(src='../static/images/profile_picture.jpg')
           .cell.auto
-
             h5 Cam Dresie
             p.text-light
               | Greetings! I spend my weekdays building the future of AI in the legal industry at Ontra. I'm a California licensed attorney and hold a law degree from Washington University in St. Louis and a Masters in Computer and Information Technology from the University of Pennsylvania.
@@ -30,11 +33,42 @@ html(class="no-js" lang="en" dir="ltr")
       .title-bar.hide-for-large
         .title-bar-left
           button.menu-icon(type='button', data-toggle='my-info')
-
           span.title-bar-title Cam Dresie
       block content
 
-  script(src='/static/js/vendor/jquery.js')
-  script(src='/static/js/vendor/what-input.js')
-  script(src='/static/js/vendor/foundation.js')
-  script(src='/static/js/scripts.js')
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+    script(src='/static/js/vendor/foundation.js')
+    script.
+      $(document).foundation();
+      
+      // Handle page transitions
+      document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.querySelector('.page-transition-overlay');
+        
+        // Add transition for all internal links
+        document.querySelectorAll('a[href^="/"]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('/')) {
+              e.preventDefault();
+              overlay.classList.add('active');
+              
+              setTimeout(() => {
+                window.location.href = href;
+              }, 300);
+            }
+          });
+        });
+        
+        // Handle back/forward navigation
+        window.addEventListener('pageshow', function(event) {
+          if (event.persisted) {
+            overlay.classList.remove('active');
+          }
+        });
+        
+        // Remove overlay when page is fully loaded
+        window.addEventListener('load', function() {
+          overlay.classList.remove('active');
+        });
+      });

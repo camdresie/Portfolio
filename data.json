@@ -38,10 +38,10 @@
         ],
         "github_link": "https://github.com/camdresie/Magic-Mirror-Code",
         "image_urls": [
-            "./static/images/1/mirror0square.jpg",
-            "./static/images/1/mirror3.jpg",
-            "./static/images/1/mirror1.jpg",
-            "./static/images/1/mirror2.jpg"
+            "./static/images/Magic Mirror/mirror0square.jpg",
+            "./static/images/Magic Mirror/mirror3.jpg",
+            "./static/images/Magic Mirror/mirror1.jpg",
+            "./static/images/Magic Mirror/mirror2.jpg"
         ]
         },
         {
@@ -118,10 +118,10 @@
         "live_link": "https://camdresie.github.io/Hackathon-Project/",
         "github_link": "https://github.com/camdresie/Hackathon-Project",
         "image_urls": [
-            "./static/images/0/study0square.png",
-            "./static/images/0/study1.PNG",
-            "./static/images/0/study2.PNG",
-            "./static/images/0/study3.PNG"
+            "./static/images/MCIT Study Smackdown/study0square.png",
+            "./static/images/MCIT Study Smackdown/study1.PNG",
+            "./static/images/MCIT Study Smackdown/study2.PNG",
+            "./static/images/MCIT Study Smackdown/study3.PNG"
         ]
         },
         { 
@@ -174,10 +174,10 @@
         "live_link": "https://camdresie.github.io/Employee-Directory-App---Web-API/",
         "github_link": "https://github.com/camdresie/Employee-Directory-App---Web-API",
         "image_urls": [
-            "./static/images/4/directory0square.jpg",
-            "./static/images/4/directory1.JPG",
-            "./static/images/4/directory2.JPG",
-            "./static/images/4/directory3.JPG"
+            "./static/images/Employee Directory/directory0square.jpg",
+            "./static/images/Employee Directory/directory1.JPG",
+            "./static/images/Employee Directory/directory2.JPG",
+            "./static/images/Employee Directory/directory3.JPG"
         ]
         },
         { 
@@ -194,12 +194,12 @@
         "live_link": "https://camdresie.github.io/Phrase-Hunter-Word-Guessing-Game/",
         "github_link": "https://github.com/camdresie/Phrase-Hunter-Word-Guessing-Game",
         "image_urls": [
-            "./static/images/9/phrase0square.jpg",
-            "./static/images/9/phrase1.JPG",
-            "./static/images/9/phrase2.JPG",
-            "./static/images/9/phrase3.JPG",
-            "./static/images/9/phrase4.JPG",
-            "./static/images/9/phrase5.JPG"
+            "./static/images/Phrase Hunter Game/phrase0square.jpg",
+            "./static/images/Phrase Hunter Game/phrase1.JPG",
+            "./static/images/Phrase Hunter Game/phrase2.JPG",
+            "./static/images/Phrase Hunter Game/phrase3.JPG",
+            "./static/images/Phrase Hunter Game/phrase4.JPG",
+            "./static/images/Phrase Hunter Game/phrase5.JPG"
         ]
         },
         { 
@@ -215,11 +215,11 @@
         "live_link": "https://camdresie.github.io/List-Pagination-and-Filtering/",
         "github_link": "https://github.com/camdresie/List-Pagination-and-Filtering",
         "image_urls": [
-            "./static/images/7/list0square.jpg",
-            "./static/images/7/list1.JPG",
-            "./static/images/7/list2.JPG",
-            "./static/images/7/list3.JPG",
-            "./static/images/7/list4.JPG"
+            "./static/images/Paginated Student List/list0square.jpg",
+            "./static/images/Paginated Student List/list1.JPG",
+            "./static/images/Paginated Student List/list2.JPG",
+            "./static/images/Paginated Student List/list3.JPG",
+            "./static/images/Paginated Student List/list4.JPG"
         ]
         },
         {
@@ -235,10 +235,10 @@
         ],
         "github_link": "https://github.com/camdresie/Battleship",
         "image_urls": [
-            "./static/images/2/battleship0square.png",
-            "./static/images/2/battleship1.PNG",
-            "./static/images/2/battleship2.PNG",
-            "./static/images/2/battleship3.PNG"
+            "./static/images/Java Battleship Game/battleship0square.png",
+            "./static/images/Java Battleship Game/battleship1.PNG",
+            "./static/images/Java Battleship Game/battleship2.PNG",
+            "./static/images/Java Battleship Game/battleship3.PNG"
         ]
         },
         { 
@@ -292,10 +292,10 @@
         "live_link": "https://camdresie.github.io/Connect-4-Game/",
         "github_link": "https://github.com/camdresie/Connect-4-Game",
         "image_urls": [
-            "./static/images/5/connect0square.jpg",
-            "./static/images/5/connect1.JPG",
-            "./static/images/5/connect2.JPG",
-            "./static/images/5/connect3.JPG"
+            "./static/images/Connect Four Game/connect0square.jpg",
+            "./static/images/Connect Four Game/connect1.JPG",
+            "./static/images/Connect Four Game/connect2.JPG",
+            "./static/images/Connect Four Game/connect3.JPG"
         ]
         },
         {
@@ -347,10 +347,10 @@
         "live_link": "https://camdresie.github.io/Random-Quote-Generator/",
         "github_link": "https://github.com/camdresie/Random-Quote-Generator",
         "image_urls": [
-            "./static/images/10/randomquote0square.jpg",
-            "./static/images/10/randomquote1.JPG",
-            "./static/images/10/randomquote2.JPG",
-            "./static/images/10/randomquote3.JPG"
+            "./static/images/Random Quote Generator/randomquote0square.jpg",
+            "./static/images/Random Quote Generator/randomquote1.JPG",
+            "./static/images/Random Quote Generator/randomquote2.JPG",
+            "./static/images/Random Quote Generator/randomquote3.JPG"
         ]
         },
         
@@ -368,11 +368,11 @@
         "live_link": "https://camdresie.github.io/Form-Validation/",
         "github_link": "https://github.com/camdresie/Form-Validation",
         "image_urls": [
-            "./static/images/8/form0square.jpg",
-            "./static/images/8/form1.JPG",
-            "./static/images/8/form2.JPG",
-            "./static/images/8/form3.JPG",
-            "./static/images/8/form4.JPG"
+            "./static/images/Conference Signup Form/form0square.jpg",
+            "./static/images/Conference Signup Form/form1.JPG",
+            "./static/images/Conference Signup Form/form2.JPG",
+            "./static/images/Conference Signup Form/form3.JPG",
+            "./static/images/Conference Signup Form/form4.JPG"
         ]
         },
         { 

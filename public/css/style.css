@@ -1,25 +1,47 @@
+:root {
+  --dark-bg: #121212;
+  --dark-surface: #1e1e1e;
+  --dark-surface-2: #2d2d2d;
+  --accent: #6366f1;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+}
 
-h1,h2,h3,h4,h5,p{
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
   font-family: 'Merriweather', serif;
 }
 
-  h5{
+h1,h2,h3,h4,h5,p {
+  font-family: 'Merriweather', serif;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+h5 {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    letter-spacing: 2.5px;
+  letter-spacing: 0.05em;
     -webkit-text-transform: uppercase;
     text-transform: uppercase;
-  }
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.9;
+}
 
-  h6{
+h6 {
     letter-spacing: 2.5px;
     -webkit-text-transform: uppercase;
     text-transform: uppercase;
     font-weight: 600;
   }
 
-  p{
+p {
     font-size: 15px;
-    color: #666;
+  color: var(--text-secondary);
   }
 
 .round{
@@ -27,65 +49,146 @@ h1,h2,h3,h4,h5,p{
 }
 
 .text-light{
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .button{
-  background-color: #333;
+  background-color: var(--accent);
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
 .button:hover{
-  background-color: #111;
+  background-color: var(--accent);
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+.button:hover::after {
+  transform: rotate(45deg) translate(50%, 50%);
 }
 
 a{
-  color: #333;
+  color: var(--accent);
+  transition: all 0.2s ease;
 }
 
 a:hover{
-  color: #111;
+  color: var(--text-primary);
 }
 
 .image{
   display: inline-block;
   max-width: 100%;
   margin-bottom: 1rem;
-  border: solid 4px #fefefe;
-  border-radius: 0;
-  box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   line-height: 0;
+  transition: transform 0.3s ease;
 }
 
-.portfolio-me{
+.portfolio-me {
   padding: 20px;
-  background: #121213;
-  color: #fff;
-  box-shadow: none !important;
+  background: linear-gradient(
+    135deg,
+    var(--dark-surface) 0%,
+    var(--dark-surface-2) 100%
+  );
+  color: var(--text-primary);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    inset -1px 0 0 rgba(99, 102, 241, 0.2);
+  position: fixed;
+  overflow-y: auto;
+  height: 100vh;
+  width: 300px;
+  top: 0;
+  left: 0;
 }
 
-  .portfolio-me p{
+.portfolio-me .cell.shrink {
+  flex: 0 0 auto;
+  padding: 1rem;
+}
+
+.portfolio-me .cell.auto {
+  flex: 1 1 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.portfolio-me .thumbnail {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(99, 102, 241, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-me .thumbnail:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+.portfolio-me h5 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.portfolio-me p {
     font-size: 14px;
-    color: #999;
+  color: var(--text-secondary);
+  margin: 1rem 0;
+  flex: 1;
   }
 
-  .portfolio-me a{
+.portfolio-me a {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
-    color: #555;
+  color: var(--accent);
     font-size: 13px;
     letter-spacing: 2.5px;
     -webkit-text-transform: uppercase;
     text-transform: uppercase;
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin-top: auto;
   }
 
   .portfolio-me a:hover{
-    color: #999;
+  color: var(--text-primary);
   }
 
 .portfolio-breadcrumb{
   margin: 0;
   padding: 20px;
-  border-bottom: 1px solid #eaeaea;
+  background: var(--dark-surface);
+  border-bottom: 1px solid var(--dark-surface-2);
 }
 
  .portfolio-breadcrumb a{
@@ -97,44 +200,126 @@ a:hover{
    text-transform: uppercase;
  }
 
-.portfolio-intro{
+.portfolio-intro {
   margin: 0;
-  padding: 40px 50px 30px;
+  padding: 4rem 3rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    to bottom,
+    var(--dark-surface),
+    var(--dark-surface-2)
+  );
+  position: relative;
+  overflow: hidden;
 }
 
-.portfolio-intro p{
-  border-bottom: 1px solid #eaeaea;
-  padding-bottom: 40px;
+.portfolio-intro h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 3rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portfolio-intro p {
+  border-bottom: 1px solid var(--dark-surface-2);
+  padding-bottom: 2.5rem;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 800px;
 }
 
 .portfolio-index{
   margin: 0;
-  padding: 10px 50px;
+  padding: 2rem 50px;
+  position: relative;
 }
 
   .portfolio-index .thumbnail{
-    margin-bottom: 5px;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   .portfolio-index a{
-    color: #222;
+    color: var(--text-primary);
   }
 
   .portfolio-index .cell{
     margin-bottom: 15px;
+    position: relative;
+    background: var(--dark-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
   }
   
   .portfolio-index .cell:hover {
-    transition: .25s ease-out;
-    transform: scale(1.1);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(99, 102, 241, 0.3),
+      0 0 0 2px rgba(99, 102, 241, 0.4),
+      0 0 50px rgba(99, 102, 241, 0.2);
+    border-color: var(--accent);
+    background: linear-gradient(
+      135deg,
+      var(--dark-surface),
+      rgba(99, 102, 241, 0.15)
+    );
+  }
+
+  .portfolio-index .cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .portfolio-index .cell:hover::before {
+    opacity: 0.15;
+  }
+
+  .portfolio-index .cell a {
+    text-decoration: none;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .portfolio-index .cell a::after {
+    display: none;
+  }
+
+  .portfolio-index .cell:hover a {
+    color: var(--text-primary);
   }
 
     .portfolio-index .cell h5{
+      margin-top: 0.5rem;
       letter-spacing: 1px;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
     }
 
 .portfolio-meta{
   padding-left: 20px;
+  background: var(--dark-surface);
+  border-radius: 8px;
 }
 
   .portfolio-meta .button{
@@ -147,9 +332,517 @@ a:hover{
 
 .portfolio-project li{
   font-size: 13px;
-  color: #444;
+  color: var(--text-secondary);
 }
 
 .portfolio-bio{
     line-height: 25px;
+    color: var(--text-secondary);
 }
+
+/* Add geometric background pattern */
+.geometric-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(30deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
+    linear-gradient(150deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
+    linear-gradient(30deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
+    linear-gradient(150deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
+    linear-gradient(60deg, rgba(99, 102, 241, 0.05) 25%, transparent 25.5%, transparent 75%, rgba(99, 102, 241, 0.05) 75%, rgba(99, 102, 241, 0.05));
+  background-size: 80px 140px, 80px 140px, 80px 140px, 80px 140px, 120px 120px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+  background-color: var(--dark-bg);
+  opacity: 0.05;
+  z-index: -1;
+  animation: patternFloat 30s linear infinite;
+}
+
+@keyframes patternFloat {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix sidebar width and positioning */
+.position-left {
+  width: 300px;
+}
+
+.position-left.reveal-for-large {
+  transform: none;
+  z-index: 1;
+}
+
+/* Adjust main content area */
+.off-canvas-content {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  margin-left: 300px !important;
+  padding: 0;
+}
+
+.reveal-for-large ~ .off-canvas-content {
+  margin-left: 300px;
+}
+
+/* Fix grid container spacing */
+.grid-container {
+  padding-right: 3rem;
+  padding-left: 3rem;
+  max-width: none;
+}
+
+/* Improve typography */
+.lead {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Hide mobile menu on large screens */
+@media screen and (min-width: 64em) {
+  .title-bar {
+    display: none;
+  }
+}
+
+/* Ensure content starts at top */
+.off-canvas-wrapper {
+  overflow: visible;
+}
+
+.off-canvas-wrapper-inner {
+  transform: none !important;
+}
+
+/* Remove the old sidebar accent */
+.portfolio-me::before {
+  display: none;
+}
+
+/* Add full-width animated accent */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    transparent 30%,
+    var(--accent) 50%,
+    transparent 70%,
+    var(--accent)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
+  z-index: 1000;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Add geometric corner accent to project cards */
+.portfolio-index .cell::after {
+  display: none;
+}
+
+.portfolio-index .cell:hover::after {
+  display: none;
+}
+
+/* Update intro section with geometric accent */
+.portfolio-intro {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-intro::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    var(--accent), 
+    transparent 20%, 
+    transparent 80%, 
+    var(--accent)
+  );
+}
+
+/* Add geometric accent to project images */
+.portfolio-index .thumbnail {
+  transform-origin: center;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.portfolio-index .thumbnail::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(
+    0deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-index .cell:hover .thumbnail::before {
+  opacity: 1;
+}
+
+.portfolio-index .cell:hover .thumbnail {
+  transform: scale(1.05);
+}
+
+.portfolio-index .thumbnail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(99, 102, 241, 0.2),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-index .cell:hover .thumbnail::after {
+  opacity: 1;
+}
+
+/* Update button style */
+.button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    rgba(99, 102, 241, 0.8) 100%
+  );
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(
+    45deg,
+    var(--accent),
+    transparent,
+    var(--accent)
+  );
+  border-radius: 4px;
+  z-index: -1;
+  animation: borderGlow 2s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add geometric decorative element to sidebar profile */
+.portfolio-me .thumbnail {
+  position: relative;
+}
+
+.portfolio-me .thumbnail::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    45deg,
+    transparent 48%,
+    var(--accent) 48%,
+    var(--accent) 52%,
+    transparent 52%
+  );
+  opacity: 0.3;
+}
+
+/* Page Transition Animations */
+.page-content {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.6s ease-out forwards;
+}
+
+.portfolio-index,
+.portfolio-intro,
+.portfolio-project {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add geometric transition overlay */
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-bg);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Create expanding line animation */
+.page-transition-overlay::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: none;
+}
+
+.page-transition-overlay.active::before {
+  animation: expandLine 0.3s ease-out forwards,
+             morphToGeometry 0.4s ease-out 0.3s forwards;
+}
+
+@keyframes expandLine {
+  0% {
+    width: 0;
+    transform: translateX(var(--start-x)) translateY(var(--start-y));
+  }
+  100% {
+    width: 100%;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes morphToGeometry {
+  0% {
+    clip-path: none;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+  }
+  50% {
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%, 0% 0%);
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+  }
+  100% {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+  }
+}
+
+/* Geometric pattern animation */
+.page-transition-overlay .geometric-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.page-transition-overlay.active .geometric-loader {
+  animation: pulseGeometry 1.5s ease-in-out infinite 0.7s;
+  opacity: 1;
+}
+
+@keyframes pulseGeometry {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.8) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Link hover effects */
+.portfolio-index .cell a {
+  position: relative;
+  text-decoration: none;
+  display: block;
+  padding-bottom: 1rem;
+}
+
+.portfolio-index .cell a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-index .cell a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Regular link styles */
+a:not(.button):not(.portfolio-index .cell a) {
+  position: relative;
+  text-decoration: none;
+}
+
+a:not(.button):not(.portfolio-index .cell a)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+a:not(.button):not(.portfolio-index .cell a):hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Add diagonal accent lines during transition */
+.page-transition-overlay .accent-line {
+  position: absolute;
+  background: linear-gradient(45deg, transparent, var(--accent), transparent);
+  height: 2px;
+  width: 100px;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.page-transition-overlay .accent-line:nth-child(1) {
+  top: calc(50% - 30px);
+  left: calc(50% - 50px);
+  transform: rotate(45deg);
+  animation: accentLinePulse 2s ease-in-out infinite 0.7s;
+}
+
+.page-transition-overlay .accent-line:nth-child(2) {
+  top: calc(50% + 30px);
+  left: calc(50% - 50px);
+  transform: rotate(-45deg);
+  animation: accentLinePulse 2s ease-in-out infinite 0.9s;
+}
+
+@keyframes accentLinePulse {
+  0% {
+    transform: rotate(45deg) scaleX(0.3);
+    opacity: 0.1;
+  }
+  50% {
+    transform: rotate(45deg) scaleX(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(45deg) scaleX(0.3);
+    opacity: 0.1;
+  }
+}
+
+/* Technology tags styling */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.portfolio-index .cell:hover .tech-tag {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: var(--text-primary);
+}
+
+/* Smooth scrollbar */
+.portfolio-me::-webkit-scrollbar {
+  width: 8px;
+}
+
+.portfolio-me::-webkit-scrollbar-track {
+  background: var(--dark-surface-2);
+}
+
+.portfolio-me::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 4px;
+}
+
+.portfolio-me::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+

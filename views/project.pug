@@ -24,8 +24,10 @@ block content
         if thisProject.github_link
           a.button.expanded(href=`${thisProject.github_link}` target='_blank') GitHub Repo
     
-    img.image(src=`../${thisProject.image_urls[1]}`)
+    //- Display project images with corrected absolute paths
+    if thisProject.image_urls.length > 1
+        img.image(src=`/static${thisProject.image_urls[1].replace('./static', '')}`)
     if thisProject.image_urls.length > 2
-      img.image(src=`../${thisProject.image_urls[2]}`)
+        img.image(src=`/static${thisProject.image_urls[2].replace('./static', '')}`)
     if thisProject.image_urls.length > 3
-      img.image(src=`../${thisProject.image_urls[3]}`)
+        img.image(src=`/static${thisProject.image_urls[3].replace('./static', '')}`)
