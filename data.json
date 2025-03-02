@@ -1,9 +1,9 @@
 {
     "categories": [
         {
-            "id": "professional",
-            "name": "Professional Work",
-            "description": "Features and projects built during professional roles"
+            "id": "passion",
+            "name": "Passion Projects",
+            "description": "Special projects combining hardware and software innovation"
         },
         {
             "id": "ai",
@@ -11,14 +11,14 @@
             "description": "Projects focusing on artificial intelligence and algorithms"
         },
         {
+            "id": "web",
+            "name": "Web Development",
+            "description": "Full-stack and frontend web applications"
+        },
+        {
             "id": "ios",
             "name": "iOS Development",
             "description": "Native iOS applications built with Swift"
-        },
-        {
-            "id": "web",
-            "name": "Web Applications",
-            "description": "Full-stack and frontend web projects"
         },
         {
             "id": "games",
@@ -51,7 +51,7 @@
         },
         {
             "id": "1",
-            "category": "web",
+            "category": "passion",
             "project_name": "Magic Mirror",
             "description": "This project features a smart mirror that serves up useful data for users. The mirror provides the current time, current weather for my home location, 5-day forecast for my current location, syncs with my Google Calendar to provide upcoming events, has a New York Times RSS feed that pulls the most recent news headlines, and provides encouraging messages that are catered to various times of day (Morning, Afternoon, Evening, or Anytime). The hardware consists of a shadow box which contains a two-way mirror in front of a computer monitor with a Raspberry Pi mounted to the back. The monitor then serves up info through the mirror screen.",
             "technologies": [
@@ -92,7 +92,7 @@
         },
         {
             "id": "3",
-            "category": "professional",
+            "category": "web",
             "project_name": "Stack Moxie Published Values",
             "description": "Published Values is a feature I built from the ground up while working with Stack Moxie. I was also involved in wireframing the idea and doing feature research on how best to implement it. Published Values is a feature that allows users of the Stack Moxie testing framework to use a list of values to run test cases against. This is particularly useful in contexts where a value could be any one of a large set of values. Rather than testing against each individual value or entering the values one-by-one, published values allow the user to create lists once and use them multiple times. The feature also connects with a user's Salesforce Global Picklist values, which allows them to test against Salesforce values if they have a connection. In addition, the feature notifies users when Salesforce Global Picklist values have changed, exposing critical information to marketing team members who don't always have Admin access to their company's Salesforce instance, but do rely on the data in global picklists to conduct their daily tasks. New or updated values are intelligently retrieved once per day and cached using Redis.",
             "technologies": [

@@ -206,8 +206,7 @@ a:hover{
 
 .portfolio-intro {
   margin: 0;
-  padding: 4rem 3rem;
-  margin-bottom: 3rem;
+  padding: 3rem 3rem 2rem;
   background: linear-gradient(
     to bottom,
     var(--dark-surface),
@@ -224,6 +223,7 @@ a:hover{
   background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: left;
 }
 
 .portfolio-intro p {
@@ -234,6 +234,7 @@ a:hover{
   line-height: 1.8;
   color: var(--text-secondary);
   max-width: 800px;
+  text-align: left;
 }
 
 .portfolio-index{
@@ -1094,5 +1095,44 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   .category-header h2 {
     font-size: 1.5rem;
   }
+}
+
+/* Update portfolio intro text alignment */
+.portfolio-intro {
+  margin: 0;
+  padding: 3rem 3rem 2rem;
+  background: linear-gradient(
+    to bottom,
+    var(--dark-surface),
+    var(--dark-surface-2)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-intro h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 3rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: left;
+}
+
+.portfolio-intro p {
+  border-bottom: 1px solid var(--dark-surface-2);
+  padding-bottom: 2.5rem;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 800px;
+  text-align: left;
+}
+
+/* Remove the centering offset if it exists */
+.portfolio-intro .cell.large-offset-2 {
+  margin-left: 0;
 }
 
