@@ -7,30 +7,51 @@ extends layout.pug
 block content
   article.grid-container.portfolio-intro
     .grid-x
-      .cell.small-12.medium-8.large-8.large-offset-2
+      .cell.small-12
         h1 Cam Dresie, Esq. MCIT
         p.lead
-          | I'm a Staff Product Manager at Ontra, where I lead the development of AI-powered solutions for the legal industry. With a unique background combining law (J.D. from Washington University in St. Louis) and technology (Master's in Computer Science from UPenn), I bridge the gap between technical innovation and legal expertise. This portfolio showcases some of my personal projects that demonstrate my hands-on technical capabilities across various technologies including JavaScript, Swift, node.js, Java, Python, and more.
+          | I'm a Staff Product Manager at Ontra, where I lead the development of AI-powered solutions for the legal industry. With a unique background combining law (J.D. from Washington University in St. Louis) and technology (Master's in Computer Science from UPenn), I bridge the gap between technical innovation and legal expertise.
 
-  article.grid-container.portfolio-index
-    
-    //- Loop through categories
-    each category in categories
+  .portfolio-tabs
+    button.portfolio-tab.active(data-tab="product") Product Management
+    button.portfolio-tab(data-tab="engineering") Software Engineering
+
+  article.grid-container.portfolio-index#portfolioContent
+    //- Product Management Section
+    .portfolio-content(data-content="product")
       .category-section
         .category-header
-          h2= category.name
-        p.category-description= category.description
-        
-        //- Grid for projects in this category
+          h2 Product Strategy & Leadership
+        p.category-description Case studies and features showcasing product management expertise
         .grid-x.grid-margin-x.grid-margin-y
-          //- Filter and display projects for this category
-          each project in projects.filter(p => p.category === category.id)
-            .cell.small-12.medium-6.large-4
-              .project-card
-                a(href=`/project/${project.id}`)
-                  img.thumbnail(src=project.image_urls[0])
-                  h5= project.project_name
-                  //- Display tech tags
-                  .tech-tags
-                    each tech in project.technologies.slice(0, 3)
-                      span.tech-tag= tech
+          if pmProjects && pmProjects.length
+            each project in pmProjects
+              .cell.small-12.medium-6.large-4
+                .project-card
+                  a(href=`/project/${project.id}`)
+                    img.thumbnail(src=project.image_urls[0])
+                    h5= project.project_name
+                    .tech-tags
+                      each tech in project.technologies.slice(0, 3)
+                        span.tech-tag= tech
+          else
+            .cell.small-12
+              p Coming soon! Product management case studies are being prepared.
+    
+    //- Engineering Section
+    .portfolio-content.hidden(data-content="engineering")
+      each category in categories
+        .category-section
+          .category-header
+            h2= category.name
+          p.category-description= category.description
+          .grid-x.grid-margin-x.grid-margin-y
+            each project in projects.filter(p => p.category === category.id)
+              .cell.small-12.medium-6.large-4
+                .project-card
+                  a(href=`/project/${project.id}`)
+                    img.thumbnail(src=project.image_urls[0])
+                    h5= project.project_name
+                    .tech-tags
+                      each tech in project.technologies.slice(0, 3)
+                        span.tech-tag= tech

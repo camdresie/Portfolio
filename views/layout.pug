@@ -72,3 +72,41 @@ html(class="no-js" lang="en" dir="ltr")
           overlay.classList.remove('active');
         });
       });
+
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Tab initialization starting'); // Debug log
+        const tabs = document.querySelectorAll('.portfolio-tab');
+        const contents = document.querySelectorAll('.portfolio-content');
+
+        console.log('Found tabs:', tabs.length); // Debug log
+        console.log('Found contents:', contents.length); // Debug log
+
+        function switchTab(targetTab) {
+          console.log('Switching to tab:', targetTab); // Debug log
+          tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.dataset.tab === targetTab) {
+              tab.classList.add('active');
+            }
+          });
+
+          contents.forEach(content => {
+            if (content.dataset.content === targetTab) {
+              content.classList.remove('hidden');
+            } else {
+              content.classList.add('hidden');
+            }
+          });
+        }
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            console.log('Tab clicked:', tab.dataset.tab); // Debug log
+            switchTab(tab.dataset.tab);
+          });
+        });
+
+        // Initialize with product management tab active
+        switchTab('product');
+      });

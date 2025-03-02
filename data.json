@@ -455,5 +455,21 @@
                 "./static/images/eggTimer/eggTimerGif.gif"
             ]
         }
+    ],
+    "pmProjects": [
+        {
+            "id": "pm1",
+            "project_name": "AI Contract Analysis Platform",
+            "description": "Led the development of an AI-powered contract analysis platform that processes over 100,000 legal documents monthly. Drove 40% improvement in processing efficiency and 25% increase in accuracy.",
+            "technologies": [
+                "Product Strategy",
+                "AI/ML",
+                "Legal Tech",
+                "User Research"
+            ],
+            "image_urls": [
+                "/images/PM/contract-analysis.jpg"
+            ]
+        }
     ]
 }
