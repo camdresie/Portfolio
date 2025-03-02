@@ -1,0 +1,77 @@
+extends layout.pug
+
+block content
+  nav.nav
+    a(href='/')
+      span &larr; Back to Portfolio
+
+  article.portfolio-project
+    .grid-container
+      .grid-x.grid-margin-x
+        .cell.small-6.medium-9.large-9
+          h1= project.project_name
+          p.lead.text-light= project.overview
+          
+          if project.challenge
+            section.project-section
+              h2 Challenge
+              p= project.challenge
+
+          if project.approach && project.approach.length > 0
+            section.project-section
+              h2 Approach
+              .approach-steps
+                each step in project.approach
+                  .approach-step
+                    h4= step.title
+                    p= step.description
+
+          if project.outcomes && project.outcomes.length > 0
+            section.project-section
+              h2 Impact & Outcomes
+              ul.outcomes-list
+                each outcome in project.outcomes
+                  li= outcome
+
+        .cell.small-6.medium-3.large-3.sidebar
+          .project-meta
+            h3 Project Details
+            
+            if project.timeline
+              .meta-item
+                h4 Timeline
+                p= project.timeline
+
+            if project.role
+              .meta-item
+                h4 Role
+                p= project.role
+
+            if project.team
+              .meta-item
+                h4 Team Composition
+                p= project.team
+
+            if project.technologies && project.technologies.length > 0
+              .meta-item
+                h4 Tools & Methods
+                .tech-container
+                  each tech in project.technologies
+                    span.tech-tag= tech
+
+      if project.images
+        section.project-section.project-gallery
+          h2 Project Gallery
+          .gallery-grid
+            each image in project.images
+              .gallery-item
+                img(src=image.url alt=image.caption)
+                if image.caption
+                  p.caption= image.caption
+
+      if project.learnings
+        section.project-section
+          h2 Key Learnings
+          ul.learnings-list
+            each learning in project.learnings
+              li= learning 

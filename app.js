@@ -33,11 +33,28 @@ app.get('/about', (req, res) => {
     res.render('about');
 })
 
-app.get('/project/:id', (req, res, next) => {
-    const id = req.params.id;
-    const thisProject = data.projects[id];
-    const templateData = { thisProject };
-    res.render('project', templateData);
+app.get('/project/:id', (req, res) => {
+  const projectId = req.params.id;
+  let project;
+
+  // Check if it's a PM project
+  if (projectId.startsWith('pm-')) {
+    for (const category of data.pmProjects.categories) {
+      project = category.projects.find(p => p.id === projectId);
+      if (project) {
+        return res.render('pm-project', { project });
+      }
+    }
+  } else {
+    // Handle engineering projects
+    project = data.projects.find(p => p.id === projectId);
+    if (project) {
+      return res.render('project', { thisProject: project });
+    }
+  }
+
+  // If no project found, return 404
+  res.sendStatus(404);
 });
 
 /*********************

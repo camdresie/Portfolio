@@ -13,30 +13,32 @@ block content
           | I'm a Staff Product Manager at Ontra, where I lead the development of AI-powered solutions for the legal industry. With a unique background combining law (J.D. from Washington University in St. Louis) and technology (Master's in Computer Science from UPenn), I bridge the gap between technical innovation and legal expertise.
 
   .portfolio-tabs
-    button.portfolio-tab.active(data-tab="product") Product Management
-    button.portfolio-tab(data-tab="engineering") Software Engineering
+    a.portfolio-tab(href="#" data-tab="product") Product Management
+    a.portfolio-tab(href="#" data-tab="engineering") Software Engineering
 
   article.grid-container.portfolio-index#portfolioContent
     //- Product Management Section
     .portfolio-content(data-content="product")
-      .category-section
+      each category in pmProjects.categories
         .category-header
-          h2 Product Strategy & Leadership
-        p.category-description Case studies and features showcasing product management expertise
-        .grid-x.grid-margin-x.grid-margin-y
-          if pmProjects && pmProjects.length
-            each project in pmProjects
-              .cell.small-12.medium-6.large-4
-                .project-card
-                  a(href=`/project/${project.id}`)
-                    img.thumbnail(src=project.image_urls[0])
-                    h5= project.project_name
-                    .tech-tags
-                      each tech in project.technologies.slice(0, 3)
-                        span.tech-tag= tech
-          else
-            .cell.small-12
-              p Coming soon! Product management case studies are being prepared.
+          h3= category.name
+        .projects-grid
+          each project in category.projects
+            a(href=`/project/${project.id}`).cell
+              .thumbnail
+                if project.image_urls && project.image_urls.thumbnail
+                  img.thumbnail-image(src=project.image_urls.thumbnail)
+                else
+                  img.thumbnail-image(src="/static/images/placeholder-project.jpg")
+              h5= project.project_name
+              p= project.description
+              .technologies
+                each tech in project.technologies
+                  span.tech-tag= tech
+              if project.live_link
+                a.button-link(href=project.live_link) Live Demo
+              if project.github_link
+                a.button-link(href=project.github_link) GitHub
     
     //- Engineering Section
     .portfolio-content.hidden(data-content="engineering")

@@ -75,15 +75,25 @@ html(class="no-js" lang="en" dir="ltr")
 
     script.
       document.addEventListener('DOMContentLoaded', function() {
-        console.log('Tab initialization starting'); // Debug log
         const tabs = document.querySelectorAll('.portfolio-tab');
         const contents = document.querySelectorAll('.portfolio-content');
+        
+        // Add card index for staggered animations
+        contents.forEach(content => {
+          const cards = content.querySelectorAll('.cell');
+          cards.forEach((card, index) => {
+            card.style.setProperty('--card-index', index);
+          });
+        });
 
-        console.log('Found tabs:', tabs.length); // Debug log
-        console.log('Found contents:', contents.length); // Debug log
+        async function switchTab(targetTab) {
+          // Get current and target content
+          const currentContent = document.querySelector('.portfolio-content:not(.hidden)');
+          const targetContent = document.querySelector(`.portfolio-content[data-content="${targetTab}"]`);
+          
+          if (currentContent === targetContent) return;
 
-        function switchTab(targetTab) {
-          console.log('Switching to tab:', targetTab); // Debug log
+          // Update active tab
           tabs.forEach(tab => {
             tab.classList.remove('active');
             if (tab.dataset.tab === targetTab) {
@@ -91,22 +101,66 @@ html(class="no-js" lang="en" dir="ltr")
             }
           });
 
-          contents.forEach(content => {
-            if (content.dataset.content === targetTab) {
-              content.classList.remove('hidden');
-            } else {
-              content.classList.add('hidden');
-            }
-          });
+          // Add transitioning class for overlay effect
+          currentContent?.classList.add('transitioning');
+          targetContent?.classList.add('transitioning');
+
+          // Fade out current content
+          if (currentContent) {
+            currentContent.classList.add('hidden');
+          }
+
+          // Small delay for smooth transition
+          await new Promise(resolve => setTimeout(resolve, 50));
+
+          // Show new content
+          if (targetContent) {
+            targetContent.classList.remove('hidden');
+            // Remove transitioning class after animation
+            setTimeout(() => {
+              currentContent?.classList.remove('transitioning');
+              targetContent?.classList.remove('transitioning');
+            }, 500);
+          }
+
+          // Update URL without page reload
+          try {
+            const url = new URL(window.location);
+            url.searchParams.set('tab', targetTab);
+            window.history.pushState({}, '', url);
+          } catch (error) {
+            console.error('Error updating URL:', error);
+          }
         }
 
+        // Add click handlers to tabs
         tabs.forEach(tab => {
           tab.addEventListener('click', (e) => {
-            console.log('Tab clicked:', tab.dataset.tab); // Debug log
-            switchTab(tab.dataset.tab);
+            e.preventDefault();
+            const targetTab = tab.dataset.tab;
+            switchTab(targetTab);
           });
         });
 
-        // Initialize with product management tab active
-        switchTab('product');
+        // Check URL parameters on page load
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        
+        // Initialize with URL param or default to product
+        if (tabParam && ['product', 'engineering'].includes(tabParam)) {
+          switchTab(tabParam);
+        } else {
+          switchTab('product');
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (e) => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const tabParam = urlParams.get('tab');
+          if (tabParam && ['product', 'engineering'].includes(tabParam)) {
+            switchTab(tabParam);
+          } else {
+            switchTab('product');
+          }
+        });
       });
