@@ -63,6 +63,7 @@
             "Git",
             "Raspberry Pi"
         ],
+        "github_link": "https://github.com/camdresie/Magic-Mirror-Code",
         "image_urls": [
                 "./static/images/Magic Mirror/mirror0square.jpg",
                 "./static/images/Magic Mirror/mirror3.jpg",
@@ -81,6 +82,7 @@
             "Minimax Algorithm",
             "Alpha-Beta Pruning"
         ],
+        "github_link": "https://github.com/camdresie/dominoAlphaBetaMinimaxAI",
         "image_urls": [
             "./static/images/Minimax/Minimax0Square.png",
             "./static/images/Minimax/Minimax1.png",
@@ -182,6 +184,7 @@
             "Unit Testing",
             "Algorithm Design"
         ],
+        "github_link": "https://github.com/camdresie/TowerBlaster",
         "image_urls": [
             "./static/images/Tower/tower0square.png",
             "./static/images/Tower/gameStart.png",
@@ -267,6 +270,7 @@
             "Abstract Classes and Methods",
             "Javadocs"
         ],
+        "github_link": "https://github.com/camdresie/Battleship",
         "image_urls": [
                 "./static/images/Java Battleship Game/battleship0square.png",
                 "./static/images/Java Battleship Game/battleship1.PNG",
@@ -305,6 +309,7 @@
             "Abstract Classes and Methods",
             "Javadocs"
         ],
+        "github_link": "https://github.com/camdresie/Hangman",
         "image_urls": [
             "./static/images/Hangman/hangman0square.png",
             "./static/images/Hangman/start.png",
