@@ -17,6 +17,7 @@ app.set('view engine', 'pug');
 *********************/
 
 app.use('/static', express.static('public'));
+app.use(express.static('public'));
 
 /*********************
  * Sets routes to the pages to be rendered (the home landing page, about page, and projects pages). The projects
