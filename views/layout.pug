@@ -15,7 +15,6 @@ html(class="no-js" lang="en" dir="ltr")
   body
     .geometric-pattern
     .page-transition-overlay
-      .geometric-loader
       .accent-line
       .accent-line
     #my-info.off-canvas.position-left.reveal-for-large.portfolio-me(data-off-canvas='')
@@ -28,23 +27,73 @@ html(class="no-js" lang="en" dir="ltr")
             p.text-light
               | Greetings! I'm a Staff Product Manager at Ontra, where I lead the development of AI-powered solutions for the legal industry. I'm a California licensed attorney and hold a law degree from Washington University in St. Louis and a Masters in Computer and Information Technology from the University of Pennsylvania.
             a(href='/about') Learn More →
+            
+            .social-links
+              a.social-link(href='https://www.linkedin.com/in/camdresie/' target='_blank', aria-label="LinkedIn")
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24")
+                  path(fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z")
+              a.social-link(href='https://github.com/camdresie' target='_blank', aria-label="GitHub")
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24")
+                  path(fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z")
+              a.social-link(href='https://www.ontra.ai' target='_blank', aria-label="Ontra")
+                svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24")
+                  path(fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z")
 
     .off-canvas-content(data-off-canvas-content='')
       .title-bar.hide-for-large
         .title-bar-left
-          button.menu-icon(type='button', data-toggle='my-info')
+          button.menu-icon(type='button', data-toggle='my-info', aria-label="Toggle menu")
+            .hamburger-menu
+              span
+              span
+              span
           span.title-bar-title Cam Dresie | Staff Product Manager
       block content
 
     script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script(src='/static/js/vendor/foundation.js')
+    script(src='/static/js/timeline.js')
     script(src='/static/js/slideshow.js')
+    script(src='/static/js/tabs.js')
     
     script.
-      $(document).foundation();
-      
-      // Handle page transitions
-      document.addEventListener('DOMContentLoaded', function() {
+      $(document).ready(function() {
+        // Initialize Foundation
+        $(document).foundation();
+        console.log('Foundation initialized');
+        
+        // Handle hamburger menu animation and toggle
+        $('.menu-icon').on('click touchstart', function(e) {
+          e.preventDefault(); // Prevent default behavior
+          console.log('Menu icon clicked or touched');
+          // Toggle the visual state
+          $(this).toggleClass('is-open');
+          
+          // Explicitly toggle the off-canvas menu
+          var offCanvas = $('#my-info');
+          
+          // Use Foundation's API to toggle the off-canvas menu
+          // This is the most reliable method
+          if (Foundation.MediaQuery.current === 'small' || Foundation.MediaQuery.current === 'medium') {
+            console.log('Current media query:', Foundation.MediaQuery.current);
+            $('#my-info').foundation('toggle');
+            console.log('Off-canvas toggled via foundation method');
+          }
+        });
+        
+        // Handle the case when the menu is opened
+        $(document).on('opened.zf.offCanvas', function() {
+          $('.menu-icon').addClass('is-open');
+          console.log('Menu opened event fired');
+        });
+        
+        // Handle the case when the menu is closed
+        $(document).on('closed.zf.offCanvas', function() {
+          $('.menu-icon').removeClass('is-open');
+          console.log('Menu closed event fired');
+        });
+        
+        // Handle page transitions
         const overlay = document.querySelector('.page-transition-overlay');
         
         // Add transition for all internal links
@@ -73,96 +122,97 @@ html(class="no-js" lang="en" dir="ltr")
         window.addEventListener('load', function() {
           overlay.classList.remove('active');
         });
-      });
-
-    script.
-      document.addEventListener('DOMContentLoaded', function() {
-        const tabs = document.querySelectorAll('.portfolio-tab');
-        const contents = document.querySelectorAll('.portfolio-content');
         
-        // Add card index for staggered animations
-        contents.forEach(content => {
-          const cards = content.querySelectorAll('.cell');
-          cards.forEach((card, index) => {
-            card.style.setProperty('--card-index', index);
-          });
-        });
-
-        async function switchTab(targetTab) {
-          // Get current and target content
-          const currentContent = document.querySelector('.portfolio-content:not(.hidden)');
-          const targetContent = document.querySelector(`.portfolio-content[data-content="${targetTab}"]`);
+        // This script is for project pages with product/engineering tabs
+        // Only run if these tabs exist
+        const projectTabs = document.querySelectorAll('.project-tab');
+        if (projectTabs.length > 0) {
+          const projectContents = document.querySelectorAll('.project-content');
           
-          if (currentContent === targetContent) return;
+          // Add card index for staggered animations
+          projectContents.forEach(content => {
+            const cards = content.querySelectorAll('.cell');
+            cards.forEach((card, index) => {
+              card.style.setProperty('--card-index', index);
+            });
+          });
 
-          // Update active tab
-          tabs.forEach(tab => {
-            tab.classList.remove('active');
-            if (tab.dataset.tab === targetTab) {
-              tab.classList.add('active');
+          async function switchProjectTab(targetTab) {
+            // Get current and target content
+            const currentContent = document.querySelector('.project-content:not(.hidden)');
+            const targetContent = document.querySelector(`.project-content[data-content="${targetTab}"]`);
+            
+            if (currentContent === targetContent) return;
+
+            // Update active tab
+            projectTabs.forEach(tab => {
+              tab.classList.remove('active');
+              if (tab.dataset.tab === targetTab) {
+                tab.classList.add('active');
+              }
+            });
+
+            // Add transitioning class for overlay effect
+            currentContent?.classList.add('transitioning');
+            targetContent?.classList.add('transitioning');
+
+            // Fade out current content
+            if (currentContent) {
+              currentContent.classList.add('hidden');
             }
+
+            // Small delay for smooth transition
+            await new Promise(resolve => setTimeout(resolve, 50));
+
+            // Show new content
+            if (targetContent) {
+              targetContent.classList.remove('hidden');
+              // Remove transitioning class after animation
+              setTimeout(() => {
+                currentContent?.classList.remove('transitioning');
+                targetContent?.classList.remove('transitioning');
+              }, 500);
+            }
+
+            // Update URL without page reload
+            try {
+              const url = new URL(window.location);
+              url.searchParams.set('tab', targetTab);
+              window.history.pushState({}, '', url);
+            } catch (error) {
+              console.error('Error updating URL:', error);
+            }
+          }
+
+          // Add click handlers to tabs
+          projectTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+              e.preventDefault();
+              const targetTab = tab.dataset.tab;
+              switchProjectTab(targetTab);
+            });
           });
 
-          // Add transitioning class for overlay effect
-          currentContent?.classList.add('transitioning');
-          targetContent?.classList.add('transitioning');
-
-          // Fade out current content
-          if (currentContent) {
-            currentContent.classList.add('hidden');
-          }
-
-          // Small delay for smooth transition
-          await new Promise(resolve => setTimeout(resolve, 50));
-
-          // Show new content
-          if (targetContent) {
-            targetContent.classList.remove('hidden');
-            // Remove transitioning class after animation
-            setTimeout(() => {
-              currentContent?.classList.remove('transitioning');
-              targetContent?.classList.remove('transitioning');
-            }, 500);
-          }
-
-          // Update URL without page reload
-          try {
-            const url = new URL(window.location);
-            url.searchParams.set('tab', targetTab);
-            window.history.pushState({}, '', url);
-          } catch (error) {
-            console.error('Error updating URL:', error);
-          }
-        }
-
-        // Add click handlers to tabs
-        tabs.forEach(tab => {
-          tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetTab = tab.dataset.tab;
-            switchTab(targetTab);
-          });
-        });
-
-        // Check URL parameters on page load
-        const urlParams = new URLSearchParams(window.location.search);
-        const tabParam = urlParams.get('tab');
-        
-        // Initialize with URL param or default to product
-        if (tabParam && ['product', 'engineering'].includes(tabParam)) {
-          switchTab(tabParam);
-        } else {
-          switchTab('product');
-        }
-
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', (e) => {
+          // Check URL parameters on page load
           const urlParams = new URLSearchParams(window.location.search);
           const tabParam = urlParams.get('tab');
+          
+          // Initialize with URL param or default to product
           if (tabParam && ['product', 'engineering'].includes(tabParam)) {
-            switchTab(tabParam);
+            switchProjectTab(tabParam);
           } else {
-            switchTab('product');
+            switchProjectTab('product');
           }
-        });
+
+          // Handle browser back/forward buttons
+          window.addEventListener('popstate', (e) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            if (tabParam && ['product', 'engineering'].includes(tabParam)) {
+              switchProjectTab(tabParam);
+            } else {
+              switchProjectTab('product');
+            }
+          });
+        }
       });

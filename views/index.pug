@@ -50,3 +50,47 @@ block content
                 .tech-tags
                   each tech in project.technologies
                     span.tech-tag= tech
+
+  script.
+    // Ensure tabs work on this page
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Index page script loaded');
+      
+      // Handle tab switching
+      const tabs = document.querySelectorAll('.portfolio-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Get tab name
+          const tabName = this.getAttribute('data-tab');
+          console.log('Tab clicked:', tabName);
+          
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Hide all content sections
+          const contents = document.querySelectorAll('.portfolio-content');
+          contents.forEach(content => {
+            content.style.display = 'none';
+          });
+          
+          // Show the selected content section
+          const targetContent = document.querySelector(`.portfolio-content[data-content="${tabName}"]`);
+          if (targetContent) {
+            targetContent.style.display = 'block';
+          }
+        });
+      });
+      
+      // Set the first tab as active by default
+      if (tabs.length > 0 && !document.querySelector('.portfolio-tab.active')) {
+        tabs[0].classList.add('active');
+        const firstTabName = tabs[0].getAttribute('data-tab');
+        const firstContent = document.querySelector(`.portfolio-content[data-content="${firstTabName}"]`);
+        if (firstContent) {
+          firstContent.style.display = 'block';
+        }
+      }
+    });

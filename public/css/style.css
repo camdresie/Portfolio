@@ -354,30 +354,56 @@ a:hover{
     color: var(--text-secondary);
 }
 
-/* Add geometric background pattern */
+/* Sophisticated static background design */
 .geometric-pattern {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    linear-gradient(30deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
-    linear-gradient(150deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
-    linear-gradient(30deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
-    linear-gradient(150deg, var(--dark-surface-2) 12%, transparent 12.5%, transparent 87%, var(--dark-surface-2) 87.5%, var(--dark-surface-2)),
-    linear-gradient(60deg, rgba(99, 102, 241, 0.05) 25%, transparent 25.5%, transparent 75%, rgba(99, 102, 241, 0.05) 75%, rgba(99, 102, 241, 0.05));
-  background-size: 80px 140px, 80px 140px, 80px 140px, 80px 140px, 120px 120px;
-  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
-  background-color: var(--dark-bg);
-  opacity: 0.05;
   z-index: -1;
-  animation: patternFloat 30s linear infinite;
+  background-color: var(--dark-bg);
+  overflow: hidden;
 }
 
+.geometric-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(99, 102, 241, 0),
+    rgba(99, 102, 241, 0.1),
+    rgba(99, 102, 241, 0.3),
+    rgba(99, 102, 241, 0.5),
+    rgba(99, 102, 241, 0.3),
+    rgba(99, 102, 241, 0.1),
+    rgba(99, 102, 241, 0)
+  );
+}
+
+.geometric-pattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.03) 0%, transparent 25%),
+    radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.03) 0%, transparent 25%),
+    linear-gradient(rgba(99, 102, 241, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.01) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+  background-position: 0 0, 0 0, center center, center center;
+  opacity: 0.7;
+}
+
+/* Remove animation */
 @keyframes patternFloat {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 100px; }
+  0%, 100% { background-position: 0 0; }
 }
 
 /* Add smooth scrolling */
@@ -442,30 +468,25 @@ html {
   display: none;
 }
 
-/* Add full-width animated accent */
+/* Static accent line at the top */
 body::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(
     90deg,
-    var(--accent),
-    transparent 30%,
-    var(--accent) 50%,
-    transparent 70%,
-    var(--accent)
+    rgba(99, 102, 241, 0),
+    rgba(99, 102, 241, 0.2),
+    rgba(99, 102, 241, 0.5),
+    rgba(99, 102, 241, 0.8),
+    rgba(99, 102, 241, 0.5),
+    rgba(99, 102, 241, 0.2),
+    rgba(99, 102, 241, 0)
   );
-  background-size: 200% 100%;
-  animation: shimmer 8s linear infinite;
   z-index: 1000;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
 }
 
 /* Add geometric corner accent to project cards */
@@ -633,68 +654,61 @@ body::before {
   }
 }
 
-/* Add geometric transition overlay */
+/* Page transition overlay */
 .page-transition-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--dark-bg);
+  background-color: var(--dark-bg);
   z-index: 9999;
-  pointer-events: none;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* Create expanding line animation */
-.page-transition-overlay::before {
-  content: '';
+.page-transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.page-transition-overlay .accent-line {
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transform-origin: left;
-  animation: none;
+  height: 1px;
+  width: 100px;
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0),
+    rgba(99, 102, 241, 0.5),
+    rgba(99, 102, 241, 0)
+  );
 }
 
-.page-transition-overlay.active::before {
-  animation: expandLine 0.3s ease-out forwards,
-             morphToGeometry 0.4s ease-out 0.3s forwards;
+.page-transition-overlay .accent-line:nth-child(1) {
+  top: calc(50% - 30px);
+  left: calc(50% - 50px);
+  transform: rotate(45deg);
 }
 
-@keyframes expandLine {
-  0% {
-    width: 0;
-    transform: translateX(var(--start-x)) translateY(var(--start-y));
-  }
-  100% {
-    width: 100%;
-    transform: translateX(0) translateY(0);
+.page-transition-overlay .accent-line:nth-child(2) {
+  top: calc(50% + 30px);
+  left: calc(50% - 50px);
+  transform: rotate(-45deg);
+}
+
+/* Remove all animation keyframes */
+@keyframes pulseGeometry {
+  0%, 50%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
   }
 }
 
-@keyframes morphToGeometry {
-  0% {
-    clip-path: none;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-  }
-  50% {
-    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%, 0% 0%);
-    width: 60px;
-    height: 60px;
-    background: var(--accent);
-  }
-  100% {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    width: 60px;
-    height: 60px;
-    background: var(--accent);
+@keyframes accentLinePulse {
+  0%, 50%, 100% {
+    transform: rotate(45deg);
+    opacity: 0.5;
   }
 }
 
@@ -713,21 +727,6 @@ body::before {
 .page-transition-overlay.active .geometric-loader {
   animation: pulseGeometry 1.5s ease-in-out infinite 0.7s;
   opacity: 1;
-}
-
-@keyframes pulseGeometry {
-  0% {
-    transform: scale(0.8) rotate(0deg);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.2) rotate(180deg);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(0.8) rotate(360deg);
-    opacity: 0.3;
-  }
 }
 
 /* Link hover effects */
@@ -897,12 +896,21 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
   /* Mobile header */
   .title-bar {
-    display: block;
-    background: var(--dark-surface);
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    padding: 0.75rem 1rem;
+    background: var(--dark-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  
+  .title-bar-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Mobile content adjustments */
@@ -984,10 +992,26 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   position: sticky;
   top: 0;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
 }
 
 .title-bar-title {
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+.title-bar-left button.menu-icon {
+  margin-right: 10px;
 }
 
 .menu-icon::after {
@@ -1196,18 +1220,19 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 /* Add smooth transitions for project visibility */
 .portfolio-content {
+  position: relative;
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: block;
 }
 
 .portfolio-content.hidden {
   opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
+  transform: translateY(10px);
+  visibility: hidden;
   position: absolute;
-  width: 100%;
+  pointer-events: none;
 }
 
 /* Add transition overlay effect */
@@ -1779,5 +1804,526 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
     position: sticky;
     top: 2rem;
   }
+}
+
+/* Timeline Styles */
+.timeline-container {
+  position: relative;
+  max-height: 800px;
+  overflow-y: auto;
+  padding: 2rem 0;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.timeline-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+  opacity: 0.7;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: var(--accent);
+  top: 0;
+  bottom: 0;
+  left: 50px;
+  margin-left: -2px;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 80px;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2), 0 0 10px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.3), 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+.timeline-date {
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}
+
+.timeline-content {
+  background-color: var(--dark-surface);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(99, 102, 241, 0.15);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-content::before {
+  display: none;
+}
+
+.timeline-item:hover .timeline-content {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(99, 102, 241, 0.25);
+  transform: translateY(-5px);
+}
+
+.timeline-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  font-size: 1.3rem;
+}
+
+.timeline-content h5 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.timeline-content p {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .timeline-container {
+    max-height: 70vh;
+    width: 100%;
+  }
+  
+  .timeline::after {
+    left: 30px;
+  }
+  
+  .timeline-dot {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    padding-left: 20px;
+    margin-bottom: 2rem;
+  }
+  
+  .timeline-content {
+    padding: 1.2rem;
+  }
+  
+  .timeline-content h4 {
+    font-size: 1.1rem;
+  }
+  
+  .timeline-content h5 {
+    font-size: 0.9rem;
+  }
+  
+  .timeline-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Portfolio tabs styling */
+.portfolio-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-tab {
+  padding: 1rem 2rem;
+  margin: 0 0.5rem;
+  color: var(--text-secondary);
+  position: relative;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.portfolio-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-tab.active {
+  color: var(--accent);
+}
+
+.portfolio-tab.active::after {
+  transform: scaleX(1);
+}
+
+.portfolio-tab:hover {
+  color: var(--accent);
+}
+
+.portfolio-tab:hover::after {
+  transform: scaleX(0.5);
+}
+
+/* Content transition styles */
+.portfolio-content {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: block;
+}
+
+.portfolio-content.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Ensure the bio content has proper spacing */
+.portfolio-content .portfolio-bio {
+  margin-top: 1rem;
+}
+
+/* Comprehensive Mobile Styles */
+@media (max-width: 768px) {
+  /* General mobile adjustments */
+  body {
+    font-size: 16px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  /* Improve sidebar on mobile */
+  #my-info.portfolio-me {
+    padding: 1.5rem;
+  }
+  
+  #my-info .cell.shrink img.thumbnail {
+    max-width: 100px;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+  
+  /* Improve navigation */
+  .title-bar {
+    padding: 0.75rem 1rem;
+    background: var(--dark-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  
+  .title-bar-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Improve project cards on mobile */
+  .portfolio-index .cell {
+    margin-bottom: 1.5rem;
+  }
+  
+  .portfolio-index .thumbnail {
+    height: 200px;
+  }
+  
+  .portfolio-index .cell h5 {
+    font-size: 1.1rem;
+    margin-top: 0.75rem;
+  }
+  
+  /* Improve project details page */
+  .portfolio-project {
+    padding: 1rem;
+  }
+  
+  .portfolio-project .project-description {
+    padding: 1rem;
+  }
+  
+  /* Improve social links */
+  .social-links {
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .social-link {
+    width: 36px;
+    height: 36px;
+  }
+  
+  /* Improve tabs on mobile */
+  .portfolio-tabs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .portfolio-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Improve bio page */
+  .portfolio-bio {
+    padding: 1.25rem;
+  }
+  
+  .skills-container {
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  
+  .skill-tag {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  /* Further refinements for very small screens */
+  .portfolio-index .thumbnail {
+    height: 180px;
+  }
+  
+  .portfolio-tabs {
+    justify-content: center;
+  }
+  
+  .portfolio-tab {
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 120px;
+  }
+  
+  /* Adjust timeline for very small screens */
+  .portfolio-content[data-content="timeline"] .timeline-content {
+    padding: 12px;
+  }
+  
+  .portfolio-content[data-content="timeline"] .timeline-content h4 {
+    font-size: 1rem;
+  }
+  
+  .portfolio-content[data-content="timeline"] .timeline-content h5 {
+    font-size: 0.9rem;
+  }
+  
+  .portfolio-content[data-content="timeline"] .timeline-content p {
+    font-size: 0.85rem;
+  }
+  
+  .portfolio-content[data-content="timeline"] .timeline-skill {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets for better mobile usability */
+  a, button, .button, .portfolio-tab, .social-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve tap targets in navigation */
+  .title-bar-left button.menu-icon {
+    padding: 12px;
+    margin: 0;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+  /* Make project cards more touch-friendly */
+  .portfolio-index .cell {
+    cursor: pointer;
+  }
+  
+  /* Ensure hover states are visible on touch */
+  .portfolio-index .cell:active,
+  .portfolio-tab:active,
+  .social-link:active,
+  .portfolio-content[data-content="timeline"] .timeline-item:active .timeline-content {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2), 0 0 30px rgba(99, 102, 241, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  /* Improve scrolling experience */
+  .portfolio-content[data-content="timeline"] .timeline-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 20px;
+  }
+}
+
+/* Custom Hamburger Menu */
+.hamburger-menu {
+  width: 30px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.hamburger-menu span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: var(--text-primary);
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.hamburger-menu span:nth-child(1) {
+  top: 0px;
+  width: 80%;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.8));
+}
+
+.hamburger-menu span:nth-child(2) {
+  top: 10px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), var(--accent));
+}
+
+.hamburger-menu span:nth-child(3) {
+  top: 20px;
+  width: 60%;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.8));
+}
+
+/* Hamburger animation when menu is open */
+.is-open .hamburger-menu span:nth-child(1) {
+  top: 10px;
+  width: 100%;
+  transform: rotate(135deg);
+  background: var(--accent);
+}
+
+.is-open .hamburger-menu span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.is-open .hamburger-menu span:nth-child(3) {
+  top: 10px;
+  width: 100%;
+  transform: rotate(-135deg);
+  background: var(--accent);
+}
+
+/* Add hover effect */
+.hamburger-menu:hover span:nth-child(1) {
+  width: 100%;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+.hamburger-menu:hover span:nth-child(2) {
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+.hamburger-menu:hover span:nth-child(3) {
+  width: 100%;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+/* Hide the default menu icon */
+.title-bar-left button.menu-icon::after,
+.title-bar-left button.menu-icon {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.title-bar-left button.menu-icon {
+  margin-right: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
