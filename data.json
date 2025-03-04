@@ -63,7 +63,6 @@
             "Git",
             "Raspberry Pi"
         ],
-        "github_link": "https://github.com/camdresie/Magic-Mirror-Code",
         "image_urls": [
                 "./static/images/Magic Mirror/mirror0square.jpg",
                 "./static/images/Magic Mirror/mirror3.jpg",
@@ -82,7 +81,6 @@
             "Minimax Algorithm",
             "Alpha-Beta Pruning"
         ],
-        "github_link": "https://github.com/camdresie/dominoAlphaBetaMinimaxAI",
         "image_urls": [
             "./static/images/Minimax/Minimax0Square.png",
             "./static/images/Minimax/Minimax1.png",
@@ -116,7 +114,7 @@
         },
         { 
         "id": "4",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Destini Story App - iOS",
         "description": "This project uses a Model View Controller (MVC) architecture to render a \"Choose Your Own Adventure\" style story. A user is presented with a prompt and then chooses between one of two options. Depending on the option they choose, the story will progress in a different way.",
         "technologies": [
@@ -176,7 +174,7 @@
         },
         { 
         "id": "7",
-            "category": "games",
+        "category": "games",
         "project_name": "Python Tower Blaster",
         "description": "This game gives the player a tower that they must order from smallest to largest \"brick\" in numerical order faster than the computer can order its tower. Players can choose to  draw a tile from the top of the draw pile or get a random tile. They then choose which \"brick\" they'd like to replace in their tower. The project is written in Python.",
         "technologies": [
@@ -194,7 +192,7 @@
         },
         { 
         "id": "8",
-            "category": "web",
+        "category": "web",
         "project_name": "Employee Directory",
         "description": "This project utilizes a web API to pull data on twelve random employees including their photo, name, birthday, address, city, state, and more for display in an employee directory. The project utilizes JavaScript's fetch() method and promises to make the code more readable and cut down on callback hell. The twelve employees are initially displayed in a gallery-type directory. If an individual employee is clicked on, then a modal tile with more detailed information about that employee is rendered.",
         "technologies": [
@@ -216,7 +214,7 @@
         },
         { 
         "id": "9",
-            "category": "games",
+        "category": "games",
         "project_name": "Phrase Hunter Game",
         "description": "This project uses object-oriented vanilla JavaScript to create a hangman-like game. Players use the onscreen keyboard to make their guesses. If a guess is incorrect, the player loses a life (the hearts at the bottom). The player has a total of five tries in which to guess the phrase. If they do not, a losing message is presented and they can restart the game. If they guess the phrase, then a winning message is displayed and they can generate a new random phrase to guess. The data set was generated from a text file containing more than 8,000 common English phrases (and a few of my own). I cleaned the data set to remove expressions that contained punctuation and filtered out inappropriate phrases using Java. Then the data set was imported to this project.",
         "technologies": [
@@ -239,7 +237,7 @@
         },
         { 
         "id": "10",
-            "category": "web",
+        "category": "web",
         "project_name": "Paginated Student List",
         "description": "For this project, I utilized vanilla JavaScript (no libraries) to create a dynamic pagination system for a list. My code appends a list of links to the bottom of the page that allows a user to navigate through the full list of students 10 at a time. The list is dynamic, so it updates automatically depending on the size of the list input. After completing the initial code mentioned above, I elected to add a search bar function. It is appended to the DOM using vanilla JavaScript. There are two event listeners, one on the search button and one on the search text input field. As a user types, the search function dynamically searches through each name on the list to see if there are any matches. If the user inputs a string of text that matches a user's name in entirety or in part, the function displays that name and hides all others. If no matches are found, a message is displayed telling the user to try another name as no matches were found.",
         "technologies": [
@@ -260,7 +258,7 @@
         },
         {
         "id": "11",
-            "category": "games",
+        "category": "games",
         "project_name": "Java Battleship Game",
         "description": "This project uses Java to render a command-line battleship game that a user can play against a computer. The ships are randomly placed each time and users can enter where they'd like to shoot by entering a pair of coordinates each turn. Sunk ships are represented by an 's', hits are represented by an 'x', spaces that have not been shot at are represented by '.', and misses are represented by '-'.",
         "technologies": [
@@ -270,7 +268,6 @@
             "Abstract Classes and Methods",
             "Javadocs"
         ],
-        "github_link": "https://github.com/camdresie/Battleship",
         "image_urls": [
                 "./static/images/Java Battleship Game/battleship0square.png",
                 "./static/images/Java Battleship Game/battleship1.PNG",
@@ -280,7 +277,7 @@
         },
         { 
         "id": "12",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Tip Calculator - iOS",
         "description": "This project employs the Model View Controller (MVC) design pattern to render a tip calculator app. The app prompts a user to enter the total amount of their bill at the top. Then they can select a tip percentage from 0%, 10%, 20%. Then they enter the number of people in their party and the app will pop up a new modal to let them know how much each person needs to pay!",
         "technologies": [
@@ -299,7 +296,7 @@
         },
         {
         "id": "13",
-            "category": "games",
+        "category": "games",
         "project_name": "Java Hangman Game",
         "description": "This project gets dictionary input from a large dictionary file, cleans the input, and then uses those words as the source for the game. The game has two modes, but the user doesn't know which they are playing. Normal hangman mode plays as one would expect, where a user guesses a letter and letters are revealed one at a time until they run out of tries or guess the word. Evil Hangman changes the word each time a player guesses a correct letter to another word with the same letter configuration as the user currently has.",
         "technologies": [
@@ -309,7 +306,6 @@
             "Abstract Classes and Methods",
             "Javadocs"
         ],
-        "github_link": "https://github.com/camdresie/Hangman",
         "image_urls": [
             "./static/images/Hangman/hangman0square.png",
             "./static/images/Hangman/start.png",
@@ -319,7 +315,7 @@
         },
         { 
         "id": "14",
-            "category": "games",
+        "category": "games",
         "project_name": "Connect Four Game",
         "description": "This project utilizes object-oriented JavaScript to complete a connect four game. In this program, heavy use is made of JavaScript's class constructors to create each aspect of the game (the players, tokens, board, spaces, and game itself). The program is highly modular, with each aspect coded in its own file for high readability. When the game begins, the first player uses the arrow keys to control their token and then drops the token in the slot of their choosing. The game alternates between both players until one has placed four tokens in a row. They are then declared the winner! If both players play all their tokens and there is no winner, a message is displayed. After either ending event, a message is displayed telling the user to refresh the browser to start a new game.",
         "technologies": [
@@ -340,7 +336,7 @@
         },
         {
         "id": "15",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Dice App - iOS",
         "description": "This app is perfect for those moments when you need to settle something with the throw of some dice on the go! Or, if you're like me, and lose the dice that come with Yahtzee!, this app will provide a replacement so you can continue to play. The app is written in Swift and makes use of the Main Storyboard for the UI layout and the View Controller to control the display of the dice and the roll button functionality. To use the app, a user simply hits the roll button and random pairs of dice are displayed.",
         "technologies": [
@@ -359,7 +355,7 @@
         },
         {
         "id": "16",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Magic 8 Ball App - iOS",
         "description": "For those questions that just won't go away, outsource the future to the Magic 8 Ball! The 8 Ball displays different responses to questions when a user taps on the \"ask\" button. The app features a custom launch page and uses xCode Auto Layout to allow the app to run properly no matter which orientation an iOS device is held in.",
         "technologies": [
@@ -378,7 +374,7 @@
         },
         { 
         "id": "17",
-            "category": "web",
+        "category": "web",
         "project_name": "Random Quote Generator",
         "description": "This project takes in an array of quotes with information pertinent to those quotes (who said it, where they said it, when they said it, and a category for the quote). The function in the program then randomizes the quotes and selects one. As it does this, the background color for the page changes to a random color. If a user doesn't hit the button to get a random quote within ten seconds, the page will automatically select a new random quote.",
         "technologies": [
@@ -398,7 +394,7 @@
         },
         { 
         "id": "18",
-            "category": "web",
+        "category": "web",
         "project_name": "Conference Signup Form",
         "description": "This is a signup form for a fictional conference I completed using vanilla JavaScript. It is a dynamic form that allows users to input various data and receive feedback on what they have entered. If a user does not enter correct data, the form will be prevented from submitting by checking user inputs against RegEx values. The user is then notified of the data that they did not correctly enter through a list of error messages below the submit button and a red border on the section that is incorrect. If the user does not have JavaScript functioning on their browser, the form will still function.",
         "technologies": [
@@ -420,7 +416,7 @@
         },
         { 
         "id": "19",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Quizzler - iOS",
         "description": "This is a quiz app that uses a Model View Controller (MVC) architecture to run a quiz game. There are several questions and answers to choose from. If a player gets a question right, their score is incremented and the answer is highlighted in green. If they get the question wrong, the question is highlighted in red.",
         "technologies": [
@@ -439,7 +435,7 @@
         },
         { 
         "id": "20",
-            "category": "ios",
+        "category": "ios",
         "project_name": "Egg Timer - iOS",
         "description": "This app allows a user to select the hardness at which they would like their egg cooked from soft, medium, or hard. The app then sets a timer for either 5, 8, or 12 minutes, corresponding to the hardness of the egg. A progress bar at the bottom displays the progression of the timer. When the timer is done, a sound will play.",
         "technologies": [
