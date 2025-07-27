@@ -7,12 +7,81 @@ html(class="no-js" lang="en" dir="ltr")
     meta(charset='utf-8')
     meta(http-equiv='x-ua-compatible', content='ie=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title Cam's Portfolio 
+    
+    //- Dynamic title and meta tags
+    title= pageTitle || "Cam Dresie - Group Product Manager | AI & Legal Tech Portfolio"
+    meta(name='description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology. Leading product strategy for flagship division with expertise in machine learning, contract automation, and team leadership.")
+    meta(name='keywords', content='Product Manager, Group Product Manager, AI, Machine Learning, Legal Tech, Contract Automation, Ontra, Product Strategy, Team Leadership')
+    meta(name='author', content='Cam Dresie')
+    
+    //- Open Graph tags for social sharing
+    meta(property='og:title', content=pageTitle || "Cam Dresie - Group Product Manager")
+    meta(property='og:description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology and product strategy.")
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='https://camdresie.com')
+    meta(property='og:image', content='/static/images/profile_picture.jpg')
+    meta(property='og:site_name', content="Cam Dresie's Portfolio")
+    
+    //- Twitter Card tags
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:title', content=pageTitle || "Cam Dresie - Group Product Manager")
+    meta(name='twitter:description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology.")
+    meta(name='twitter:image', content='/static/images/profile_picture.jpg')
+    
+    //- Additional meta tags
+    meta(name='robots', content='index, follow')
+    meta(name='theme-color', content='#00a6ff')
+    
+    //- Structured data for better SEO
+    script(type='application/ld+json').
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Cam Dresie",
+        "jobTitle": "Group Product Manager",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Ontra"
+        },
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Washington University in St. Louis School of Law",
+            "degree": "Doctor of Law (J.D.)"
+          },
+          {
+            "@type": "EducationalOrganization", 
+            "name": "University of Pennsylvania",
+            "degree": "Master of Computer and Information Technology"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Truman State University", 
+            "degree": "Bachelor of Arts in Philosophy and Religious Studies"
+          }
+        ],
+        "knowsAbout": ["Product Management", "Artificial Intelligence", "Machine Learning", "Legal Technology", "Contract Automation", "Team Leadership", "Product Strategy"],
+        "url": "https://camdresie.com",
+        "image": "https://camdresie.com/static/images/profile_picture.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/camdresie/",
+          "https://github.com/camdresie"
+        ]
+      } 
+    //- Preconnect to external domains for faster loading
+    link(rel='preconnect', href='https://fonts.googleapis.com')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+    
+    //- Favicon and app icons
     link(rel="icon" type="image/svg+xml" href='/favicon.svg')
     link(rel="icon" type="image/svg+xml" sizes="32x32" href='/static/images/favicon/favicon-32x32.svg')
     link(rel="icon" type="image/svg+xml" sizes="16x16" href='/static/images/favicon/favicon-16x16.svg')
     link(rel="apple-touch-icon" href='/static/images/favicon/apple-touch-icon.svg')
-    link(href='https://fonts.googleapis.com/css?family=Merriweather:300,400,400i,700,800', rel='stylesheet')
+    
+    //- Optimized font loading
+    link(href='https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;800&display=swap', rel='stylesheet')
+    
+    //- CSS files
     link(rel='stylesheet', href='/static/css/foundation.css')
     link(rel='stylesheet', href='/static/css/style.css')
   body
@@ -24,13 +93,23 @@ html(class="no-js" lang="en" dir="ltr")
       .grid-y.grid-padding-x(style='height: 100%;')
         block sidebar
           .cell.shrink
-            img.thumbnail(src='../static/images/profile_picture.jpg')
-          .cell.auto
+            img.thumbnail(src='../static/images/profile_picture.jpg' alt='Cam Dresie - Group Product Manager')
             h5 Cam Dresie
-            p.text-light
-              | Greetings! I'm a Group Product Manager at Ontra, where I lead product strategy for our flagship division and manage a team of Product Managers developing AI-powered solutions for the legal industry. I'm a California licensed attorney and hold a law degree from Washington University in St. Louis and a Masters in Computer and Information Technology from the University of Pennsylvania.
-            a(href='/about') Learn More →
-            
+          .cell.auto
+            .main-navigation-sidebar
+              a.sidebar-nav-button(href='/')
+                .nav-icon 💼
+                .nav-text Projects
+              a.sidebar-nav-button(href='/bio')
+                .nav-icon 👤
+                .nav-text Bio
+              a.sidebar-nav-button(href='/timeline')
+                .nav-icon 📈
+                .nav-text Career Timeline
+              a.sidebar-nav-button(href='/leadership')
+                .nav-icon 🎯
+                .nav-text Leadership Philosophy
+          .cell.shrink
             .social-links
               a.social-link(href='https://www.linkedin.com/in/camdresie/' target='_blank', aria-label="LinkedIn")
                 svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24")
@@ -51,6 +130,7 @@ html(class="no-js" lang="en" dir="ltr")
               span
               span
           span.title-bar-title Cam Dresie | Group Product Manager
+      
       block content
 
     script(src='https://code.jquery.com/jquery-3.6.0.min.js')

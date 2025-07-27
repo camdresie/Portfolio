@@ -2,7 +2,7 @@
   --dark-bg: #121212;
   --dark-surface: #1e1e1e;
   --dark-surface-2: #2d2d2d;
-  --accent: #6366f1;
+  --accent: #00a6ff;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --border-radius-sm: 4px;
@@ -138,9 +138,10 @@ a:hover{
 .portfolio-me .cell.auto {
   flex: 1 1 auto;
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 1rem;
+  height: 100%;
 }
 
 .portfolio-me .thumbnail {
@@ -264,12 +265,12 @@ a:hover{
     margin-bottom: 15px;
     position: relative;
     background: var(--dark-surface);
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius-md);
     overflow: hidden;
     padding: 1rem;
     padding-bottom: 2rem;
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(0, 166, 255, 0.1);
     box-shadow: 
       0 4px 6px rgba(0, 0, 0, 0.1),
       0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -280,14 +281,14 @@ a:hover{
   .portfolio-index .cell:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-      0 20px 40px rgba(99, 102, 241, 0.3),
-      0 0 0 2px rgba(99, 102, 241, 0.4),
-      0 0 50px rgba(99, 102, 241, 0.2);
+      0 20px 40px rgba(0, 166, 255, 0.3),
+      0 0 0 2px rgba(0, 166, 255, 0.4),
+      0 0 50px rgba(0, 166, 255, 0.2);
     border-color: var(--accent);
     background: linear-gradient(
       135deg,
       var(--dark-surface),
-      rgba(99, 102, 241, 0.15)
+      rgba(0, 166, 255, 0.15)
     );
   }
 
@@ -2124,6 +2125,91 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
     height: 36px;
   }
   
+  /* Sidebar Navigation */
+  .main-navigation-sidebar {
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+    height: 100% !important;
+    justify-content: center !important;
+    padding: 40px 0 !important;
+    width: 100% !important;
+  }
+  
+  .sidebar-nav-button {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 20px 15px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    position: relative !important;
+    border-left: 3px solid transparent !important;
+    min-height: 60px !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .sidebar-nav-button:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-left-color: var(--accent);
+    transform: translateX(5px);
+  }
+  
+  .sidebar-nav-button:active {
+    transform: translateX(2px);
+  }
+  
+  .nav-icon {
+    font-size: 1.3rem;
+    min-width: 24px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-nav-button:hover .nav-icon {
+    transform: scale(1.1);
+  }
+  
+  .nav-text {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-nav-button:hover .nav-text {
+    color: #fff;
+  }
+  
+  /* Mobile adjustments for sidebar navigation */
+  @media (max-width: 1024px) {
+    .main-navigation-sidebar {
+      margin: 20px 0;
+      gap: 12px;
+    }
+    
+    .sidebar-nav-button {
+      padding: 15px 18px;
+      gap: 12px;
+    }
+    
+    .nav-icon {
+      font-size: 1.2rem;
+    }
+    
+    .nav-text {
+      font-size: 0.9rem;
+    }
+  }
+  
   /* Improve tabs on mobile */
   .portfolio-tabs {
     flex-wrap: wrap;
@@ -2325,5 +2411,64 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+/* FINAL NAVIGATION OVERRIDE - HIGHEST PRIORITY */
+#my-info .main-navigation-sidebar {
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  height: 100% !important;
+  justify-content: center !important;
+  padding: 40px 0 !important;
+  width: 100% !important;
+}
+
+#my-info .sidebar-nav-button {
+  display: flex !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  padding: 15px 15px !important;
+  margin: 8px 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+  border-left: 3px solid transparent !important;
+  min-height: 50px !important;
+}
+
+#my-info .sidebar-nav-button .nav-icon {
+  display: inline-block !important;
+  font-size: 1.3rem !important;
+  margin-right: 15px !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+}
+
+#my-info .sidebar-nav-button .nav-text {
+  display: inline-block !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  line-height: 1.2 !important;
+  vertical-align: middle !important;
+  position: relative !important;
+  transition: color 0.3s ease !important;
+}
+
+
+#my-info .sidebar-nav-button:hover {
+  background: transparent !important;
+}
+
+#my-info .sidebar-nav-button:hover .nav-text {
+  color: #fff !important;
 }
 
