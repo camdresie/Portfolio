@@ -19,6 +19,7 @@ block content
         .portfolio-tabs
           a.portfolio-tab.active(href="#" data-tab="timeline") Professional Timeline
           a.portfolio-tab(href="#" data-tab="bio") Bio
+          a.portfolio-tab(href="#" data-tab="leadership") Leadership Philosophy
 
         //- Timeline content (default visible)
         .portfolio-content(data-content="timeline" style="display: block;")
@@ -27,7 +28,7 @@ block content
               //- Timeline entries will be added here
               .timeline-item
                 .timeline-dot
-                .timeline-date Aug 2025 - Present
+                .timeline-date 2025 - Present
                 .timeline-content
                   h4 Group Product Manager
                   h5 Ontra
@@ -43,7 +44,7 @@ block content
 
               .timeline-item
                 .timeline-dot
-                .timeline-date 2025 - July 2025
+                .timeline-date 2025
                 .timeline-content
                   h4 Staff Product Manager
                   h5 Ontra
@@ -247,32 +248,108 @@ block content
                   | In my free time I'm an avid runner and reader, dog dad to Koda (a black labradoodle), husband to Lucas, and love to play videogames. To get a feel for my capabilities, please check out some of the projects I've completed as displayed on this site or visit my Github!
             
             .cell.portfolio-meta.small-12.medium-4.large-4
-              .skills-container
-                h6 Skills
+              .skills-container.product-skills
+                h6 Product Management Skills
                 .skills-grid
-                  span.skill-tag JavaScript
-                  span.skill-tag Java
-                  span.skill-tag C
-                  span.skill-tag Swift
-                  span.skill-tag Python
-                  span.skill-tag React.js
-                  span.skill-tag Vue.js 
-                  span.skill-tag Sails.js 
-                  span.skill-tag Node.js
-                  span.skill-tag Express.js
-                  span.skill-tag ORM
-                  span.skill-tag Data Modeling 
-                  span.skill-tag SQL/MySQL
-                  span.skill-tag Azure Cloud
-                  span.skill-tag Segment 
-                  span.skill-tag Amplitude
-                  span.skill-tag REST APIs
-                  span.skill-tag Git
-                  span.skill-tag HTML/CSS
-                  span.skill-tag Bootstrap
-                  span.skill-tag AI
-                  span.skill-tag Product Management
-                  span.skill-tag Product Strategy
+                  span.skill-tag.product-skill Product Strategy
+                  span.skill-tag.product-skill Product Portfolio Management
+                  span.skill-tag.product-skill Team Leadership
+                  span.skill-tag.product-skill People Management
+                  span.skill-tag.product-skill Cross-functional Leadership
+                  span.skill-tag.product-skill Strategic Planning
+                  span.skill-tag.product-skill Resource Allocation
+                  span.skill-tag.product-skill Stakeholder Management
+                  span.skill-tag.product-skill Business Strategy
+                  span.skill-tag.product-skill AI/ML Product Development
+                  span.skill-tag.product-skill Legal Tech
+                  span.skill-tag.product-skill Enterprise SaaS
+                  span.skill-tag.product-skill User Research
+                  span.skill-tag.product-skill Product Roadmapping
+                  span.skill-tag.product-skill Agile Methodologies
+                  span.skill-tag.product-skill Data-Driven Decision Making
+                  span.skill-tag.product-skill Go-to-Market Strategy
+                  span.skill-tag.product-skill Performance Management
+                  span.skill-tag.product-skill Budget Management
+                  span.skill-tag.product-skill Vendor Management
+                  span.skill-tag.product-skill OKRs & KPIs
+                  
+              .skills-container.engineering-skills
+                h6 Engineering & Technical Skills
+                .skills-grid
+                  span.skill-tag.engineering-skill JavaScript
+                  span.skill-tag.engineering-skill Java
+                  span.skill-tag.engineering-skill C
+                  span.skill-tag.engineering-skill Swift
+                  span.skill-tag.engineering-skill Python
+                  span.skill-tag.engineering-skill React.js
+                  span.skill-tag.engineering-skill Vue.js 
+                  span.skill-tag.engineering-skill Node.js
+                  span.skill-tag.engineering-skill Express.js
+                  span.skill-tag.engineering-skill SQL/MySQL
+                  span.skill-tag.engineering-skill Azure Cloud
+                  span.skill-tag.engineering-skill REST APIs
+                  span.skill-tag.engineering-skill Git
+                  span.skill-tag.engineering-skill HTML/CSS
+                  span.skill-tag.engineering-skill Data Modeling
+                  span.skill-tag.engineering-skill CI/CD
+                  span.skill-tag.engineering-skill API Integration
+                  span.skill-tag.engineering-skill Database Design
+                  span.skill-tag.engineering-skill Cloud Architecture
+                  span.skill-tag.engineering-skill Technical Documentation
+                  span.skill-tag.engineering-skill Code Review
+                  span.skill-tag.engineering-skill System Design
+
+        //- Leadership Philosophy content (initially hidden)
+        .portfolio-content.hidden(data-content="leadership" style="display: none;")
+          .grid-x.grid-margin-x
+            .cell.small-12.medium-12.large-12
+              .leadership-philosophy
+                .philosophy-intro
+                  h3 Leadership Philosophy
+                  p.lead
+                    | I believe in supportive leadership that empowers teams to do their best work while fostering growth, autonomy, and psychological safety.
+
+                .philosophy-principles
+                  .principle-card
+                    .principle-icon 🎯
+                    .principle-content
+                      h4 Clarity & Alignment
+                      p I ensure teams have clear direction and understand how their work connects to broader company goals. Regular communication about priorities, context, and decision-making rationale helps everyone make better autonomous decisions.
+
+                  .principle-card
+                    .principle-icon 🌱
+                    .principle-content
+                      h4 Growth Mindset
+                      p I invest in my team's professional development through stretch assignments, mentoring, and creating safe spaces to experiment and learn from failures. Everyone should leave our team better than when they joined.
+
+                  .principle-card
+                    .principle-icon 🤝
+                    .principle-content
+                      h4 Psychological Safety
+                      p Teams perform best when they can bring their authentic selves to work, voice concerns without fear, and take calculated risks. I foster an environment where diverse perspectives are valued and healthy debate is encouraged.
+
+                  .principle-card
+                    .principle-icon ⚡
+                    .principle-content
+                      h4 Empowered Autonomy
+                      p I provide context and guardrails, then trust my team to execute. Micromanagement stifles creativity and growth. I focus on outcomes and impact rather than prescriptive processes.
+
+                  .principle-card
+                    .principle-icon 📊
+                    .principle-content
+                      h4 Data-Driven Decisions
+                      p While intuition matters, I emphasize making decisions based on user research, metrics, and market insights. I teach teams to identify the right metrics to track and how to interpret data meaningfully.
+
+                  .principle-card
+                    .principle-icon 🔄
+                    .principle-content
+                      h4 Continuous Improvement
+                      p Regular retrospectives, feedback loops, and process iteration are essential. I model intellectual humility by being open about my own mistakes and showing how failure drives learning and improvement.
+
+                .philosophy-quote
+                  blockquote
+                    | "The best product managers are force multipliers who elevate everyone around them. My role isn't to have all the answers—it's to ask the right questions, remove blockers, and create conditions where brilliant people can do their best work."
+                  cite - My Leadership Approach
   
   script.
     // Ensure tabs work on this page
@@ -537,6 +614,15 @@ block content
           padding: 25px;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.05);
+          margin-bottom: 20px;
+        }
+        
+        .skills-container.product-skills {
+          border-left: 3px solid #00a6ff;
+        }
+        
+        .skills-container.engineering-skills {
+          border-left: 3px solid #00cc66;
         }
         
         .skills-container h6 {
@@ -544,6 +630,20 @@ block content
           font-weight: 600;
           color: #fff;
           letter-spacing: 0.5px;
+          display: flex;
+          align-items: center;
+        }
+        
+        .skills-container.product-skills h6::before {
+          content: "👨‍💼";
+          margin-right: 8px;
+          font-size: 1.1rem;
+        }
+        
+        .skills-container.engineering-skills h6::before {
+          content: "👨‍💻";
+          margin-right: 8px;
+          font-size: 1.1rem;
         }
         
         .skills-grid {
@@ -553,28 +653,71 @@ block content
         }
         
         .skill-tag {
-          background: rgba(0, 166, 255, 0.1);
-          color: rgba(255, 255, 255, 0.9);
           padding: 6px 12px;
           border-radius: 4px;
           font-size: 0.85rem;
           font-weight: 500;
-          border: 1px solid rgba(0, 166, 255, 0.2);
           transition: all 0.3s ease;
+          cursor: default;
         }
         
-        .skill-tag:hover {
+        .skill-tag.product-skill {
+          background: rgba(0, 166, 255, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 166, 255, 0.2);
+        }
+        
+        .skill-tag.product-skill:hover {
           background: rgba(0, 166, 255, 0.2);
           transform: translateY(-2px);
           box-shadow: 0 3px 10px rgba(0, 166, 255, 0.15);
         }
         
+        .skill-tag.engineering-skill {
+          background: rgba(0, 204, 102, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 204, 102, 0.2);
+        }
+        
+        .skill-tag.engineering-skill:hover {
+          background: rgba(0, 204, 102, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 3px 10px rgba(0, 204, 102, 0.15);
+        }
+        
+        /* Tablet view for timeline */
+        @media (max-width: 1024px) {
+          .portfolio-content[data-content="timeline"] .timeline-container {
+            max-height: 60vh;
+            padding: 15px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content {
+            padding: 18px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content h4 {
+            font-size: 1.1rem;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content p {
+            font-size: 0.9rem;
+          }
+        }
+        
         /* Mobile view for timeline */
         @media (max-width: 768px) {
+          .portfolio-content[data-content="timeline"] .timeline-container {
+            max-height: 70vh;
+            padding: 10px;
+            margin: 0;
+          }
+          
           .portfolio-content[data-content="timeline"] .timeline-item {
             width: 100%;
-            padding-left: 70px;
-            padding-right: 25px;
+            padding-left: 60px;
+            padding-right: 15px;
+            margin-bottom: 25px;
           }
           
           .portfolio-content[data-content="timeline"] .timeline-item:nth-child(even) {
@@ -582,12 +725,16 @@ block content
           }
           
           .portfolio-content[data-content="timeline"] .timeline::after {
-            left: 40px;
+            left: 30px;
+            width: 3px;
           }
           
           .portfolio-content[data-content="timeline"] .timeline-dot {
-            left: 40px !important;
+            left: 30px !important;
             right: auto !important;
+            width: 14px;
+            height: 14px;
+            top: 25px;
           }
           
           .portfolio-content[data-content="timeline"] .timeline-date {
@@ -595,13 +742,260 @@ block content
             width: 100%;
             left: auto !important;
             right: auto !important;
-            top: -5px;
-            margin-bottom: 5px;
+            top: 0;
+            margin-bottom: 8px;
             text-align: left !important;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #00a6ff;
           }
           
           .portfolio-content[data-content="timeline"] .timeline-content {
-            padding: 15px;
+            padding: 16px;
+            margin-top: 5px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content h5 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-skills {
+            gap: 6px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-skill {
+            padding: 3px 8px;
+            font-size: 0.75rem;
+          }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+          .portfolio-content[data-content="timeline"] .timeline-container {
+            max-height: 75vh;
+            padding: 8px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-item {
+            padding-left: 50px;
+            padding-right: 10px;
+            margin-bottom: 20px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline::after {
+            left: 25px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-dot {
+            left: 25px !important;
+            width: 12px;
+            height: 12px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content {
+            padding: 12px;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content h4 {
+            font-size: 0.95rem;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content h5 {
+            font-size: 0.85rem;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-content p {
+            font-size: 0.8rem;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-skill {
+            padding: 2px 6px;
+            font-size: 0.7rem;
+          }
+        }
+        
+        /* Touch-friendly enhancements */
+        @media (hover: none) and (pointer: coarse) {
+          .portfolio-content[data-content="timeline"] .timeline-content {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 166, 255, 0.1);
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-item:active .timeline-content {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+          }
+          
+          .portfolio-content[data-content="timeline"] .timeline-container {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+          }
+          
+          .portfolio-tab {
+            min-height: 44px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 166, 255, 0.2);
+          }
+          
+          .portfolio-tab:active {
+            transform: scale(0.96);
+            transition: transform 0.1s ease;
+          }
+        }
+        
+        /* Leadership Philosophy Styling */
+        .leadership-philosophy {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        
+        .philosophy-intro {
+          text-align: center;
+          margin-bottom: 40px;
+        }
+        
+        .philosophy-intro h3 {
+          color: #fff;
+          font-size: 2rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+          letter-spacing: 0.5px;
+        }
+        
+        .philosophy-intro p.lead {
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 1.2rem;
+          line-height: 1.6;
+          max-width: 700px;
+          margin: 0 auto;
+        }
+        
+        .philosophy-principles {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 25px;
+          margin-bottom: 40px;
+        }
+        
+        .principle-card {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 12px;
+          padding: 25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+        }
+        
+        .principle-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 166, 255, 0.15);
+          border-color: rgba(0, 166, 255, 0.2);
+        }
+        
+        .principle-icon {
+          font-size: 2rem;
+          margin-top: 5px;
+          flex-shrink: 0;
+        }
+        
+        .principle-content h4 {
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 10px;
+          letter-spacing: 0.3px;
+        }
+        
+        .principle-content p {
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.6;
+          font-size: 0.95rem;
+          margin: 0;
+        }
+        
+        .philosophy-quote {
+          background: rgba(0, 166, 255, 0.05);
+          border-left: 4px solid #00a6ff;
+          border-radius: 8px;
+          padding: 30px;
+          text-align: center;
+          margin-top: 30px;
+        }
+        
+        .philosophy-quote blockquote {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 1.1rem;
+          line-height: 1.7;
+          font-style: italic;
+          margin: 0 0 15px 0;
+          quotes: '"' '"';
+        }
+        
+        .philosophy-quote blockquote:before {
+          content: open-quote;
+          font-size: 1.5rem;
+          color: #00a6ff;
+        }
+        
+        .philosophy-quote blockquote:after {
+          content: close-quote;
+          font-size: 1.5rem;
+          color: #00a6ff;
+        }
+        
+        .philosophy-quote cite {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        
+        /* Responsive adjustments for leadership philosophy */
+        @media (max-width: 768px) {
+          .philosophy-principles {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          
+          .principle-card {
+            padding: 20px;
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+          }
+          
+          .principle-icon {
+            margin-top: 0;
+          }
+          
+          .philosophy-intro h3 {
+            font-size: 1.6rem;
+          }
+          
+          .philosophy-intro p.lead {
+            font-size: 1.1rem;
+          }
+          
+          .philosophy-quote {
+            padding: 20px;
+          }
+          
+          .philosophy-quote blockquote {
+            font-size: 1rem;
           }
         }
       `;

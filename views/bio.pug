@@ -1,0 +1,200 @@
+extends layout.pug
+
+//- Bio page showing personal background and story
+
+block content 
+  article.grid-container.portfolio-intro.portfolio-project
+    .grid-x
+      .cell.small-12.medium-12.large-12
+        h1.about-heading Bio
+        p.lead.text-light.about-subtitle
+          | Getting to know Cam Dresie
+
+        .portfolio-content
+          .grid-x.grid-margin-x
+            .cell.small-12.medium-8.large-8
+              .portfolio-bio
+                p
+                  | I'm a Group Product Manager and attorney who brings my utmost to every project I work on. Throughout my career, I've gained a vast array of technical and business competencies that I employ to build features that will delight users. 
+                p
+                  | I currently work as a Group Product Manager at Ontra, where I lead product strategy for our flagship division and manage a team of Product Managers developing AI-powered solutions for the legal industry. Prior to my time at Ontra, I worked as an engineer with Stack Moxie, an enterprise-grade solution for automated testing of marketing operations tech stacks.
+                p
+                  | Working as a software engineer with Stack Moxie, I quickly proved myself to be capable of managing large-scale projects independently. In my time with the company, I shipped three entirely new, full-stack features on which I handled all aspects of development. In my development work, I combine a commitment to strong technical foundations, a focus on excellent user experience, and a passion for clean design to craft features that have scaled to serve all Stack Moxie's clients, from small startups to enterprise-grade giants. 
+                p
+                  | In addition to the native features I developed for Stack Moxie, I also developed integrations with partners including Salesforce, Amplitude, and others. To achieve seamless integrations, I worked hand-in-hand with outside development teams at other companies, utilizing my communication skills to provide the projects with direction and effectively convey technical requirements to outside teams. The integrations I developed brought partners' features into the Stack Moxie ecosystem and integrated Stack Moxie's testing functionalities into other applications. 
+                p
+                  | I also assisted in managing the cloud infrastructure on which Stack Moxie runs. I handled several aspects of our migration from AWS to Azure including creating the CI/CD process, configuring deployment pipelines, migrating to Azure Service Bus, and preparing to migrate fully onto an Azure-hosted regime instead of Heroku in the future. 
+                p
+                  | Prior to becoming an engineer, I attained my law degree from Washington University in St. Louis and worked as a legal consultant for firms and startups specifically on issues around data privacy, including GDPR and CCPA, corporate formation, and regulatory and compliance issues. I maintain an active California Bar license. 
+                p
+                  | In my free time I'm an avid runner and reader, dog dad to Koda (a black labradoodle), husband to Lucas, and love to play videogames. To get a feel for my capabilities, please check out some of the projects I've completed as displayed on this site or visit my Github!
+            
+            .cell.portfolio-meta.small-12.medium-4.large-4
+              .skills-container.product-skills
+                h6 Product Management Skills
+                .skills-grid
+                  span.skill-tag.product-skill Product Strategy
+                  span.skill-tag.product-skill Product Portfolio Management
+                  span.skill-tag.product-skill Team Leadership
+                  span.skill-tag.product-skill People Management
+                  span.skill-tag.product-skill Cross-functional Leadership
+                  span.skill-tag.product-skill Strategic Planning
+                  span.skill-tag.product-skill Resource Allocation
+                  span.skill-tag.product-skill Stakeholder Management
+                  span.skill-tag.product-skill Business Strategy
+                  span.skill-tag.product-skill AI/ML Product Development
+                  span.skill-tag.product-skill Legal Tech
+                  span.skill-tag.product-skill Enterprise SaaS
+                  span.skill-tag.product-skill User Research
+                  span.skill-tag.product-skill Product Roadmapping
+                  span.skill-tag.product-skill Agile Methodologies
+                  span.skill-tag.product-skill Data-Driven Decision Making
+                  span.skill-tag.product-skill Go-to-Market Strategy
+                  span.skill-tag.product-skill Performance Management
+                  span.skill-tag.product-skill Budget Management
+                  span.skill-tag.product-skill Vendor Management
+                  span.skill-tag.product-skill OKRs & KPIs
+                  
+              .skills-container.engineering-skills
+                h6 Engineering & Technical Skills
+                .skills-grid
+                  span.skill-tag.engineering-skill JavaScript
+                  span.skill-tag.engineering-skill Java
+                  span.skill-tag.engineering-skill C
+                  span.skill-tag.engineering-skill Swift
+                  span.skill-tag.engineering-skill Python
+                  span.skill-tag.engineering-skill React.js
+                  span.skill-tag.engineering-skill Vue.js 
+                  span.skill-tag.engineering-skill Node.js
+                  span.skill-tag.engineering-skill Express.js
+                  span.skill-tag.engineering-skill SQL/MySQL
+                  span.skill-tag.engineering-skill Azure Cloud
+                  span.skill-tag.engineering-skill REST APIs
+                  span.skill-tag.engineering-skill Git
+                  span.skill-tag.engineering-skill HTML/CSS
+                  span.skill-tag.engineering-skill Data Modeling
+                  span.skill-tag.engineering-skill CI/CD
+                  span.skill-tag.engineering-skill API Integration
+                  span.skill-tag.engineering-skill Database Design
+                  span.skill-tag.engineering-skill Cloud Architecture
+                  span.skill-tag.engineering-skill Technical Documentation
+                  span.skill-tag.engineering-skill Code Review
+                  span.skill-tag.engineering-skill System Design
+
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      // Apply styling for skills sections
+      const inlineStyles = `
+        .about-heading {
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: #fff;
+          letter-spacing: 0.5px;
+        }
+        
+        .about-subtitle {
+          margin-bottom: 2rem;
+          opacity: 0.8;
+        }
+        
+        .portfolio-bio {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          padding: 25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          margin-bottom: 20px;
+        }
+        
+        .portfolio-bio p {
+          margin-bottom: 1.5rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .portfolio-bio p:last-child {
+          margin-bottom: 0;
+        }
+        
+        .skills-container {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          padding: 25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          margin-bottom: 20px;
+        }
+        
+        .skills-container.product-skills {
+          border-left: 3px solid #00a6ff;
+        }
+        
+        .skills-container.engineering-skills {
+          border-left: 3px solid #00cc66;
+        }
+        
+        .skills-container h6 {
+          margin-bottom: 15px;
+          font-weight: 600;
+          color: #fff;
+          letter-spacing: 0.5px;
+          display: flex;
+          align-items: center;
+        }
+        
+        .skills-container.product-skills h6::before {
+          content: "👨‍💼";
+          margin-right: 8px;
+          font-size: 1.1rem;
+        }
+        
+        .skills-container.engineering-skills h6::before {
+          content: "👨‍💻";
+          margin-right: 8px;
+          font-size: 1.1rem;
+        }
+        
+        .skills-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        
+        .skill-tag {
+          padding: 6px 12px;
+          border-radius: 4px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          cursor: default;
+        }
+        
+        .skill-tag.product-skill {
+          background: rgba(0, 166, 255, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 166, 255, 0.2);
+        }
+        
+        .skill-tag.product-skill:hover {
+          background: rgba(0, 166, 255, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 3px 10px rgba(0, 166, 255, 0.15);
+        }
+        
+        .skill-tag.engineering-skill {
+          background: rgba(0, 204, 102, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(0, 204, 102, 0.2);
+        }
+        
+        .skill-tag.engineering-skill:hover {
+          background: rgba(0, 204, 102, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 3px 10px rgba(0, 204, 102, 0.15);
+        }
+      `;
+      
+      const styleElement = document.createElement('style');
+      styleElement.textContent = inlineStyles;
+      document.head.appendChild(styleElement);
+    });

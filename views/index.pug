@@ -28,7 +28,7 @@ block content
           .projects-grid
             each project in category.projects
               a.cell(href=`/project/${project.id}`)
-                img.thumbnail(src=project.image_urls && project.image_urls.thumbnail ? project.image_urls.thumbnail : "/static/images/placeholder-project.jpg")
+                img.thumbnail(src=project.image_urls && project.image_urls.thumbnail ? project.image_urls.thumbnail : "/static/images/placeholder-project.jpg" alt=`${project.project_name} - Product Management Project` loading="lazy")
                 h5= project.project_name
                 .tech-tags
                   each tech in project.technologies
@@ -45,7 +45,7 @@ block content
           .projects-grid
             each project in projects.filter(p => p.category === category.id)
               a.cell(href=`/project/${project.id}`)
-                img.thumbnail(src=project.image_urls[0])
+                img.thumbnail(src=project.image_urls[0] alt=`${project.project_name} - Engineering Project` loading="lazy")
                 h5= project.project_name
                 .tech-tags
                   each tech in project.technologies

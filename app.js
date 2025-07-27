@@ -27,11 +27,39 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     const { projects, categories, pmProjects } = data;
-    res.render('index', { projects, categories, pmProjects });
+    res.render('index', { 
+        projects, 
+        categories, 
+        pmProjects,
+        pageTitle: "Cam Dresie - Group Product Manager | AI & Legal Tech Portfolio",
+        pageDescription: "Group Product Manager at Ontra specializing in AI-powered legal technology. Leading product strategy for flagship division with expertise in machine learning, contract automation, and team leadership."
+    });
 })
 
+app.get('/bio', (req, res) => {
+    res.render('bio', {
+        pageTitle: "Bio - Cam Dresie | Group Product Manager & Attorney",
+        pageDescription: "Learn about Cam Dresie's background and personal story. Group PM at Ontra with expertise in AI-powered legal technology, team leadership, and software engineering."
+    });
+})
+
+app.get('/timeline', (req, res) => {
+    res.render('timeline', {
+        pageTitle: "Professional Timeline - Cam Dresie | Career Journey",
+        pageDescription: "Explore Cam Dresie's professional timeline from law to product management. Journey from J.D. at Washington University to Group Product Manager at Ontra leading AI legal technology."
+    });
+})
+
+app.get('/leadership', (req, res) => {
+    res.render('leadership', {
+        pageTitle: "Leadership Philosophy - Cam Dresie | Management Approach",
+        pageDescription: "Discover Cam Dresie's leadership philosophy as a Group Product Manager. Supportive leadership approach focusing on team empowerment, growth mindset, and psychological safety."
+    });
+})
+
+// Keep legacy /about route for backwards compatibility, redirect to /bio
 app.get('/about', (req, res) => {
-    res.render('about');
+    res.redirect(301, '/bio');
 })
 
 app.get('/project/:id', (req, res) => {
@@ -43,14 +71,22 @@ app.get('/project/:id', (req, res) => {
     for (const category of data.pmProjects.categories) {
       project = category.projects.find(p => p.id === projectId);
       if (project) {
-        return res.render('pm-project', { project });
+        return res.render('pm-project', { 
+          project,
+          pageTitle: `${project.project_name} - Cam Dresie Product Management Portfolio`,
+          pageDescription: project.description || project.overview
+        });
       }
     }
   } else {
     // Handle engineering projects
     project = data.projects.find(p => p.id === projectId);
     if (project) {
-      return res.render('project', { thisProject: project });
+      return res.render('project', { 
+        thisProject: project,
+        pageTitle: `${project.project_name} - Cam Dresie Engineering Portfolio`,
+        pageDescription: project.description
+      });
     }
   }
 

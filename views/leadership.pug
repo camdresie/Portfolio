@@ -1,0 +1,226 @@
+extends layout.pug
+
+//- Leadership philosophy page showcasing management approach
+
+block content 
+  article.grid-container.portfolio-intro.portfolio-project
+    .grid-x
+      .cell.small-12.medium-12.large-12
+        h1.about-heading Leadership Philosophy
+        p.lead.text-light.about-subtitle
+          | How I approach team leadership and product management
+
+        .portfolio-content
+          .leadership-philosophy
+            .philosophy-intro
+              h3 Leadership Philosophy
+              p.lead
+                | I believe in supportive leadership that empowers teams to do their best work while fostering growth, autonomy, and psychological safety.
+
+            .philosophy-principles
+              .principle-card
+                .principle-icon 🎯
+                .principle-content
+                  h4 Clarity & Alignment
+                  p I ensure teams have clear direction and understand how their work connects to broader company goals. Regular communication about priorities, context, and decision-making rationale helps everyone make better autonomous decisions.
+
+              .principle-card
+                .principle-icon 🌱
+                .principle-content
+                  h4 Growth Mindset
+                  p I invest in my team's professional development through stretch assignments, mentoring, and creating safe spaces to experiment and learn from failures. Everyone should leave our team better than when they joined.
+
+              .principle-card
+                .principle-icon 🤝
+                .principle-content
+                  h4 Psychological Safety
+                  p Teams perform best when they can bring their authentic selves to work, voice concerns without fear, and take calculated risks. I foster an environment where diverse perspectives are valued and healthy debate is encouraged.
+
+              .principle-card
+                .principle-icon ⚡
+                .principle-content
+                  h4 Empowered Autonomy
+                  p I provide context and guardrails, then trust my team to execute. Micromanagement stifles creativity and growth. I focus on outcomes and impact rather than prescriptive processes.
+
+              .principle-card
+                .principle-icon 📊
+                .principle-content
+                  h4 Data-Driven Decisions
+                  p While intuition matters, I emphasize making decisions based on user research, metrics, and market insights. I teach teams to identify the right metrics to track and how to interpret data meaningfully.
+
+              .principle-card
+                .principle-icon 🔄
+                .principle-content
+                  h4 Continuous Improvement
+                  p Regular retrospectives, feedback loops, and process iteration are essential. I model intellectual humility by being open about my own mistakes and showing how failure drives learning and improvement.
+
+            .philosophy-quote
+              blockquote
+                | "The best product managers are force multipliers who elevate everyone around them. My role isn't to have all the answers—it's to ask the right questions, remove blockers, and create conditions where brilliant people can do their best work."
+              cite - My Leadership Approach
+
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      // Apply leadership philosophy styling
+      const inlineStyles = `
+        .about-heading {
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: #fff;
+          letter-spacing: 0.5px;
+        }
+        
+        .about-subtitle {
+          margin-bottom: 2rem;
+          opacity: 0.8;
+        }
+        
+        /* Leadership Philosophy Styling */
+        .leadership-philosophy {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        
+        .philosophy-intro {
+          text-align: center;
+          margin-bottom: 40px;
+        }
+        
+        .philosophy-intro h3 {
+          color: #fff;
+          font-size: 2rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+          letter-spacing: 0.5px;
+        }
+        
+        .philosophy-intro p.lead {
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 1.2rem;
+          line-height: 1.6;
+          max-width: 700px;
+          margin: 0 auto;
+        }
+        
+        .philosophy-principles {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 25px;
+          margin-bottom: 40px;
+        }
+        
+        .principle-card {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 12px;
+          padding: 25px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+        }
+        
+        .principle-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 25px rgba(0, 166, 255, 0.15);
+          border-color: rgba(0, 166, 255, 0.2);
+        }
+        
+        .principle-icon {
+          font-size: 2rem;
+          margin-top: 5px;
+          flex-shrink: 0;
+        }
+        
+        .principle-content h4 {
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 10px;
+          letter-spacing: 0.3px;
+        }
+        
+        .principle-content p {
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.6;
+          font-size: 0.95rem;
+          margin: 0;
+        }
+        
+        .philosophy-quote {
+          background: rgba(0, 166, 255, 0.05);
+          border-left: 4px solid #00a6ff;
+          border-radius: 8px;
+          padding: 30px;
+          text-align: center;
+          margin-top: 30px;
+        }
+        
+        .philosophy-quote blockquote {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 1.1rem;
+          line-height: 1.7;
+          font-style: italic;
+          margin: 0 0 15px 0;
+          quotes: '"' '"';
+        }
+        
+        .philosophy-quote blockquote:before {
+          content: open-quote;
+          font-size: 1.5rem;
+          color: #00a6ff;
+        }
+        
+        .philosophy-quote blockquote:after {
+          content: close-quote;
+          font-size: 1.5rem;
+          color: #00a6ff;
+        }
+        
+        .philosophy-quote cite {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        
+        /* Responsive adjustments for leadership philosophy */
+        @media (max-width: 768px) {
+          .philosophy-principles {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          
+          .principle-card {
+            padding: 20px;
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+          }
+          
+          .principle-icon {
+            margin-top: 0;
+          }
+          
+          .philosophy-intro h3 {
+            font-size: 1.6rem;
+          }
+          
+          .philosophy-intro p.lead {
+            font-size: 1.1rem;
+          }
+          
+          .philosophy-quote {
+            padding: 20px;
+          }
+          
+          .philosophy-quote blockquote {
+            font-size: 1rem;
+          }
+        }
+      `;
+      
+      const styleElement = document.createElement('style');
+      styleElement.textContent = inlineStyles;
+      document.head.appendChild(styleElement);
+    });
