@@ -2472,3 +2472,28 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   color: #fff !important;
 }
 
+/* Mobile-specific navigation adjustments */
+@media (max-width: 1024px) {
+  #my-info .main-navigation-sidebar {
+    justify-content: flex-start !important;
+    padding: 20px 0 !important;
+    gap: 8px !important;
+  }
+  
+  #my-info .sidebar-nav-button {
+    padding: 12px 15px !important;
+    margin: 4px 0 !important;
+    min-height: 40px !important;
+  }
+  
+  #my-info .sidebar-nav-button .nav-icon {
+    font-size: 1.1rem !important;
+    margin-right: 12px !important;
+  }
+  
+  #my-info .sidebar-nav-button .nav-text {
+    font-size: 0.8rem !important;
+    letter-spacing: 0.4px !important;
+  }
+}
+
