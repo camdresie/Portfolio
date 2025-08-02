@@ -521,6 +521,81 @@
                             "Stakeholder Management",
                             "Contract Lifecycle Management"
                         ]
+                    },
+                    {
+                        "id": "pm-trackle",
+                        "project_name": "Trackle - Game Score Tracker",
+                        "description": "Designed and built a comprehensive social gaming platform from concept to deployment, demonstrating end-to-end product development skills from user research through technical implementation.",
+                        "timeline": "2025",
+                        "role": "Solo Product Manager & Engineer",
+                        "team": "1 member (Full-Stack Product Development)",
+                        "overview": "Trackle is a full-stack web application that transforms daily word puzzle gaming into a social, competitive experience. Built specifically for my family's daily gaming ritual, the platform enables users to track scores across popular games like Wordle, Mini Crossword, and Connections, connect with friends, and compete on leaderboards.",
+                        "challenge": "My family plays daily word games but had no centralized way to track progress or compare scores. There was no existing solution that allowed users to track scores across multiple games. I set out to create a platform for users to track their daily scores and get insights about their performance over time.",
+                        "images": [
+                            {
+                                "url": "./static/images/Trackle/trackle0square.png",
+                                "caption": "Trackle"
+                            },
+                            {
+                                "url": "./static/images/Trackle/trackle1.png",
+                                "caption": "Trackle Leaderboard"
+                            },
+                            {
+                                "url": "./static/images/Trackle/trackle2.png",
+                                "caption": "Daily AI Insight into Game Performance"
+                            },
+                            {
+                                "url": "./static/images/Trackle/trackle3.png",
+                                "caption": "Games and Statistics"
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Trackle/trackle0square.png",
+                            "gallery": [
+                                "./static/images/Trackle/trackle1.png",
+                                "./static/images/Trackle/trackle2.png",
+                                "./static/images/Trackle/trackle3.png"
+                            ]
+                        },
+                        "approach": [
+                            {
+                                "title": "User Research & Product Discovery",
+                                "description": "Interviewed family members to understand their gaming habits, pain points with existing tracking methods, and desired features. Analyzed competitor solutions and identified gaps in the market for simple, social-focused game tracking."
+                            },
+                            {
+                                "title": "Product Strategy & Design",
+                                "description": "Developed comprehensive product strategy focusing on simplicity, social features, and mobile-first design. Created user personas, user journey maps, and wireframes. Prioritized features based on user value and technical complexity."
+                            },
+                            {
+                                "title": "Technical Architecture & Development",
+                                "description": "Built full-stack application using modern AI technologies, including Lovable, Cursor, Claude Code, and OpenAI. Implemented user authentication, real-time data synchronization, and responsive design. Deployed to production with automated CI/CD pipeline."
+                            },
+                            {
+                                "title": "User Testing & Iteration",
+                                "description": "Conducted usability testing with family members, gathered feedback, and iteratively improved the user experience. Implemented analytics to track user engagement and feature adoption."
+                            }
+                        ],
+                        "outcomes": [
+                            "Daily active usage",
+                            "Reduced friction in score sharing from manual texts to one-click shares",
+                            "Users glean insights into performance over time with detailed statistics and leaderboards"
+                        ],
+                        "technologies": [
+                            "Product Strategy",
+                            "User Research",
+                            "React",
+                            "TypeScript",
+                            "Supabase",
+                            "Tailwind CSS",
+                            "PostgreSQL",
+                            "Lovable",
+                            "Claude Code",
+                            "OpenAI",
+                            "Cursor",
+                            "Responsive Design",
+                            "Full-Stack Development",
+                            "CI/CD"
+                        ]
                     }
                 ]
             },      

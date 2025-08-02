@@ -6,9 +6,14 @@ block content
   article.grid-container.portfolio-intro.portfolio-project
     .grid-x
       .cell.small-12.medium-12.large-12
-        h1.about-heading Bio
-        p.lead.text-light.about-subtitle
-          | Getting to know Cam Dresie
+        .bio-header
+          .bio-photo
+            img.bio-thumbnail(src='../static/images/profile_picture.jpg' alt='Cam Dresie - Group Product Manager')
+          .bio-title-section
+            h1.about-heading Cam Dresie
+            p.bio-subtitle Group Product Manager | Attorney | AI & Legal Tech Leader
+            p.lead.text-light.about-subtitle
+              | Getting to know the person behind the products
 
         .portfolio-content
           .grid-x.grid-margin-x
@@ -43,6 +48,9 @@ block content
                   span.skill-tag.product-skill Stakeholder Management
                   span.skill-tag.product-skill Business Strategy
                   span.skill-tag.product-skill AI/ML Product Development
+                  span.skill-tag.product-skill AI Prototyping
+                  span.skill-tag.product-skill Generative AI
+                  span.skill-tag.product-skill Chatbots
                   span.skill-tag.product-skill Legal Tech
                   span.skill-tag.product-skill Enterprise SaaS
                   span.skill-tag.product-skill User Research
@@ -71,6 +79,8 @@ block content
                   span.skill-tag.engineering-skill Azure Cloud
                   span.skill-tag.engineering-skill REST APIs
                   span.skill-tag.engineering-skill Git
+                  span.skill-tag.engineering-skill Claude Code
+                  span.skill-tag.engineering-skill Cursor
                   span.skill-tag.engineering-skill HTML/CSS
                   span.skill-tag.engineering-skill Data Modeling
                   span.skill-tag.engineering-skill CI/CD
