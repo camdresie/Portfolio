@@ -26,20 +26,20 @@ app.use(express.static('public'));
 *********************/
 
 app.get('/', (req, res) => {
+    res.render('bio', {
+        pageTitle: "Cam Dresie - Group Product Manager | AI & Legal Tech Leader",
+        pageDescription: "Learn about Cam Dresie's background and personal story. Group PM at Ontra with expertise in AI-powered legal technology, team leadership, and software engineering."
+    });
+})
+
+app.get('/projects', (req, res) => {
     const { projects, categories, pmProjects } = data;
     res.render('index', { 
         projects, 
         categories, 
         pmProjects,
-        pageTitle: "Cam Dresie - Group Product Manager | AI & Legal Tech Portfolio",
-        pageDescription: "Group Product Manager at Ontra specializing in AI-powered legal technology. Leading product strategy for flagship division with expertise in machine learning, contract automation, and team leadership."
-    });
-})
-
-app.get('/bio', (req, res) => {
-    res.render('bio', {
-        pageTitle: "Bio - Cam Dresie | Group Product Manager & Attorney",
-        pageDescription: "Learn about Cam Dresie's background and personal story. Group PM at Ontra with expertise in AI-powered legal technology, team leadership, and software engineering."
+        pageTitle: "Projects - Cam Dresie | Product & Engineering Portfolio",
+        pageDescription: "Explore Cam Dresie's product management and engineering projects. AI-powered legal technology solutions, team leadership initiatives, and technical implementations."
     });
 })
 

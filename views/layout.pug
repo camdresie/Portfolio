@@ -92,23 +92,27 @@ html(class="no-js" lang="en" dir="ltr")
     #my-info.off-canvas.position-left.reveal-for-large.portfolio-me(data-off-canvas='')
       .grid-y.grid-padding-x(style='height: 100%;')
         block sidebar
-          .cell.shrink
-            img.thumbnail(src='../static/images/profile_picture.jpg' alt='Cam Dresie - Group Product Manager')
-            h5 Cam Dresie
           .cell.auto
             .main-navigation-sidebar
               a.sidebar-nav-button(href='/')
-                .nav-icon 💼
-                .nav-text Projects
-              a.sidebar-nav-button(href='/bio')
                 .nav-icon 👤
                 .nav-text Bio
+              a.sidebar-nav-button(href='/projects')
+                .nav-icon 💼
+                .nav-text Projects
               a.sidebar-nav-button(href='/timeline')
                 .nav-icon 📈
                 .nav-text Career Timeline
               a.sidebar-nav-button(href='/leadership')
                 .nav-icon 🎯
                 .nav-text Leadership Philosophy
+              a.quick-link(href='/resume.pdf' target='_blank')
+                .quick-link-icon 📄
+                .quick-link-text Resume
+              a.quick-link(href='https://calendly.com/camdresie' target='_blank')
+                .quick-link-icon 📅
+                .quick-link-text Schedule a Chat
+                  
           .cell.shrink
             .social-links
               a.social-link(href='https://www.linkedin.com/in/camdresie/' target='_blank', aria-label="LinkedIn")
