@@ -1219,6 +1219,12 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   transform: scaleX(1);
 }
 
+/* Add portfolio content wrapper for consistent layout */
+.portfolio-content-wrapper {
+  position: relative;
+  min-height: 600px; /* Ensure consistent minimum height */
+}
+
 /* Add smooth transitions for project visibility */
 .portfolio-content {
   position: relative;
@@ -1233,7 +1239,11 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   transform: translateY(10px);
   visibility: hidden;
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   pointer-events: none;
+  z-index: -1;
 }
 
 /* Add transition overlay effect */
