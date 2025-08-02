@@ -883,6 +883,53 @@
                             "Search Algorithms",
                             "User Research"
                         ]
+                    },
+                    {
+                        "id": "pm-deals",
+                        "project_name": "Deals",
+                        "description": "Developed a centralized document management platform for Private Equity deal teams to organize and access deal-related documents efficiently.",
+                        "timeline": "Q1 2025",
+                        "role": "Staff Product Manager",
+                        "team": "7 members (3 Engineers, 1 Engineering Manager, 1 UX Designer, 1 PM, 1 QA)",
+                        "overview": "Deals is a comprehensive document management solution that enables Private Equity deal team members to group together all documents associated with a specific deal. The platform provides a centralized, easy-to-access repository for NDAs, NRLs, Engagement Letters, and other critical deal documents, streamlining the deal management process and improving team collaboration.",
+                        "approach": [
+                            {
+                                "title": "User Research & Discovery",
+                                "description": "Conducted interviews with Private Equity deal teams to understand their document management pain points and workflow requirements. Identified the need for a centralized system to organize deal-related documents and potential opportunities for expansion pending a successful launch."
+                            },
+                            {
+                                "title": "MVP Implementation",
+                                "description": "Implemented features to group together documents in a week to quickly get user feedback on the tool in-product."
+                            },
+                            {
+                                "title": "Information Architecture",
+                                "description": "Designed an intuitive folder structure and tagging system that allows teams to quickly categorize and retrieve documents by deal, document type, and status. Created flexible methods to add documents to deals that are already on the platform or when adding new documents to the platform."
+                            },
+                            {
+                                "title": "Lifecycle Features",
+                                "description": "Implemented features to tag a deal as open or closed to maintain clean information architecture."
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Deals/deals0square.png"
+                        },
+                        "images": [
+                            {
+                                "url": "./static/images/Deals/deals0square.png",
+                                "caption": "Deals platform main dashboard"
+                            }
+                        ],
+                        "outcomes": [
+                            "Improved deal team collaboration with centralized document access",
+                            "Created strong base for further development of features to drive network effects",
+                            "Successful adoption across 3+ Private Equity firms within first 2 months"
+                        ],
+                        "technologies": [
+                            "Product Strategy",
+                            "User Research",
+                            "Agile",
+                            "Strategic Development"
+                        ]
                     }
                 ]
             }
