@@ -2694,3 +2694,163 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   }
 }
 
+/* Blog page styles */
+.blog-header {
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 120px;
+}
+
+.blog-header-content {
+  padding-right: 150px; /* Space for the button */
+}
+
+.blog-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.blog-subtitle {
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem; /* tighter, like bio */
+  letter-spacing: 0.3px;
+}
+
+.blog-intro {
+  color: var(--text-secondary); /* match site body text color */
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.blog-subscribe-button {
+  position: absolute !important;
+  top: 1.5rem !important;
+  right: 0 !important;
+  z-index: 10 !important;
+}
+
+/* No appearance overrides here so it matches global .button styling */
+
+.blog-logo {
+  width: 32px !important;
+  height: 32px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 0.5rem !important;
+}
+
+.blog-brand .blog-logo,
+img.blog-logo {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.blog-item {
+  margin-bottom: 0;
+}
+
+.blog-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 166, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 166, 255, 0.15);
+}
+
+.blog-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.blog-title a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+  color: var(--accent);
+}
+
+.blog-meta {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-chip {
+  background: rgba(0, 166, 255, 0.1);
+  color: var(--accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  border: 1px solid rgba(0, 166, 255, 0.2);
+}
+
+.blog-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+
+/* Mobile responsive adjustments for blog */
+@media (max-width: 768px) {
+  .blog-header {
+    min-height: 150px;
+  }
+  
+  .blog-header-content {
+    padding-right: 120px; /* Smaller space for mobile */
+  }
+  
+  .blog-header h1 {
+    font-size: 2rem;
+  }
+  
+  .blog-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .blog-subscribe-button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+

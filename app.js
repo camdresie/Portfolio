@@ -5,6 +5,13 @@
 const express = require("express");
 const app = express();
 const data = require("./data.json");
+const RSSParser = require('rss-parser');
+const rssParser = new RSSParser();
+
+// Simple in-memory cache for blog feed
+let blogCache = { posts: [], lastFetched: 0 };
+const BLOG_RSS_URL = 'https://beyond-the-backlog.ghost.io/rss/';
+const BLOG_CACHE_TTL_MS = 1000 * 60 * 15; // 15 minutes
 
 /*********************
  * Sets Pug as the view engine
@@ -56,6 +63,41 @@ app.get('/leadership', (req, res) => {
         pageDescription: "Discover Cam Dresie's leadership philosophy as a Group Product Manager. Supportive leadership approach focusing on team empowerment, growth mindset, and psychological safety."
     });
 })
+
+// Blog route - fetches Ghost RSS and renders posts
+app.get('/blog', async (req, res) => {
+    try {
+        const now = Date.now();
+        if (!blogCache.posts.length || (now - blogCache.lastFetched) > BLOG_CACHE_TTL_MS) {
+            const feed = await rssParser.parseURL(BLOG_RSS_URL);
+            const posts = (feed.items || []).map(item => ({
+                title: item.title,
+                link: item.link,
+                pubDate: item.pubDate ? new Date(item.pubDate) : null,
+                isoDate: item.isoDate || null,
+                description: item.contentSnippet || item.content || '',
+                author: item.creator || item.author || feed.title,
+                categories: item.categories || []
+            }));
+
+            blogCache = { posts, lastFetched: now };
+        }
+
+        const formattedPosts = blogCache.posts.map(p => ({
+            ...p,
+            displayDate: p.pubDate ? p.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : ''
+        }));
+
+        res.render('blog', {
+            posts: formattedPosts,
+            pageTitle: "Blog - Beyond the Backlog | Cam Dresie",
+            pageDescription: "Latest posts from Beyond the Backlog by Cam Dresie. Product management, AI, and legal tech insights."
+        });
+    } catch (error) {
+        console.error('Error fetching blog feed:', error);
+        res.status(500).render('error', { error: { status: 500, message: 'Failed to load blog feed.' } });
+    }
+});
 
 // Keep legacy /about route for backwards compatibility, redirect to /bio
 app.get('/about', (req, res) => {
