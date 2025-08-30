@@ -11,16 +11,25 @@ html(class="no-js" lang="en" dir="ltr")
     //- Dynamic title and meta tags
     title= pageTitle || "Cam Dresie - Group Product Manager | AI & Legal Tech Portfolio"
     meta(name='description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology. Leading product strategy for flagship division with expertise in machine learning, contract automation, and team leadership.")
-    meta(name='keywords', content='Product Manager, Group Product Manager, AI, Machine Learning, Legal Tech, Contract Automation, Ontra, Product Strategy, Team Leadership')
+    meta(name='keywords', content='Cam Dresie, Product Manager, Group Product Manager, AI, Machine Learning, Legal Tech, Contract Automation, Ontra, Product Strategy, Team Leadership, Washington University Law, University of Pennsylvania, MCIT, camdresie')
     meta(name='author', content='Cam Dresie')
+    meta(name='geo.region', content='US')
+    meta(name='geo.placename', content='United States')
+    meta(name='language', content='en-US')
+    
+    //- Canonical URL to prevent duplicate content issues
+    link(rel='canonical', href=`https://camdresie.com${req && req.originalUrl ? req.originalUrl : ''}`)
     
     //- Open Graph tags for social sharing
-    meta(property='og:title', content=pageTitle || "Cam Dresie - Group Product Manager")
-    meta(property='og:description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology and product strategy.")
+    meta(property='og:title', content=pageTitle || "Cam Dresie - Group Product Manager | AI & Legal Tech")
+    meta(property='og:description', content=pageDescription || "Group Product Manager at Ontra specializing in AI-powered legal technology and product strategy. Expert in machine learning, contract automation, and team leadership.")
     meta(property='og:type', content='website')
-    meta(property='og:url', content='https://camdresie.com')
-    meta(property='og:image', content='/static/images/profile_picture.jpg')
+    meta(property='og:url', content=`https://camdresie.com${req && req.originalUrl ? req.originalUrl : ''}`)
+    meta(property='og:image', content='https://camdresie.com/static/images/profile_picture.jpg')
+    meta(property='og:image:width', content='400')
+    meta(property='og:image:height', content='400')
     meta(property='og:site_name', content="Cam Dresie's Portfolio")
+    meta(property='og:locale', content='en_US')
     
     //- Twitter Card tags
     meta(name='twitter:card', content='summary_large_image')
@@ -106,9 +115,9 @@ html(class="no-js" lang="en" dir="ltr")
               a.sidebar-nav-button(href='/leadership')
                 .nav-icon 🎯
                 .nav-text Leadership Philosophy
-              a.quick-link(href='/resume.pdf' target='_blank')
-                .quick-link-icon 📄
-                .quick-link-text Resume
+              a.sidebar-nav-button(href='/blog')
+                .nav-icon 📰
+                .nav-text Beyond the Backlog
               a.quick-link(href='https://calendly.com/camdresie' target='_blank')
                 .quick-link-icon 📅
                 .quick-link-text Schedule a Chat

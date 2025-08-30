@@ -585,6 +585,174 @@ body::before {
   z-index: 1000;
 }
 
+/* Blog page styles - matching portfolio styling */
+.portfolio-project h1 {
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.blog-header {
+  margin: 0 30px 20px 30px;
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  gap: 20px !important;
+  align-items: start !important;
+}
+
+.blog-subscribe-float {
+  grid-column: 2 !important;
+  justify-self: end !important;
+  margin: 0 !important;
+}
+
+/* More specific selector to override any conflicts */
+.blog-header a.button.button-subscribe.blog-subscribe-float {
+  grid-column: 2 !important;
+  justify-self: end !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.blog-header-content {
+  grid-column: 1 !important;
+}
+
+.blog-subtitle {
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 2px 0 8px 0;
+  letter-spacing: 0.3px;
+}
+
+.blog-intro {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.blog-header .button-subscribe {
+  background: rgba(var(--accent-rgb), 0.15);
+  border: 1px solid rgba(var(--accent-rgb), 0.6);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.blog-header .button-subscribe:hover {
+  background: rgba(var(--accent-rgb), 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 16px rgba(var(--accent-rgb), 0.25);
+}
+
+.blog-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 18px rgba(var(--accent-rgb), 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.blog-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.blog-title a:hover {
+  color: var(--accent);
+  transition: color var(--transition-speed) ease;
+}
+
+.blog-meta {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.blog-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 6px 0;
+}
+
+.blog-chip {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.blog-chip:hover {
+  background: rgba(var(--accent-rgb), 0.2);
+  transform: translateY(-1px);
+}
+
+.blog-description {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+/* Blog header and grid enhancements */
+
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .blog-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.blog-item { display: flex; }
+
+.blog-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-md);
+  padding: 18px 22px;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35), 0 0 18px rgba(var(--accent-rgb), 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.blog-title { margin: 0 0 6px 0; }
+.blog-description { margin-top: 8px; }
+
 /* Touch-friendly improvements */
 @media (hover: none) and (pointer: coarse) {
   /* Increase touch targets for better mobile usability */

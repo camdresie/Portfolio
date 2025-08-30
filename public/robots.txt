@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://camdresie.com/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Block access to potentially sensitive areas (if any exist)
+# Uncomment these if you have areas you don't want indexed
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow indexing of important files
+Allow: /sitemap.xml
+Allow: /static/images/profile_picture.jpg
+
+# Website: https://camdresie.com
+# Description: Cam Dresie - Group Product Manager specializing in AI & Legal Tech
