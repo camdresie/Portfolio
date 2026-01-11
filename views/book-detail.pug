@@ -41,7 +41,7 @@ block content
             .book-review-section
               h2.review-heading My Review
               .review-content
-                p= book.review
+                p!= book.review
           else
             .no-review
               p.empty-state I haven't written a review for this book yet.
