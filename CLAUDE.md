@@ -14,7 +14,16 @@ npm start                    # Runs on port 5001 (localhost:5001)
 
 # No build process - static assets served directly from /public
 # No test framework currently configured
+
+# Dependencies
+npm install                  # Install all dependencies from package.json
 ```
+
+## Dependencies
+
+- **express** (^4.17.1): Web framework for routing and middleware
+- **pug** (^3.0.1): Template engine for rendering views
+- **rss-parser** (^3.12.0): RSS feed parser for blog functionality
 
 ## Architecture
 
@@ -33,6 +42,14 @@ The site presents two distinct portfolio types through a unified interface:
 
 **Routing System** (`app.js`):
 ```javascript
+// Main routes
+app.get('/')                     // Bio page (homepage)
+app.get('/projects')             // Projects portfolio (dual tabbed interface)
+app.get('/timeline')             // Professional timeline
+app.get('/leadership')           // Leadership philosophy
+app.get('/blog')                 // Blog posts from Ghost RSS feed
+app.get('/about')                // Legacy route - 301 redirects to /bio
+
 // Intelligent project routing based on ID prefix
 app.get('/project/:id', (req, res) => {
   if (projectId.startsWith('pm-')) {
@@ -44,11 +61,15 @@ app.get('/project/:id', (req, res) => {
 ```
 
 **Template System** (`views/`):
-- `layout.pug`: Base template with navigation and styling
-- `index.pug`: Home page with tabbed dual portfolio display
-- `about.pug`: Professional timeline and bio with tab system
+- `layout.pug`: Base template with navigation, SEO meta tags, and styling
+- `bio.pug`: Bio page (homepage) - professional background and personal story
+- `index.pug`: Projects page with tabbed dual portfolio display (PM + Engineering)
+- `timeline.pug`: Professional timeline with scroll animations
+- `leadership.pug`: Leadership philosophy and management approach
+- `blog.pug`: Blog posts from Ghost RSS feed
 - `project.pug`: Engineering project detail pages
 - `pm-project.pug`: Product management project detail pages
+- `error.pug`: Custom 404 and error pages
 
 ### Frontend Architecture
 
@@ -56,7 +77,13 @@ app.get('/project/:id', (req, res) => {
 
 **Image Galleries**: Touch-enabled galleries with swipe navigation for mobile devices.
 
-**Timeline Visualization**: Professional timeline on about page with alternating layout and scroll animations.
+**Timeline Visualization**: Professional timeline on timeline page with alternating layout and scroll animations.
+
+**Blog Feed System**:
+- Fetches posts from Ghost blog RSS feed (`https://beyond-the-backlog.ghost.io/rss/`)
+- In-memory caching with 15-minute TTL to reduce external requests
+- RSS parsing via `rss-parser` dependency
+- Graceful error handling with 500 error page on feed failure
 
 ## Data Schemas
 
@@ -132,6 +159,13 @@ All pages extend `layout.pug` which provides:
 - Foundation CSS and custom stylesheets
 - JavaScript includes
 
+### SEO Optimization
+Each route passes custom `pageTitle` and `pageDescription` to templates for optimized meta tags:
+- Dynamic title tags for each page and project
+- Descriptive meta descriptions for search engines
+- Sitemap available at `/sitemap.xml`
+- Robots.txt configured at `/robots.txt`
+
 ### Responsive Design
 - Foundation framework provides responsive grid system
 - Custom CSS handles mobile-specific timeline layout
@@ -144,15 +178,25 @@ All pages extend `layout.pug` which provides:
 
 ## Deployment
 
-The application is configured for Heroku deployment:
-- Uses `process.env.PORT` with fallback to 5001
+The application supports multiple deployment platforms:
+- Uses `process.env.PORT` with fallback to 5001 for local development
 - Static assets served via Express static middleware
 - No build process required - files served directly
+- Azure Web App deployment configured via GitHub Actions (`.github/workflows/master_camportfolio.yml`)
+  - Triggers on push to `master` branch
+  - Node.js 12.x runtime
+  - Automatic CI/CD pipeline
 
 ## Portfolio Content Strategy
 
-**Engineering Section**: Demonstrates technical depth with working demos and clean code architecture.
+**Bio Page** (`/`): Homepage featuring professional background, personal story, and career journey from law to engineering to product management.
 
-**PM Section**: Emphasizes business impact, team leadership, and strategic thinking with quantified outcomes.
+**Projects Page** (`/projects`): Dual-tabbed interface showcasing:
+- **Engineering Section**: Technical projects with working demos, GitHub links, and clean code architecture
+- **PM Section**: Business-focused projects emphasizing team leadership, strategic impact, and quantified outcomes
 
-**About Page**: Professional timeline highlighting career progression from law to engineering to product management, showcasing unique interdisciplinary background.
+**Timeline Page** (`/timeline`): Professional timeline highlighting career progression with alternating layout and scroll animations.
+
+**Leadership Page** (`/leadership`): Management philosophy and approach to team leadership.
+
+**Blog Page** (`/blog`): "Beyond the Backlog" newsletter posts fetched from Ghost CMS RSS feed.

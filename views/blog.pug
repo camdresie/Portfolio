@@ -1,33 +1,35 @@
 extends layout.pug
 
 block content
-  article.grid-container.portfolio-intro.portfolio-project
-    .blog-header
-      .blog-header-content
+  article.grid-container.consuming-page
+    .consuming-header
+      .consuming-header-content
         h1 Beyond the Backlog
-        p.blog-subtitle Product Management | AI & Legal Tech Insights
-        p.blog-intro
-          | Distilled learnings from my career as a product manager—real-world case studies, frameworks, and the hard-earned lessons behind what worked (and what didn’t). Focused on building AI-powered legal tech, product strategy, and leading teams.
-      a.button.button-subscribe.blog-subscribe-button(href='https://beyond-the-backlog.ghost.io/' target='_blank' rel='noopener') Subscribe
+        p.consuming-subtitle Product Management | AI & Legal Tech Insights
+        p.consuming-intro
+          | Distilled learnings from my career as a product manager—real-world case studies, frameworks, and the hard-earned lessons behind what worked (and what didn't). Focused on building AI-powered legal tech, product strategy, and leading teams.
+        a.button.button-subscribe.blog-subscribe-button(href='https://beyond-the-backlog.ghost.io/' target='_blank' rel='noopener') Subscribe
+
     .grid-x.grid-padding-x
       .cell.small-12
-
-      if posts && posts.length
-        .blog-list
-          each post in posts
-            .blog-item
-              .blog-card
-                h3.blog-title
-                  a(href=post.link target="_blank" rel="noopener noreferrer")= post.title
-                if post.displayDate
-                  p.blog-meta Posted on #{post.displayDate}
-                if post.categories && post.categories.length
-                  .blog-categories
-                    each c in post.categories
-                      span.blog-chip= c
-                if post.description
-                  p.blog-description= post.description
-      else
-        .cell.small-12
-          p No posts available yet. Please check back soon.
-
+        if posts && posts.length
+          .consuming-grid
+            each post in posts
+              .consuming-card
+                if post.imageUrl
+                  .consuming-image-wrapper
+                    a(href=post.link target="_blank" rel="noopener")
+                      img.consuming-image(src=post.imageUrl alt=post.title)
+                .consuming-content
+                  h3.consuming-title
+                    a(href=post.link target="_blank" rel="noopener")= post.title
+                  if post.displayDate
+                    p.blog-meta Posted on #{post.displayDate}
+                  if post.categories && post.categories.length
+                    .blog-categories
+                      each c in post.categories
+                        span.blog-chip= c
+                  if post.description
+                    p.blog-description= post.description
+        else
+          p.empty-state No posts available yet. Please check back soon.

@@ -1,0 +1,52 @@
+extends layout.pug
+
+block content
+  article.grid-container.book-detail-page
+    .book-detail-header
+      a.back-link(href='/consuming')
+        span.back-arrow ←
+        |  Back to Reading List
+
+    .grid-x.grid-padding-x.book-detail-content
+      .cell.medium-4.large-3
+        .book-cover-section
+          if book.imageUrl
+            img.book-detail-cover(src=book.imageUrl alt=book.title)
+          .book-meta
+            if book.status === 'current'
+              .status-badge.status-current Currently Reading
+            else
+              .status-badge.status-finished Finished
+
+            if book.link
+              a.goodreads-link(href=book.link target='_blank' rel='noopener')
+                | View on Goodreads →
+
+      .cell.medium-8.large-9
+        .book-info-section
+          h1.book-detail-title= book.title
+          p.book-detail-author by #{book.subtitle}
+
+          if book.rating
+            .book-detail-rating
+              .rating-stars
+                - for (let i = 0; i < 5; i++)
+                  if i < book.rating
+                    span.star.filled ⭐
+                  else
+                    span.star.empty ☆
+              span.rating-text #{book.rating}/5 stars
+
+          if book.review && book.review.trim().length > 0
+            .book-review-section
+              h2.review-heading My Review
+              .review-content
+                p= book.review
+          else
+            .no-review
+              p.empty-state I haven't written a review for this book yet.
+
+    .grid-x.grid-padding-x
+      .cell.small-12
+        .back-to-list
+          a.button.secondary(href='/consuming') ← Back to Reading List

@@ -1,0 +1,64 @@
+extends layout.pug
+
+block content
+  article.grid-container.consuming-page
+    .consuming-header
+      .consuming-header-content
+        h1 Currently Reading
+        p.consuming-subtitle My Goodreads Library
+        p.consuming-intro
+          | What I'm reading right now and books I've recently finished. Click any book to see my full review.
+          | Updated daily from my
+          a(href='https://www.goodreads.com/user/show/108233429-cam-dresie' target='_blank' rel='noopener') Goodreads profile
+          | .
+
+    .grid-x.grid-padding-x
+      .cell.small-12
+
+        // Currently Reading Section
+        section.consuming-section
+          h2.section-title
+            span.section-icon 📚
+            | Currently Reading
+          if booksError
+            p.error-message Unable to load Goodreads data: #{booksError}
+          else if currentBooks && currentBooks.length
+            .consuming-grid
+              each book in currentBooks
+                .consuming-card
+                  if book.imageUrl
+                    .consuming-image-wrapper
+                      a(href=`/book/${book.id}`)
+                        img.consuming-image(src=book.imageUrl alt=book.title)
+                  .consuming-content
+                    h3.consuming-title
+                      a(href=`/book/${book.id}`)= book.title
+                    p.consuming-subtitle= book.subtitle
+                    if book.rating
+                      .book-rating
+                        - for (let i = 0; i < book.rating; i++)
+                          span.star ⭐
+          else
+            p.empty-state No books currently reading.
+
+        // Recently Read Section
+        if recentBooks && recentBooks.length
+          section.consuming-section
+            h2.section-title
+              span.section-icon 📖
+              | Recently Finished
+            .consuming-grid
+              each book in recentBooks
+                .consuming-card
+                  if book.imageUrl
+                    .consuming-image-wrapper
+                      a(href=`/book/${book.id}`)
+                        img.consuming-image(src=book.imageUrl alt=book.title)
+                  .consuming-content
+                    h3.consuming-title
+                      a(href=`/book/${book.id}`)= book.title
+                    p.consuming-subtitle= book.subtitle
+                    if book.rating
+                      .book-rating
+                        - for (let i = 0; i < book.rating; i++)
+                          span.star ⭐
