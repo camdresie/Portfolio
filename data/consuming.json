@@ -1,0 +1,21 @@
+{
+  "audiobooks": [
+    {
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "progress": 65,
+      "imageUrl": "https://m.media-amazon.com/images/I/71WCR+-8wqL._SL1500_.jpg",
+      "link": "https://www.audible.com/pd/Thinking-Fast-and-Slow-Audiobook/B005TKKCWC",
+      "status": "current"
+    }
+  ],
+  "podcasts": [
+    {
+      "showName": "Acquired",
+      "episodeTitle": "Nvidia: The GPU Company (2001-2006)",
+      "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/82/cd/99/82cd9964-c0dc-5fe1-0636-7b04f3f85182/mza_16524019343469268348.jpg/600x600bb.jpg",
+      "link": "https://www.acquired.fm",
+      "status": "current"
+    }
+  ]
+}
