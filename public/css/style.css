@@ -3342,3 +3342,43 @@ img.blog-logo {
   }
 }
 
+/* Movie-specific styles for consuming page */
+.movie-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+
+.movie-rating .star {
+  color: #ffc107;
+  font-size: 0.9rem;
+}
+
+.movie-rating .star.half {
+  opacity: 0.7;
+}
+
+.rewatch-badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 166, 255, 0.15);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid rgba(0, 166, 255, 0.3);
+}
+
+/* Consuming page header updates for dual content */
+.consuming-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Tab positioning for consuming page */
+.consuming-page + .portfolio-tabs {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+

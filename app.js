@@ -20,6 +20,19 @@ const rssParser = new RSSParser({
         ]
     }
 });
+// Configure RSS parser to extract Letterboxd custom fields
+const letterboxdParser = new RSSParser({
+    customFields: {
+        item: [
+            ['letterboxd:watchedDate', 'watchedDate'],
+            ['letterboxd:filmTitle', 'filmTitle'],
+            ['letterboxd:filmYear', 'filmYear'],
+            ['letterboxd:memberRating', 'memberRating'],
+            ['letterboxd:rewatch', 'rewatch'],
+            ['tmdb:movieId', 'tmdbMovieId']
+        ]
+    }
+});
 const fs = require('fs');
 const path = require('path');
 
@@ -28,9 +41,10 @@ let blogCache = { posts: [], lastFetched: 0 };
 const BLOG_RSS_URL = 'https://beyond-the-backlog.ghost.io/rss/';
 const BLOG_CACHE_TTL_MS = 1000 * 60 * 15; // 15 minutes
 
-// Cache for consuming data (books only)
+// Cache for consuming data (books and movies)
 let consumingCache = {
     books: { data: [], lastFetched: 0, error: null },
+    movies: { data: [], lastFetched: 0, error: null },
     lastFullFetch: 0
 };
 const CONSUMING_CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
@@ -91,6 +105,75 @@ async function fetchGoodreadsRSS() {
         return [...currentBooks, ...readBooks];
     } catch (error) {
         console.error('Error fetching Goodreads RSS:', error);
+        throw error;
+    }
+}
+
+// Fetch movies from Letterboxd RSS feed
+async function fetchLetterboxdRSS() {
+    try {
+        const username = process.env.LETTERBOXD_USERNAME;
+        if (!username || username === 'your_letterboxd_username') {
+            throw new Error('Letterboxd username not configured');
+        }
+
+        const rssUrl = `https://letterboxd.com/${username}/rss/`;
+        const feed = await letterboxdParser.parseURL(rssUrl);
+
+        const parseMovie = (item) => {
+            // Extract poster image from content HTML
+            let imageUrl = '';
+            if (item.content) {
+                const imgMatch = item.content.match(/<img[^>]+src="([^"]+)"/);
+                if (imgMatch) {
+                    imageUrl = imgMatch[1];
+                }
+            }
+
+            // Extract review text (remove HTML tags from content)
+            let review = '';
+            if (item.content) {
+                review = item.content
+                    .replace(/<img[^>]*>/g, '') // Remove img tags
+                    .replace(/<p>/g, '')
+                    .replace(/<\/p>/g, '\n')
+                    .replace(/<br\s*\/?>/g, '\n')
+                    .replace(/<[^>]+>/g, '') // Remove all other HTML tags
+                    .trim();
+            }
+
+            // Determine status: watched in last 30 days = 'current', else 'recent'
+            const watchedDate = item.watchedDate ? new Date(item.watchedDate) : new Date(item.pubDate);
+            const daysSinceWatch = (Date.now() - watchedDate.getTime()) / (1000 * 60 * 60 * 24);
+            const status = daysSinceWatch <= 30 ? 'current' : 'recent';
+
+            // Create unique ID from TMDB ID or generate from title/year
+            const movieId = item.tmdbMovieId || `${item.filmTitle}-${item.filmYear}`.toLowerCase().replace(/\s+/g, '-');
+
+            return {
+                type: 'movie',
+                id: movieId,
+                title: item.filmTitle || 'Unknown Title',
+                subtitle: item.filmYear ? `${item.filmYear}` : '',
+                imageUrl: imageUrl,
+                link: item.link || '',
+                status: status,
+                timestamp: watchedDate,
+                rating: item.memberRating ? parseFloat(item.memberRating) : null,
+                review: review,
+                rewatch: item.rewatch === 'Yes',
+                tmdbId: item.tmdbMovieId
+            };
+        };
+
+        // Parse all movies and sort by watch date (most recent first)
+        const movies = (feed.items || [])
+            .map(item => parseMovie(item))
+            .sort((a, b) => b.timestamp - a.timestamp);
+
+        return movies;
+    } catch (error) {
+        console.error('Error fetching Letterboxd RSS:', error);
         throw error;
     }
 }
@@ -188,6 +271,16 @@ async function refreshConsumingCache() {
     } catch (error) {
         consumingCache.books.error = error.message;
         console.error('Failed to fetch books:', error);
+    }
+
+    try {
+        const movies = await fetchLetterboxdRSS();
+        consumingCache.movies.data = movies;
+        consumingCache.movies.error = null;
+        consumingCache.movies.lastFetched = now;
+    } catch (error) {
+        consumingCache.movies.error = error.message;
+        console.error('Failed to fetch movies:', error);
     }
 
     consumingCache.lastFullFetch = now;
@@ -306,17 +399,24 @@ app.get('/consuming', async (req, res) => {
         const currentBooks = consumingCache.books.data.filter(b => b.status === 'current');
         const recentBooks = consumingCache.books.data.filter(b => b.status === 'recent');
 
+        // Separate movies into recently watched and older
+        const currentMovies = consumingCache.movies.data.filter(m => m.status === 'current');
+        const recentMovies = consumingCache.movies.data.filter(m => m.status === 'recent');
+
         res.render('consuming', {
             currentBooks,
             recentBooks,
             booksError: consumingCache.books.error,
-            pageTitle: "Currently Reading - Cam Dresie | Books & Reviews",
-            pageDescription: "What I'm currently reading and have recently finished. Book reviews and ratings from Goodreads."
+            currentMovies,
+            recentMovies,
+            moviesError: consumingCache.movies.error,
+            pageTitle: "Currently Reading & Watching - Cam Dresie",
+            pageDescription: "What I'm currently reading from Goodreads and watching on Letterboxd."
         });
     } catch (error) {
         console.error('Error loading consuming page:', error);
         res.status(500).render('error', {
-            error: { status: 500, message: 'Failed to load reading data.' }
+            error: { status: 500, message: 'Failed to load reading and watching data.' }
         });
     }
 });
