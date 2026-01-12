@@ -159,22 +159,12 @@ html(class="no-js" lang="en" dir="ltr")
         console.log('Foundation initialized');
         
         // Handle hamburger menu animation and toggle
-        $('.menu-icon').on('click touchstart', function(e) {
-          e.preventDefault(); // Prevent default behavior
-          console.log('Menu icon clicked or touched');
-          // Toggle the visual state
-          $(this).toggleClass('is-open');
-          
-          // Explicitly toggle the off-canvas menu
-          var offCanvas = $('#my-info');
-          
-          // Use Foundation's API to toggle the off-canvas menu
-          // This is the most reliable method
-          if (Foundation.MediaQuery.current === 'small' || Foundation.MediaQuery.current === 'medium') {
-            console.log('Current media query:', Foundation.MediaQuery.current);
-            $('#my-info').foundation('toggle');
-            console.log('Off-canvas toggled via foundation method');
-          }
+        $('.menu-icon').on('click', function(e) {
+          console.log('Menu icon clicked');
+          // Don't prevent default - let Foundation handle it
+
+          // Foundation's data-toggle attribute will handle the menu toggle
+          // We just need to ensure the icon state syncs with menu state
         });
         
         // Handle the case when the menu is opened
