@@ -4,61 +4,167 @@ block content
   article.grid-container.consuming-page
     .consuming-header
       .consuming-header-content
-        h1 Currently Reading
-        p.consuming-subtitle My Goodreads Library
+        h1 Currently Consuming
+        p.consuming-subtitle What I'm Reading & Watching
         p.consuming-intro
-          | What I'm reading right now and books I've recently finished. Click any book to see my full review.
-          | Updated daily from my
-          a(href='https://www.goodreads.com/user/show/108233429-cam-dresie' target='_blank' rel='noopener') Goodreads profile
-          | .
+          | Books from my
+          a(href='https://www.goodreads.com/user/show/108233429-cam-dresie' target='_blank' rel='noopener')  Goodreads profile
+          |  and movies from my
+          a(href='https://letterboxd.com/mainslamcam/' target='_blank' rel='noopener')  Letterboxd account
+          | . Updated daily.
 
-    .grid-x.grid-padding-x
-      .cell.small-12
+  //- Tab Navigation
+  .portfolio-tabs
+    a.portfolio-tab.active(href="#" data-tab="reading") 📚 Reading
+    a.portfolio-tab(href="#" data-tab="watching") 🎬 Watching
 
-        // Currently Reading Section
-        section.consuming-section
-          h2.section-title
-            span.section-icon 📚
-            | Currently Reading
-          if booksError
-            p.error-message Unable to load Goodreads data: #{booksError}
-          else if currentBooks && currentBooks.length
-            .consuming-grid
-              each book in currentBooks
-                .consuming-card
-                  if book.imageUrl
-                    .consuming-image-wrapper
-                      a(href=`/book/${book.id}`)
-                        img.consuming-image(src=book.imageUrl alt=book.title)
-                  .consuming-content
-                    h3.consuming-title
-                      a(href=`/book/${book.id}`)= book.title
-                    p.consuming-subtitle= book.subtitle
-                    if book.rating
-                      .book-rating
-                        - for (let i = 0; i < book.rating; i++)
-                          span.star ⭐
-          else
-            p.empty-state No books currently reading.
+  article.grid-container.consuming-page
+    .portfolio-content-wrapper
+      //- Reading Tab Content
+      .portfolio-content(data-content="reading")
+        .grid-x.grid-padding-x
+          .cell.small-12
+            //- Currently Reading Section
+            section.consuming-section
+              h2.section-title
+                span.section-icon 📚
+                | Currently Reading
+              if booksError
+                p.error-message Unable to load Goodreads data: #{booksError}
+              else if currentBooks && currentBooks.length
+                .consuming-grid
+                  each book in currentBooks
+                    .consuming-card
+                      if book.imageUrl
+                        .consuming-image-wrapper
+                          a(href=`/book/${book.id}`)
+                            img.consuming-image(src=book.imageUrl alt=book.title)
+                      .consuming-content
+                        h3.consuming-title
+                          a(href=`/book/${book.id}`)= book.title
+                        p.consuming-subtitle= book.subtitle
+                        if book.rating
+                          .book-rating
+                            - for (let i = 0; i < book.rating; i++)
+                              span.star ⭐
+              else
+                p.empty-state No books currently reading.
 
-        // Recently Read Section
-        if recentBooks && recentBooks.length
-          section.consuming-section
-            h2.section-title
-              span.section-icon 📖
-              | Recently Finished
-            .consuming-grid
-              each book in recentBooks
-                .consuming-card
-                  if book.imageUrl
-                    .consuming-image-wrapper
-                      a(href=`/book/${book.id}`)
-                        img.consuming-image(src=book.imageUrl alt=book.title)
-                  .consuming-content
-                    h3.consuming-title
-                      a(href=`/book/${book.id}`)= book.title
-                    p.consuming-subtitle= book.subtitle
-                    if book.rating
-                      .book-rating
-                        - for (let i = 0; i < book.rating; i++)
-                          span.star ⭐
+            //- Recently Finished Books Section
+            if recentBooks && recentBooks.length
+              section.consuming-section
+                h2.section-title
+                  span.section-icon 📖
+                  | Recently Finished
+                .consuming-grid
+                  each book in recentBooks
+                    .consuming-card
+                      if book.imageUrl
+                        .consuming-image-wrapper
+                          a(href=`/book/${book.id}`)
+                            img.consuming-image(src=book.imageUrl alt=book.title)
+                      .consuming-content
+                        h3.consuming-title
+                          a(href=`/book/${book.id}`)= book.title
+                        p.consuming-subtitle= book.subtitle
+                        if book.rating
+                          .book-rating
+                            - for (let i = 0; i < book.rating; i++)
+                              span.star ⭐
+
+      //- Watching Tab Content
+      .portfolio-content.hidden(data-content="watching")
+        .grid-x.grid-padding-x
+          .cell.small-12
+            //- Recently Watched Section
+            section.consuming-section
+              h2.section-title
+                span.section-icon 🎬
+                | Recently Watched
+              if moviesError
+                p.error-message Unable to load Letterboxd data: #{moviesError}
+              else if currentMovies && currentMovies.length
+                .consuming-grid
+                  each movie in currentMovies
+                    .consuming-card
+                      if movie.imageUrl
+                        .consuming-image-wrapper
+                          a(href=movie.link target='_blank' rel='noopener')
+                            img.consuming-image(src=movie.imageUrl alt=movie.title)
+                      .consuming-content
+                        h3.consuming-title
+                          a(href=movie.link target='_blank' rel='noopener')= movie.title
+                        p.consuming-subtitle= movie.subtitle
+                        if movie.rating
+                          .movie-rating
+                            - const fullStars = Math.floor(movie.rating)
+                            - const hasHalfStar = (movie.rating % 1) >= 0.25
+                            - for (let i = 0; i < fullStars; i++)
+                              span.star ⭐
+                            - if (hasHalfStar)
+                              span.star.half ½⭐
+                        if movie.rewatch
+                          .rewatch-badge 🔁 Rewatch
+              else
+                p.empty-state No recent movies watched.
+
+            //- Older Watched Movies Section
+            if recentMovies && recentMovies.length
+              section.consuming-section
+                h2.section-title
+                  span.section-icon 🎞️
+                  | Previously Watched
+                .consuming-grid
+                  each movie in recentMovies
+                    .consuming-card
+                      if movie.imageUrl
+                        .consuming-image-wrapper
+                          a(href=movie.link target='_blank' rel='noopener')
+                            img.consuming-image(src=movie.imageUrl alt=movie.title)
+                      .consuming-content
+                        h3.consuming-title
+                          a(href=movie.link target='_blank' rel='noopener')= movie.title
+                        p.consuming-subtitle= movie.subtitle
+                        if movie.rating
+                          .movie-rating
+                            - const fullStars = Math.floor(movie.rating)
+                            - const hasHalfStar = (movie.rating % 1) >= 0.25
+                            - for (let i = 0; i < fullStars; i++)
+                              span.star ⭐
+                            - if (hasHalfStar)
+                              span.star.half ½⭐
+                        if movie.rewatch
+                          .rewatch-badge 🔁 Rewatch
+
+  //- Tab switching JavaScript
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.portfolio-tab');
+      const contents = document.querySelectorAll('.portfolio-content');
+
+      // Initialize: first tab active by default
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          const tabName = this.getAttribute('data-tab');
+
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+
+          // Hide all content sections
+          contents.forEach(content => {
+            content.classList.add('hidden');
+            content.style.display = 'none';
+          });
+
+          // Show the selected content section
+          const targetContent = document.querySelector(`.portfolio-content[data-content="${tabName}"]`);
+          if (targetContent) {
+            targetContent.classList.remove('hidden');
+            targetContent.style.display = 'block';
+          }
+        });
+      });
+    });
