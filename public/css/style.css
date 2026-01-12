@@ -2299,12 +2299,18 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   .title-bar-left button.menu-icon {
     padding: 12px;
     margin: 0;
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 56px;
+    min-height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+  }
+
+  .hamburger-menu {
+    width: 40px;
+    height: 32px;
+    padding: 10px;
   }
   
   /* Make project cards more touch-friendly */
@@ -2333,21 +2339,32 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 /* Custom Hamburger Menu */
 .hamburger-menu {
-  width: 30px;
-  height: 24px;
+  width: 36px;
+  height: 28px;
   position: relative;
   cursor: pointer;
   display: inline-block;
   margin-right: 15px;
+  padding: 8px;
+  background: rgba(0, 166, 255, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 166, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu:hover {
+  background: rgba(0, 166, 255, 0.2);
+  border-color: rgba(0, 166, 255, 0.5);
+  transform: scale(1.05);
 }
 
 .hamburger-menu span {
   display: block;
   position: absolute;
-  height: 2px;
+  height: 3px;
   width: 100%;
   background: var(--text-primary);
-  border-radius: 2px;
+  border-radius: 3px;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
@@ -2356,24 +2373,29 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 .hamburger-menu span:nth-child(1) {
   top: 0px;
-  width: 80%;
-  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.8));
+  width: 85%;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.9));
 }
 
 .hamburger-menu span:nth-child(2) {
-  top: 10px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), var(--accent));
+  top: 12px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), var(--accent));
 }
 
 .hamburger-menu span:nth-child(3) {
-  top: 20px;
-  width: 60%;
-  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.8));
+  top: 24px;
+  width: 70%;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.9));
 }
 
 /* Hamburger animation when menu is open */
+.is-open .hamburger-menu {
+  background: rgba(0, 166, 255, 0.2);
+  border-color: var(--accent);
+}
+
 .is-open .hamburger-menu span:nth-child(1) {
-  top: 10px;
+  top: 12px;
   width: 100%;
   transform: rotate(135deg);
   background: var(--accent);
@@ -2385,7 +2407,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 }
 
 .is-open .hamburger-menu span:nth-child(3) {
-  top: 10px;
+  top: 12px;
   width: 100%;
   transform: rotate(-135deg);
   background: var(--accent);
@@ -2415,12 +2437,13 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 .title-bar-left button.menu-icon {
   margin-right: 10px;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 52px;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 6px;
 }
 
 /* FINAL NAVIGATION OVERRIDE - HIGHEST PRIORITY */
@@ -2730,11 +2753,16 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   margin-bottom: 0;
 }
 
+.blog-subscribe-wrapper {
+  margin-top: 1.5rem;
+}
+
 .blog-subscribe-button {
-  position: absolute !important;
-  top: 1.5rem !important;
-  right: 0 !important;
-  z-index: 10 !important;
+  display: inline-block;
+}
+
+.blog-subscribe-button::before {
+  animation: none !important;
 }
 
 /* No appearance overrides here so it matches global .button styling */
@@ -2851,11 +2879,6 @@ img.blog-logo {
   .blog-list {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-  
-  .blog-subscribe-button {
-    padding: 0.5rem 1rem !important;
-    font-size: 0.8rem !important;
   }
 }
 
