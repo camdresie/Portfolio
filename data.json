@@ -677,6 +677,58 @@
                         ]
                     },
                     {
+                        "id": "pm-markup-2",
+                        "project_name": "Markup Builder 2.0",
+                        "description": "Led a cross-functional AI initiative to rebuild Ontra's flagship contract redlining product using LLMs, RAG retrieval, semantic precedent graphs, and unsupervised clause clustering, delivering a 7.6x improvement in accuracy and quality.",
+                        "timeline": "Q3 - Q4 2025",
+                        "role": "Group Product Manager",
+                        "team": "12 members (5 Engineers, 2 MLEs, 1 Data Scientist, 1 Legal Intelligence, 1 UX Designer, 1 QA, 1 PM)",
+                        "overview": "Markup Builder 2.0 is Ontra's flagship AI product that automatically redlines legal contracts using client precedent. It applies LLMs, RAG retrieval, semantic precedent graphs, and clause clustering to replicate the judgment of an experienced attorney reviewing a contract — dramatically accelerating the markup process for lawyers serving private equity and private credit clients.",
+                        "challenge": "The prior iteration of Markup Builder delivered value but lacked the accuracy and quality needed to fully earn user trust. Rebuilding required coordinating across 7 distinct functions — ML engineering, data science, platform infrastructure, legal intelligence, app engineering, UX design, and QA — without direct authority over any team.",
+                        "approach": [
+                            {
+                                "title": "Building Shared Context",
+                                "description": "Built shared understanding across all participating teams on the project context, the problem space, and what success looked like before any code was written."
+                            },
+                            {
+                                "title": "Experimental Framework",
+                                "description": "Established an experimental framework so teams could run fast, low-cost experiments and advance what moved eval metrics while killing what didn't. Defined guiding policies — boundaries that a successful solution had to satisfy — to frame what a winning experiment looked like."
+                            },
+                            {
+                                "title": "Cross-Functional Coordination",
+                                "description": "Maintained a single prioritized experiment backlog visible to all teams and worked daily to unblock cross-team dependencies across 7 functions."
+                            },
+                            {
+                                "title": "AI Evaluation Framework",
+                                "description": "Built an AI evaluation framework in tandem with Data Science to ensure every experiment clearly mapped to measurable quality and accuracy outcomes, enabling data-driven decisions about which approaches to pursue."
+                            }
+                        ],
+                        "image_urls": {
+                            "thumbnail": "./static/images/Markup Builder/markupbuilder0square.png"
+                        },
+                        "images": [
+                            {
+                                "url": "./static/images/Markup Builder/markupbuilder0square.png",
+                                "caption": "Markup Builder 2.0"
+                            }
+                        ],
+                        "outcomes": [
+                            "Shipped on schedule across 2 quarters",
+                            "7.6x improvement in accuracy and quality over the prior system",
+                            "Dramatically improved time to value for customers",
+                            "Cross-functional collaboration model became a template for subsequent AI initiatives at Ontra"
+                        ],
+                        "technologies": [
+                            "LLMs",
+                            "RAG Retrieval",
+                            "Semantic Precedent Graphs",
+                            "Unsupervised Clause Clustering",
+                            "Agentic QA Pipelines",
+                            "Cross-Functional Leadership",
+                            "Experimental Frameworks"
+                        ]
+                    },
+                    {
                         "id": "pm-intake-ai",
                         "project_name": "Intake AI Models",
                         "description": "Developed a suite of AI models for intelligent document processing, enabling automated classification of document types, processing speed prediction, and project name extraction to streamline the legal document intake process.",
