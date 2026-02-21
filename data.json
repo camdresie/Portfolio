@@ -89,6 +89,27 @@
         ]
         },
         {
+        "id": "21",
+            "category": "ai",
+        "project_name": "Timmy or Troye - Deep Learning Image Classifier",
+        "description": "A deep learning image classifier built with fastai and PyTorch that distinguishes between Timothée Chalamet, Troye Sivan, and Timmy Turner from Fairly Odd Parents. The project uses DuckDuckGo image search to automatically build a training dataset, then fine-tunes a pretrained ResNet18 convolutional neural network to classify images across the three categories. The model achieves near-perfect accuracy on the validation set after just 6 epochs of fine-tuning, demonstrating the power of transfer learning for rapid computer vision prototyping.",
+        "technologies": [
+            "Python",
+            "PyTorch",
+            "fastai",
+            "Deep Learning",
+            "Transfer Learning",
+            "ResNet18",
+            "Computer Vision",
+            "Jupyter Notebook"
+        ],
+        "github_link": "https://github.com/camdresie/timmy-or-troye-image-classifier",
+        "image_urls": [
+            "./static/images/TimmyOrTroye/timmyortroye0square.jpg",
+            "./static/images/TimmyOrTroye/timmyortroye1.jpg"
+        ]
+        },
+        {
         "id": "3",
             "category": "web",
         "project_name": "Stack Moxie Published Values",
