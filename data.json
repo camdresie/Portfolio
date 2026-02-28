@@ -452,7 +452,7 @@
             ]
         },
         {
-        "id": "21",
+        "id": "22",
         "category": "ai",
         "project_name": "Mixture of Experts: LLM-as-Judge",
         "description": "A Python/Jupyter implementation of a Mixture of Experts evaluation system where multiple frontier LLMs (GPT, Claude, Gemini, DeepSeek, Llama) each answer a challenging question and then act as judges to rank each other's responses. Final rankings are aggregated by average score across all judges, demonstrating how ensemble evaluation improves over single-judge assessment.",
