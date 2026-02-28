@@ -146,6 +146,23 @@ html(class="no-js" lang="en" dir="ltr")
       
       block content
 
+    //- Floating Chat Widget (Career Agent)
+    #chat-widget
+      button#chat-toggle(aria-label="Chat with Cam's AI Assistant")
+        svg.chat-icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+          path(d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z")
+        svg.close-icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+          line(x1="18" y1="6" x2="6" y2="18")
+          line(x1="6" y1="6" x2="18" y2="18")
+      #chat-panel
+        .chat-panel-header
+          span Chat with Cam's AI Assistant
+          button#chat-close(aria-label="Close chat")
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+              line(x1="18" y1="6" x2="6" y2="18")
+              line(x1="6" y1="6" x2="18" y2="18")
+        iframe#chat-iframe(title="Career Agent Chat" loading="lazy")
+
     script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     script(src='/static/js/vendor/foundation.js')
     script(src='/static/js/timeline.js')
@@ -208,6 +225,45 @@ html(class="no-js" lang="en" dir="ltr")
         window.addEventListener('load', function() {
           overlay.classList.remove('active');
         });
+
+        // ---- Chat Widget Logic ----
+        (function() {
+          var CHAT_URL = 'https://camdresie-cam-career-agent.hf.space'; // Hugging Face Spaces embed URL
+          var toggle = document.getElementById('chat-toggle');
+          var panel = document.getElementById('chat-panel');
+          var closeBtn = document.getElementById('chat-close');
+          var widget = document.getElementById('chat-widget');
+          var iframe = document.getElementById('chat-iframe');
+          var isOpen = false;
+          var iframeLoaded = false;
+
+          function openChat() {
+            isOpen = true;
+            widget.classList.add('open');
+            if (!iframeLoaded) {
+              iframe.src = CHAT_URL;
+              iframeLoaded = true;
+            }
+          }
+
+          function closeChat() {
+            isOpen = false;
+            widget.classList.remove('open');
+          }
+
+          toggle.addEventListener('click', function() {
+            if (isOpen) { closeChat(); } else { openChat(); }
+          });
+
+          closeBtn.addEventListener('click', function() {
+            closeChat();
+          });
+
+          // Close on Escape key
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isOpen) { closeChat(); }
+          });
+        })();
         
         // This script is for project pages with product/engineering tabs
         // Only run if these tabs exist
