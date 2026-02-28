@@ -1,14 +1,14 @@
 {
     "categories": [
         {
-            "id": "passion",
-            "name": "Passion Projects",
-            "description": "Special projects combining hardware and software innovation"
-        },
-        {
             "id": "ai",
             "name": "AI & Machine Learning",
             "description": "Projects focusing on artificial intelligence and algorithms"
+        },
+        {
+            "id": "passion",
+            "name": "Passion Projects",
+            "description": "Special projects combining hardware and software innovation"
         },
         {
             "id": "web",
