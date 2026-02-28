@@ -18,15 +18,34 @@ block content
             .cell.small-12.medium-8.large-8
               .portfolio-bio
                 p
-                  | As Group Product Manager at Ontra for our flagship product, Contract Automation, I champion innovation through AI-enabled solutions and robust product management. I believe great products come from high-trust teams with clear outcomes and room to create. The teams I lead excel at turning complex customer problems into shipped, impactful solutions.
+                  | As Group Product Manager at Ontra for our flagship product, Contract Automation, I champion innovation through agentic AI solutions — building systems where LLMs autonomously orchestrate complex, multi-step legal workflows — and robust product management. I believe great products come from high-trust teams with clear outcomes and room to create. The teams I lead excel at turning complex customer problems into shipped, impactful solutions.
                 p
-                  | I invest in people: candid feedback, visible expectations, and career coaching are baked into our operating rhythms. The result is a culture that experiments, has freedom to fail, learns quickly, and consistently delivers business impact. Known for my inspiring leadership style and clear communication, I ensure that our products exceed customer expectations through strategic product vision and execution on that vision. 
+                  | I invest in people: candid feedback, visible expectations, and career coaching are baked into our operating rhythms. The result is a culture that experiments, has freedom to fail, learns quickly, and consistently delivers business impact. Known for my inspiring leadership style and clear communication, I ensure that our products exceed customer expectations through strategic product vision and execution on that vision.
                 p
-                  | My technical acumen and background in business and legal domains allow me to adeptly navigate complex challenges which gives me a unique edge in crafting product strategy. My management style empowers teams to excel, fostering a culture of transparency, innovation, and relentless pursuit of excellence.
+                  | My technical acumen and background in business and legal domains allow me to adeptly navigate complex challenges, giving me a unique edge in crafting product strategy. I actively build with agentic AI frameworks like LangChain, LangGraph, and Claude Agents, bridging PM strategy and hands-on AI engineering in a way few product leaders can. My management style empowers teams to excel, fostering a culture of transparency, innovation, and relentless pursuit of excellence.
                 p
                   | Outside the office, I’m an avid hiker, runner, and reader, with a particular fondness for Walter Isaacson's biography of Leonardo Da Vinci. I also love spending time with my husband, attending concerts, and spending quality time with our family Labradoodle, Koda.
             
             .cell.portfolio-meta.small-12.medium-4.large-4
+              .skills-container.ai-skills
+                h6 AI & Agentic Development
+                .skills-grid
+                  span.skill-tag.ai-skill LangGraph
+                  span.skill-tag.ai-skill LangChain
+                  span.skill-tag.ai-skill Claude Agents
+                  span.skill-tag.ai-skill Claude Code
+                  span.skill-tag.ai-skill OpenAI Agents SDK
+                  span.skill-tag.ai-skill Cursor
+                  span.skill-tag.ai-skill Prompt Engineering
+                  span.skill-tag.ai-skill LLM Orchestration
+                  span.skill-tag.ai-skill Retrieval-Augmented Generation
+                  span.skill-tag.ai-skill Tool Use & Function Calling
+                  span.skill-tag.ai-skill Multi-step AI Workflows
+                  span.skill-tag.ai-skill Agentic AI Systems
+                  span.skill-tag.ai-skill MCP (Model Context Protocol)
+                  span.skill-tag.ai-skill Human-in-the-Loop Design
+                  span.skill-tag.ai-skill AI Workflow Automation
+
               .skills-container.product-skills
                 h6 Product Management Skills
                 .skills-grid
@@ -54,7 +73,7 @@ block content
                   span.skill-tag.product-skill Budget Management
                   span.skill-tag.product-skill Vendor Management
                   span.skill-tag.product-skill OKRs & KPIs
-                  
+
               .skills-container.engineering-skills
                 h6 Engineering & Technical Skills
                 .skills-grid
@@ -64,15 +83,13 @@ block content
                   span.skill-tag.engineering-skill Swift
                   span.skill-tag.engineering-skill Python
                   span.skill-tag.engineering-skill React.js
-                  span.skill-tag.engineering-skill Vue.js 
+                  span.skill-tag.engineering-skill Vue.js
                   span.skill-tag.engineering-skill Node.js
                   span.skill-tag.engineering-skill Express.js
                   span.skill-tag.engineering-skill SQL/MySQL
                   span.skill-tag.engineering-skill Azure Cloud
                   span.skill-tag.engineering-skill REST APIs
                   span.skill-tag.engineering-skill Git
-                  span.skill-tag.engineering-skill Claude Code
-                  span.skill-tag.engineering-skill Cursor
                   span.skill-tag.engineering-skill HTML/CSS
                   span.skill-tag.engineering-skill Data Modeling
                   span.skill-tag.engineering-skill CI/CD
@@ -134,6 +151,10 @@ block content
         .skills-container.engineering-skills {
           border-left: 3px solid #00cc66;
         }
+
+        .skills-container.ai-skills {
+          border-left: 3px solid #a855f7;
+        }
         
         .skills-container h6 {
           margin-bottom: 15px;
@@ -152,6 +173,12 @@ block content
         
         .skills-container.engineering-skills h6::before {
           content: "👨‍💻";
+          margin-right: 8px;
+          font-size: 1.1rem;
+        }
+
+        .skills-container.ai-skills h6::before {
+          content: "🤖";
           margin-right: 8px;
           font-size: 1.1rem;
         }
@@ -193,6 +220,18 @@ block content
           background: rgba(0, 204, 102, 0.2);
           transform: translateY(-2px);
           box-shadow: 0 3px 10px rgba(0, 204, 102, 0.15);
+        }
+
+        .skill-tag.ai-skill {
+          background: rgba(168, 85, 247, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .skill-tag.ai-skill:hover {
+          background: rgba(168, 85, 247, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 3px 10px rgba(168, 85, 247, 0.15);
         }
       `;
       
