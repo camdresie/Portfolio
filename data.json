@@ -450,6 +450,29 @@
             "./static/images/eggTimer/eggTimerSquare.jpg",
             "./static/images/eggTimer/eggTimerGif.gif"
             ]
+        },
+        {
+        "id": "21",
+        "category": "ai",
+        "project_name": "Mixture of Experts: LLM-as-Judge",
+        "description": "A Python/Jupyter implementation of a Mixture of Experts evaluation system where multiple frontier LLMs (GPT, Claude, Gemini, DeepSeek, Llama) each answer a challenging question and then act as judges to rank each other's responses. Final rankings are aggregated by average score across all judges, demonstrating how ensemble evaluation improves over single-judge assessment.",
+        "technologies": [
+            "Python",
+            "Jupyter Notebook",
+            "OpenAI API",
+            "Anthropic API",
+            "Google Gemini API",
+            "DeepSeek API",
+            "Groq API",
+            "Ollama",
+            "Mixture of Experts",
+            "LLM-as-Judge"
+        ],
+        "github_link": "https://github.com/camdresie/Mixture-of-Experts-LLM-as-Judge",
+        "image_urls": [
+            "./static/images/MixtureOfExperts/moe0square.jpg",
+            "./static/images/MixtureOfExperts/moe1.jpg"
+        ]
         }
     ],
     "pmProjects": {
