@@ -14,6 +14,7 @@ block content
 
   .portfolio-tabs
     a.portfolio-tab(href="#" data-tab="product") Product Management
+    a.portfolio-tab(href="#" data-tab="ai") AI & Machine Learning
     a.portfolio-tab(href="#" data-tab="engineering") Software Engineering
 
   article.grid-container.portfolio-index#portfolioContent
@@ -34,7 +35,24 @@ block content
                   .tech-tags
                     each tech in project.technologies
                       span.tech-tag= tech
-      
+
+      //- AI & Machine Learning Section
+      .portfolio-content.hidden(data-content="ai")
+        each subcategory in aiSubcategories
+          - const subcatProjects = aiProjects.filter(p => p.aiSubcategory === subcategory.id)
+          if subcatProjects.length > 0
+            .category-section
+              .category-header
+                h3= subcategory.name
+              .projects-grid
+                each project in subcatProjects
+                  a.cell(href=`/project/${project.id}`)
+                    img.thumbnail(src=project.image_urls[0] alt=`${project.project_name} - AI/ML Project` loading="lazy")
+                    h5= project.project_name
+                    .tech-tags
+                      each tech in project.technologies
+                        span.tech-tag= tech
+
       //- Engineering Section
       .portfolio-content.hidden(data-content="engineering")
         each category in categories

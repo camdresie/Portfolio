@@ -1,10 +1,19 @@
 {
-    "categories": [
+    "aiSubcategories": [
         {
-            "id": "ai",
-            "name": "AI & Machine Learning",
-            "description": "Projects focusing on artificial intelligence and algorithms"
+            "id": "agentic",
+            "name": "Agentic AI & GenAI"
         },
+        {
+            "id": "dl",
+            "name": "Deep Learning & Computer Vision"
+        },
+        {
+            "id": "classical",
+            "name": "Classical AI & Algorithms"
+        }
+    ],
+    "categories": [
         {
             "id": "passion",
             "name": "Passion Projects",
@@ -73,6 +82,7 @@
         {
         "id": "2",
             "category": "ai",
+            "aiSubcategory": "classical",
         "project_name": "Domino Game AI - Minimax With Alpha-Beta Pruning",
         "description": "This is a project I did for my AI class at UPenn. This project implements a minimax algorithm with alpha-beta pruning to create an AI that is capable of playing a dominoes game. The game is played by two players, one a human and the other the AI. One player always places dominoes vertically, the other horizontally. The AI allows a player to enter a number to specify how many moves ahead it should search in the minimax tree of possibilities, 1 being the least and 9 the most. If the game looks 9 moves into the future, it is exceedingly hard to beat. It examines all possible outcomes to determine the most optimal play for it, assuming fully optimal play by the human player. If the human player makes an error, it is even easier for the AI to win. Code available on request.",
         "technologies": [
@@ -91,6 +101,7 @@
         {
         "id": "21",
             "category": "ai",
+            "aiSubcategory": "dl",
         "project_name": "Timmy or Troye - Deep Learning Image Classifier",
         "description": "A deep learning image classifier built with fastai and PyTorch that distinguishes between Timothée Chalamet, Troye Sivan, and Timmy Turner from Fairly Odd Parents. The project uses DuckDuckGo image search to automatically build a training dataset, then fine-tunes a pretrained ResNet18 convolutional neural network to classify images across the three categories. The model achieves near-perfect accuracy on the validation set after just 6 epochs of fine-tuning, demonstrating the power of transfer learning for rapid computer vision prototyping.",
         "technologies": [
@@ -475,6 +486,7 @@
         {
         "id": "22",
         "category": "ai",
+        "aiSubcategory": "agentic",
         "project_name": "Mixture of Experts: LLM-as-Judge",
         "description": "A Python/Jupyter implementation of a Mixture of Experts evaluation system where multiple frontier LLMs (GPT, Claude, Gemini, DeepSeek, Llama) each answer a challenging question and then act as judges to rank each other's responses. Final rankings are aggregated by average score across all judges, demonstrating how ensemble evaluation improves over single-judge assessment.",
         "technologies": [
@@ -498,6 +510,7 @@
         {
         "id": "23",
         "category": "ai",
+        "aiSubcategory": "agentic",
         "project_name": "RAG Career Agent",
         "description": "An AI-powered career agent embedded in my portfolio site that answers questions about my background, projects, skills, and experience. Built with a Retrieval-Augmented Generation (RAG) architecture, the agent uses OpenAI embeddings and FAISS vector search to semantically retrieve the most relevant information from my resume, LinkedIn profile, portfolio projects, leadership philosophy, career timeline, and blog posts before generating responses. The agent includes OpenAI function calling for recording visitor contact details and unanswered questions via Pushover notifications, and is deployed on Hugging Face Spaces with a floating chat widget integrated into every page of the portfolio.",
         "technologies": [
