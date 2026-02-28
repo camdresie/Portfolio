@@ -314,11 +314,15 @@ app.get('/', (req, res) => {
 })
 
 app.get('/projects', (req, res) => {
-    const { projects, categories, pmProjects } = data;
-    res.render('index', { 
-        projects, 
-        categories, 
+    const { projects, categories, pmProjects, aiSubcategories } = data;
+    const aiProjects = projects.filter(p => p.category === 'ai');
+    const engineeringProjects = projects.filter(p => p.category !== 'ai');
+    res.render('index', {
+        projects: engineeringProjects,
+        categories,
         pmProjects,
+        aiSubcategories,
+        aiProjects,
         pageTitle: "Projects - Cam Dresie | Product & Engineering Portfolio",
         pageDescription: "Explore Cam Dresie's product management and engineering projects. AI-powered legal technology solutions, team leadership initiatives, and technical implementations."
     });

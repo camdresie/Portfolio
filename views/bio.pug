@@ -14,19 +14,8 @@ block content
             p.bio-subtitle Group Product Manager | Attorney | AI & Legal Tech Leader
 
         .portfolio-content
-          .grid-x.grid-margin-x
-            .cell.small-12.medium-8.large-8
-              .portfolio-bio
-                p
-                  | As Group Product Manager at Ontra for our flagship product, Contract Automation, I champion innovation through agentic AI solutions — building systems where LLMs autonomously orchestrate complex, multi-step legal workflows — and robust product management. I believe great products come from high-trust teams with clear outcomes and room to create. The teams I lead excel at turning complex customer problems into shipped, impactful solutions.
-                p
-                  | I invest in people: candid feedback, visible expectations, and career coaching are baked into our operating rhythms. The result is a culture that experiments, has freedom to fail, learns quickly, and consistently delivers business impact. Known for my inspiring leadership style and clear communication, I ensure that our products exceed customer expectations through strategic product vision and execution on that vision.
-                p
-                  | My technical acumen and background in business and legal domains allow me to adeptly navigate complex challenges, giving me a unique edge in crafting product strategy. I actively build with agentic AI frameworks like LangChain, LangGraph, and Claude Agents, bridging PM strategy and hands-on AI engineering in a way few product leaders can. My management style empowers teams to excel, fostering a culture of transparency, innovation, and relentless pursuit of excellence.
-                p
-                  | Outside the office, I’m an avid hiker, runner, and reader, with a particular fondness for Walter Isaacson's biography of Leonardo Da Vinci. I also love spending time with my husband, attending concerts, and spending quality time with our family Labradoodle, Koda.
-            
-            .cell.portfolio-meta.small-12.medium-4.large-4
+          .skills-section
+            .skills-columns
               .skills-container.ai-skills
                 h6 AI & Agentic Development
                 .skills-grid
@@ -38,71 +27,58 @@ block content
                   span.skill-tag.ai-skill Cursor
                   span.skill-tag.ai-skill Prompt Engineering
                   span.skill-tag.ai-skill LLM Orchestration
-                  span.skill-tag.ai-skill Retrieval-Augmented Generation
+                  span.skill-tag.ai-skill RAG
                   span.skill-tag.ai-skill Tool Use & Function Calling
-                  span.skill-tag.ai-skill Multi-step AI Workflows
                   span.skill-tag.ai-skill Agentic AI Systems
-                  span.skill-tag.ai-skill MCP (Model Context Protocol)
+                  span.skill-tag.ai-skill MCP
                   span.skill-tag.ai-skill Human-in-the-Loop Design
-                  span.skill-tag.ai-skill AI Workflow Automation
 
               .skills-container.product-skills
-                h6 Product Management Skills
+                h6 Product Management
                 .skills-grid
                   span.skill-tag.product-skill Product Strategy
-                  span.skill-tag.product-skill Product Portfolio Management
+                  span.skill-tag.product-skill Portfolio Management
                   span.skill-tag.product-skill Team Leadership
                   span.skill-tag.product-skill People Management
                   span.skill-tag.product-skill Cross-functional Leadership
-                  span.skill-tag.product-skill Strategic Planning
-                  span.skill-tag.product-skill Resource Allocation
                   span.skill-tag.product-skill Stakeholder Management
-                  span.skill-tag.product-skill Business Strategy
                   span.skill-tag.product-skill AI/ML Product Development
-                  span.skill-tag.product-skill AI Prototyping
-                  span.skill-tag.product-skill Generative AI
-                  span.skill-tag.product-skill Chatbots
                   span.skill-tag.product-skill Legal Tech
                   span.skill-tag.product-skill Enterprise SaaS
                   span.skill-tag.product-skill User Research
-                  span.skill-tag.product-skill Product Roadmapping
                   span.skill-tag.product-skill Agile Methodologies
-                  span.skill-tag.product-skill Data-Driven Decision Making
                   span.skill-tag.product-skill Go-to-Market Strategy
-                  span.skill-tag.product-skill Performance Management
-                  span.skill-tag.product-skill Budget Management
-                  span.skill-tag.product-skill Vendor Management
                   span.skill-tag.product-skill OKRs & KPIs
 
               .skills-container.engineering-skills
-                h6 Engineering & Technical Skills
+                h6 Engineering & Technical
                 .skills-grid
+                  span.skill-tag.engineering-skill Python
                   span.skill-tag.engineering-skill JavaScript
                   span.skill-tag.engineering-skill Java
-                  span.skill-tag.engineering-skill C
                   span.skill-tag.engineering-skill Swift
-                  span.skill-tag.engineering-skill Python
                   span.skill-tag.engineering-skill React.js
                   span.skill-tag.engineering-skill Vue.js
                   span.skill-tag.engineering-skill Node.js
-                  span.skill-tag.engineering-skill Express.js
                   span.skill-tag.engineering-skill SQL/MySQL
                   span.skill-tag.engineering-skill Azure Cloud
                   span.skill-tag.engineering-skill REST APIs
                   span.skill-tag.engineering-skill Git
-                  span.skill-tag.engineering-skill HTML/CSS
-                  span.skill-tag.engineering-skill Data Modeling
                   span.skill-tag.engineering-skill CI/CD
-                  span.skill-tag.engineering-skill API Integration
-                  span.skill-tag.engineering-skill Database Design
-                  span.skill-tag.engineering-skill Cloud Architecture
-                  span.skill-tag.engineering-skill Technical Documentation
-                  span.skill-tag.engineering-skill Code Review
                   span.skill-tag.engineering-skill System Design
+
+          .portfolio-bio
+            p
+              | As Group Product Manager at Ontra for our flagship product, Contract Automation, I champion innovation through agentic AI solutions — building systems where LLMs autonomously orchestrate complex, multi-step legal workflows — and robust product management. I believe great products come from high-trust teams with clear outcomes and room to create. The teams I lead excel at turning complex customer problems into shipped, impactful solutions.
+            p
+              | I invest in people: candid feedback, visible expectations, and career coaching are baked into our operating rhythms. The result is a culture that experiments, has freedom to fail, learns quickly, and consistently delivers business impact. Known for my inspiring leadership style and clear communication, I ensure that our products exceed customer expectations through strategic product vision and execution on that vision.
+            p
+              | My technical acumen and background in business and legal domains allow me to adeptly navigate complex challenges, giving me a unique edge in crafting product strategy. I actively build with agentic AI frameworks like LangChain, LangGraph, and Claude Agents, bridging PM strategy and hands-on AI engineering in a way few product leaders can. My management style empowers teams to excel, fostering a culture of transparency, innovation, and relentless pursuit of excellence.
+            p
+              | Outside the office, I'm an avid hiker, runner, and reader, with a particular fondness for Walter Isaacson's biography of Leonardo Da Vinci. I also love spending time with my husband, attending concerts, and spending quality time with our family Labradoodle, Koda.
 
   script.
     document.addEventListener('DOMContentLoaded', function() {
-      // Apply styling for skills sections
       const inlineStyles = `
         .about-heading {
           margin-bottom: 0.5rem;
@@ -110,116 +86,129 @@ block content
           color: #fff;
           letter-spacing: 0.5px;
         }
-        
-        .about-subtitle {
-          margin-bottom: 2rem;
-          opacity: 0.8;
-        }
-        
+
         .portfolio-bio {
           background: rgba(255, 255, 255, 0.03);
           border-radius: 8px;
-          padding: 25px;
+          padding: 30px;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.05);
           margin-bottom: 20px;
         }
-        
+
         .portfolio-bio p {
           margin-bottom: 1.5rem;
           line-height: 1.7;
           color: rgba(255, 255, 255, 0.85);
+          max-width: 100%;
+          border-bottom: none;
+          padding-bottom: 0;
         }
-        
+
         .portfolio-bio p:last-child {
           margin-bottom: 0;
         }
-        
+
+        .skills-section {
+          margin-top: 0.5rem;
+          margin-bottom: 20px;
+        }
+
+        .skills-columns {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+          .skills-columns {
+            grid-template-columns: 1fr;
+          }
+        }
+
         .skills-container {
           background: rgba(255, 255, 255, 0.03);
           border-radius: 8px;
-          padding: 25px;
+          padding: 16px;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.05);
-          margin-bottom: 20px;
         }
-        
+
         .skills-container.product-skills {
-          border-left: 3px solid #00a6ff;
+          border-top: 3px solid #00a6ff;
         }
-        
+
         .skills-container.engineering-skills {
-          border-left: 3px solid #00cc66;
+          border-top: 3px solid #00cc66;
         }
 
         .skills-container.ai-skills {
-          border-left: 3px solid #a855f7;
+          border-top: 3px solid #a855f7;
         }
-        
+
         .skills-container h6 {
-          margin-bottom: 15px;
+          margin-bottom: 12px;
           font-weight: 600;
           color: #fff;
           letter-spacing: 0.5px;
+          font-size: 0.85rem;
           display: flex;
           align-items: center;
         }
-        
+
         .skills-container.product-skills h6::before {
-          content: "👨‍💼";
+          content: "\\1F468\\200D\\1F4BC";
           margin-right: 8px;
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
-        
+
         .skills-container.engineering-skills h6::before {
-          content: "👨‍💻";
+          content: "\\1F468\\200D\\1F4BB";
           margin-right: 8px;
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
 
         .skills-container.ai-skills h6::before {
-          content: "🤖";
+          content: "\\1F916";
           margin-right: 8px;
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
-        
+
         .skills-grid {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
+          gap: 6px;
         }
-        
+
         .skill-tag {
-          padding: 6px 12px;
+          padding: 4px 10px;
           border-radius: 4px;
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 500;
           transition: all 0.3s ease;
           cursor: default;
         }
-        
+
         .skill-tag.product-skill {
           background: rgba(0, 166, 255, 0.1);
           color: rgba(255, 255, 255, 0.9);
           border: 1px solid rgba(0, 166, 255, 0.2);
         }
-        
+
         .skill-tag.product-skill:hover {
           background: rgba(0, 166, 255, 0.2);
-          transform: translateY(-2px);
-          box-shadow: 0 3px 10px rgba(0, 166, 255, 0.15);
+          transform: translateY(-1px);
         }
-        
+
         .skill-tag.engineering-skill {
           background: rgba(0, 204, 102, 0.1);
           color: rgba(255, 255, 255, 0.9);
           border: 1px solid rgba(0, 204, 102, 0.2);
         }
-        
+
         .skill-tag.engineering-skill:hover {
           background: rgba(0, 204, 102, 0.2);
-          transform: translateY(-2px);
-          box-shadow: 0 3px 10px rgba(0, 204, 102, 0.15);
+          transform: translateY(-1px);
         }
 
         .skill-tag.ai-skill {
@@ -230,11 +219,10 @@ block content
 
         .skill-tag.ai-skill:hover {
           background: rgba(168, 85, 247, 0.2);
-          transform: translateY(-2px);
-          box-shadow: 0 3px 10px rgba(168, 85, 247, 0.15);
+          transform: translateY(-1px);
         }
       `;
-      
+
       const styleElement = document.createElement('style');
       styleElement.textContent = inlineStyles;
       document.head.appendChild(styleElement);
