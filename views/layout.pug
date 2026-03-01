@@ -121,6 +121,9 @@ html(class="no-js" lang="en" dir="ltr")
               a.sidebar-nav-button(href='/consuming')
                 .nav-icon 📚
                 .nav-text Currently Consuming
+              a.sidebar-nav-button.sidebar-chat-trigger(href='#' id='sidebar-chat-trigger')
+                .nav-icon 💬
+                .nav-text Chat with Cam's AI Agent
 
           .cell.shrink
             .social-links
@@ -148,7 +151,7 @@ html(class="no-js" lang="en" dir="ltr")
 
     //- Floating Chat Widget (Career Agent)
     #chat-widget
-      button#chat-toggle(aria-label="Chat with Cam's AI Assistant")
+      button#chat-toggle(aria-label="Chat with Cam's AI Agent")
         svg.chat-icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
           path(d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z")
         svg.close-icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
@@ -156,7 +159,7 @@ html(class="no-js" lang="en" dir="ltr")
           line(x1="6" y1="6" x2="18" y2="18")
       #chat-panel
         .chat-panel-header
-          span Chat with Cam's AI Assistant
+          span Chat with Cam's AI Agent
           button#chat-close(aria-label="Close chat")
             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
               line(x1="18" y1="6" x2="6" y2="18")
@@ -258,6 +261,15 @@ html(class="no-js" lang="en" dir="ltr")
           closeBtn.addEventListener('click', function() {
             closeChat();
           });
+
+          // Sidebar nav trigger
+          var sidebarTrigger = document.getElementById('sidebar-chat-trigger');
+          if (sidebarTrigger) {
+            sidebarTrigger.addEventListener('click', function(e) {
+              e.preventDefault();
+              openChat();
+            });
+          }
 
           // Close on Escape key
           document.addEventListener('keydown', function(e) {
