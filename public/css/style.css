@@ -215,11 +215,7 @@ a:hover{
 .portfolio-intro {
   margin: 0;
   padding: 3rem 3rem 2rem;
-  background: linear-gradient(
-    to bottom,
-    var(--dark-surface),
-    var(--dark-surface-2)
-  );
+  background: linear-gradient(to bottom, var(--dark-surface), var(--dark-surface-2));
   position: relative;
   overflow: hidden;
 }
@@ -271,16 +267,16 @@ a:hover{
     padding-bottom: 2rem;
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 166, 255, 0.1);
-    box-shadow: 
+    box-shadow:
       0 4px 6px rgba(0, 0, 0, 0.1),
       0 0 0 1px rgba(255, 255, 255, 0.05);
     position: relative;
     z-index: 1003;
   }
-  
+
   .portfolio-index .cell:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 20px 40px rgba(0, 166, 255, 0.3),
       0 0 0 2px rgba(0, 166, 255, 0.4),
       0 0 50px rgba(0, 166, 255, 0.2);
@@ -1136,11 +1132,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 .portfolio-intro {
   margin: 0;
   padding: 3rem 3rem 2rem;
-  background: linear-gradient(
-    to bottom,
-    var(--dark-surface),
-    var(--dark-surface-2)
-  );
+  background: linear-gradient(to bottom, var(--dark-surface), var(--dark-surface-2));
   position: relative;
   overflow: hidden;
 }
@@ -1246,7 +1238,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   z-index: -1;
 }
 
-/* Add transition overlay effect */
+/* Transition overlay effect removed - was causing blueish tint */
 .portfolio-content::before {
   content: '';
   position: absolute;
@@ -1254,15 +1246,14 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, var(--accent), transparent);
+  background: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 1;
 }
 
 .portfolio-content.transitioning::before {
-  opacity: 0.05;
+  opacity: 0;
 }
 
 /* Enhance project card transitions */
@@ -1574,7 +1565,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
   padding: 1.5rem;
   transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(99, 102, 241, 0.1);
-  box-shadow: 
+  box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 0 0 1px rgba(255, 255, 255, 0.05);
   text-decoration: none;
@@ -1588,7 +1579,7 @@ a:not(.button):not(.portfolio-index .cell a):hover::after {
 
 .projects-grid a.cell:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(99, 102, 241, 0.3),
     0 0 0 2px rgba(99, 102, 241, 0.4),
     0 0 50px rgba(99, 102, 241, 0.2);
@@ -3599,5 +3590,12 @@ img.blog-logo {
 #chat-toggle:hover,
 #chat-widget.open #chat-toggle {
   animation: none;
+}
+
+/* Sidebar chat trigger */
+.sidebar-chat-trigger {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
 }
 
