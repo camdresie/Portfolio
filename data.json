@@ -533,6 +533,30 @@
             "./static/images/CareerAgent/agent0square.jpg",
             "./static/images/CareerAgent/agent1.jpg"
         ]
+        },
+        {
+        "id": "24",
+        "category": "ai",
+        "aiSubcategory": "agentic",
+        "project_name": "Deep Research Agent",
+        "description": "An AI-powered research assistant that automates comprehensive web research through a multi-agent pipeline. Given a research query, the system generates clarifying questions to focus scope, plans targeted web searches, executes them in parallel, and synthesizes findings into a structured 5-10 page markdown report. The pipeline features built-in quality evaluation loops — a Search Plan Evaluator and Report Evaluator score outputs on criteria like coverage, depth, and completeness, triggering automatic revisions if quality thresholds aren't met. The architecture uses 7 specialized agents (Clarifier, Planner, Search, Writer, and 3 Evaluators) orchestrated through OpenAI's Agents SDK, with a Gradio UI that progressively reveals each phase of the research process.",
+        "technologies": [
+            "Python",
+            "OpenAI Agents SDK",
+            "OpenAI API",
+            "Gradio",
+            "Pydantic",
+            "Multi-Agent Orchestration",
+            "Web Search Tool Use",
+            "Async Python",
+            "Agentic AI",
+            "Quality Evaluation Loops"
+        ],
+        "live_link": "https://huggingface.co/spaces/camdresie/deep-research",
+        "image_urls": [
+            "./static/images/DeepResearch/deepresearch0square.jpg",
+            "./static/images/DeepResearch/deepresearch1.jpg"
+        ]
         }
     ],
     "pmProjects": {
