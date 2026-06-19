@@ -308,8 +308,8 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.render('bio', {
-        pageTitle: "Cam Dresie - Group Product Manager | AI & Legal Tech Leader",
-        pageDescription: "Learn about Cam Dresie's background and personal story. Group PM at Ontra with expertise in AI-powered legal technology, team leadership, and software engineering."
+        pageTitle: "Cam Dresie - Knowledge & Innovation Attorney | AI & Legal Tech Leader",
+        pageDescription: "Learn about Cam Dresie's background and personal story. Senior Knowledge & Innovation Attorney at Paul Weiss, with deep expertise in AI-powered legal technology, product leadership, and software engineering."
     });
 })
 
@@ -331,14 +331,14 @@ app.get('/projects', (req, res) => {
 app.get('/timeline', (req, res) => {
     res.render('timeline', {
         pageTitle: "Professional Timeline - Cam Dresie | Career Journey",
-        pageDescription: "Explore Cam Dresie's professional timeline from law to product management. Journey from J.D. at Washington University to Group Product Manager at Ontra leading AI legal technology."
+        pageDescription: "Explore Cam Dresie's professional timeline across law, product, and AI. From a J.D. at Washington University through product leadership at Ontra to Senior Knowledge & Innovation Attorney at Paul Weiss."
     });
 })
 
 app.get('/leadership', (req, res) => {
     res.render('leadership', {
         pageTitle: "Leadership Philosophy - Cam Dresie | Management Approach",
-        pageDescription: "Discover Cam Dresie's leadership philosophy as a Group Product Manager. Supportive leadership approach focusing on team empowerment, growth mindset, and psychological safety."
+        pageDescription: "Discover Cam Dresie's leadership philosophy as a product and innovation leader. Supportive leadership approach focusing on team empowerment, growth mindset, and psychological safety."
     });
 })
 
