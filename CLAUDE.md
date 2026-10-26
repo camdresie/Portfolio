@@ -48,6 +48,9 @@ app.get('/projects')             // Projects portfolio (dual tabbed interface)
 app.get('/timeline')             // Professional timeline
 app.get('/leadership')           // Leadership philosophy
 app.get('/blog')                 // Blog posts from Ghost RSS feed
+app.get('/consuming')            // Books and movies from Goodreads/Letterboxd RSS
+app.get('/desert-horology')      // Desert Horology Co. watch page (curated Instagram reels + optional live feed)
+app.get('/watches')              // Alias - 301 redirects to /desert-horology
 app.get('/about')                // Legacy route - 301 redirects to /bio
 
 // Intelligent project routing based on ID prefix
@@ -67,6 +70,8 @@ app.get('/project/:id', (req, res) => {
 - `timeline.pug`: Professional timeline with scroll animations
 - `leadership.pug`: Leadership philosophy and management approach
 - `blog.pug`: Blog posts from Ghost RSS feed
+- `consuming.pug`: Currently reading and watching, from Goodreads and Letterboxd RSS
+- `desert-horology.pug`: Desert Horology Co. page in its own brand styling (`public/css/desert-horology.css`, `public/js/desert-horology.js`)
 - `project.pug`: Engineering project detail pages
 - `pm-project.pug`: Product management project detail pages
 - `error.pug`: Custom 404 and error pages
@@ -84,6 +89,12 @@ app.get('/project/:id', (req, res) => {
 - In-memory caching with 15-minute TTL to reduce external requests
 - RSS parsing via `rss-parser` dependency
 - Graceful error handling with 500 error page on feed failure
+
+**Desert Horology Co. Page** (`/desert-horology`):
+- Content lives in `data/desert-horology.json`: intro copy, a `featured` list of reel links ("Most watched"), and a `series.episodes` list (The Quartz Crisis). Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
+- Reels render through Instagram's official embed (blockquote + `instagram.com/embed.js`), loaded lazily by `public/js/desert-horology.js`; a branded fallback card links out if the script never loads
+- Optional "Latest posts" grid is fetched server-side by `lib/instagram.js` from the Instagram API with Instagram Login, cached for 6 hours, with automatic long-lived token refresh persisted to `INSTAGRAM_TOKEN_FILE`. Hidden unless `INSTAGRAM_ACCESS_TOKEN` is set. Setup: `docs/instagram-feed-setup.md`
+- Brand tokens (Poppins, `#141210` background, `#F1EEE7` cream, `#C4653A` rust) are scoped to `.dhc-page` in `public/css/desert-horology.css`
 
 ## Data Schemas
 
@@ -149,6 +160,9 @@ app.get('/project/:id', (req, res) => {
 - `/public/js/scripts.js`: Main site functionality
 - `/public/js/slideshow.js`: Image gallery functionality  
 - `/public/js/tabs.js`: Tab system functionality
+- `/public/js/desert-horology.js`: Lazy Instagram embeds and post modal for the Desert Horology page
+
+**Environment variables** (see `.env.example`): Goodreads, Letterboxd, and Last.fm settings for the consuming page; `INSTAGRAM_ACCESS_TOKEN` (plus optional `INSTAGRAM_TOKEN_FILE`, `INSTAGRAM_FEED_LIMIT`, `INSTAGRAM_CACHE_TTL_MINUTES`) for the Desert Horology feed.
 
 ## Development Notes
 

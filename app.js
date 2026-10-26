@@ -35,6 +35,8 @@ const letterboxdParser = new RSSParser({
 });
 const fs = require('fs');
 const path = require('path');
+const instagram = require('./lib/instagram');
+const desertHorology = require('./data/desert-horology.json');
 
 // Simple in-memory cache for blog feed
 let blogCache = { posts: [], lastFetched: 0 };
@@ -456,6 +458,52 @@ app.get('/book/:id', async (req, res) => {
     }
 });
 
+// Desert Horology Co. route - curated Instagram reels plus an optional live feed
+const INSTAGRAM_POST_RE = /^https?:\/\/(?:www\.)?instagram\.com\/(p|reel|reels|tv)\/([A-Za-z0-9_-]+)\/?/i;
+
+// Accepts the links Instagram's share sheet produces (with ?igsh=... etc.) and returns the
+// canonical permalink Instagram's embed script expects, or null if the link is not a post.
+function normalizeInstagramPostUrl(url) {
+    const match = typeof url === 'string' ? url.trim().match(INSTAGRAM_POST_RE) : null;
+    if (!match) return null;
+    const kind = match[1].toLowerCase() === 'reels' ? 'reel' : match[1].toLowerCase();
+    return `https://www.instagram.com/${kind}/${match[2]}/`;
+}
+
+app.get('/desert-horology', async (req, res) => {
+    const withValidLinks = (items) => (items || [])
+        .map(item => {
+            const url = normalizeInstagramPostUrl(item && item.url);
+            return url ? { ...item, url } : null;
+        })
+        .filter(Boolean);
+
+    const featured = withValidLinks(desertHorology.featured);
+    const series = desertHorology.series || {};
+    const episodes = withValidLinks(series.episodes);
+
+    let feed = { configured: false, posts: [], error: null };
+    try {
+        feed = await instagram.getLatestPosts();
+    } catch (error) {
+        console.error('Error loading Instagram feed:', error);
+    }
+
+    res.render('desert-horology', {
+        dhc: desertHorology,
+        featured,
+        series,
+        episodes,
+        feed,
+        pageTitle: "Desert Horology Co. - Cam Dresie | Watch Collecting & Horology on Instagram",
+        pageDescription: "Desert Horology Co. is Cam Dresie's watch-collecting side project on Instagram: short videos on horological history, iconic watches like the Breitling Emergency and Omega Ploprof, and practical buying guides."
+    });
+});
+
+app.get('/watches', (req, res) => {
+    res.redirect(301, '/desert-horology');
+});
+
 // Keep legacy /about route for backwards compatibility, redirect to /bio
 app.get('/about', (req, res) => {
     res.redirect(301, '/bio');
@@ -513,6 +561,9 @@ app.use((err, req, res, next) => {
 /*********************
  * The app listens on localhost:3000. The app will also run if a user enters 'npm start' in the terminal.
 *********************/
+
+// Keeps the Instagram token fresh in the background (no-op unless INSTAGRAM_ACCESS_TOKEN is set)
+instagram.startTokenMaintenance();
 
 app.listen(process.env.PORT || 5001, () => {
     console.log('The server is running!');

@@ -1,0 +1,560 @@
+/* ==========================================================================
+   Desert Horology Co. page
+   Brand constants from the DHC cover template: Poppins; near-black #141210,
+   cream #F1EEE7, warm grays, rust accent. Scoped to .dhc-page so nothing here
+   leaks into the rest of the (blue-accent) site.
+   ========================================================================== */
+
+.dhc-page {
+  --dhc-bg: #141210;
+  --dhc-surface: #1b1815;
+  --dhc-surface-2: #231f1b;
+  --dhc-ink: #F1EEE7;
+  --dhc-sub: #C9C4B8;
+  --dhc-gray: #6E6A61;
+  --dhc-accent: #C4653A;
+  --dhc-accent-strong: #E07A42;
+  --dhc-line: rgba(241, 238, 231, 0.1);
+  --dhc-font: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+
+  background: var(--dhc-bg);
+  color: var(--dhc-ink);
+  font-family: var(--dhc-font);
+  min-height: 100vh;
+  padding: 0 16px 72px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dhc-page h1,
+.dhc-page h2,
+.dhc-page h3,
+.dhc-page p {
+  font-family: var(--dhc-font);
+  color: inherit;
+}
+
+.dhc-page a {
+  color: var(--dhc-accent-strong);
+}
+
+/* The site adds an animated accent underline to every link via ::after; cards and buttons
+   on this page carry their own hover treatment instead. */
+.dhc-page a::after,
+.dhc-modal a::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.dhc-hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 72px 0 52px;
+  text-align: center;
+  border-bottom: 1px solid var(--dhc-line);
+}
+
+.dhc-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 36px;
+  color: var(--dhc-ink);
+}
+
+.dhc-mark {
+  width: 64px;
+  height: 64px;
+  display: block;
+  flex: none;
+}
+
+.dhc-mark-major { stroke: var(--dhc-ink); }
+.dhc-mark-minor { stroke: var(--dhc-gray); }
+
+.dhc-wordmark {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dhc-wordmark span {
+  color: var(--dhc-sub);
+  font-weight: 400;
+}
+
+.dhc-title {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  margin: 0 0 14px;
+}
+
+.dhc-tagline {
+  color: var(--dhc-accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 0 30px;
+}
+
+.dhc-intro {
+  max-width: 680px;
+  margin: 0 auto 34px;
+}
+
+.dhc-intro p {
+  color: var(--dhc-sub);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 300;
+  margin: 0 0 1rem;
+}
+
+.dhc-intro p:last-child { margin-bottom: 0; }
+
+.dhc-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.dhc-page .dhc-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--dhc-accent);
+  color: var(--dhc-bg);
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--dhc-font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dhc-page .dhc-button:hover,
+.dhc-page .dhc-button:focus-visible {
+  background: var(--dhc-accent-strong);
+  color: var(--dhc-bg);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.dhc-page .dhc-button--ghost {
+  background: transparent;
+  color: var(--dhc-ink);
+  border-color: var(--dhc-line);
+}
+
+.dhc-page .dhc-button--ghost:hover,
+.dhc-page .dhc-button--ghost:focus-visible {
+  background: var(--dhc-surface-2);
+  color: var(--dhc-ink);
+  border-color: var(--dhc-gray);
+}
+
+/* --- Sections ------------------------------------------------------------ */
+
+.dhc-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 56px 0 8px;
+}
+
+.dhc-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.dhc-eyebrow {
+  display: block;
+  color: var(--dhc-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.dhc-h2 {
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.dhc-section-desc {
+  color: var(--dhc-sub);
+  font-weight: 300;
+  max-width: 640px;
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+
+/* --- Reel cards ---------------------------------------------------------- */
+
+.dhc-reel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dhc-reel-grid > li { margin: 0; }
+
+.dhc-reel {
+  margin: 0;
+  background: var(--dhc-surface);
+  border: 1px solid var(--dhc-line);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.dhc-embed {
+  position: relative;
+  min-height: 420px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--dhc-surface-2);
+}
+
+/* Instagram's script injects its own inline sizing; let the player fill the card instead. */
+.dhc-embed .instagram-media,
+.dhc-modal-body .instagram-media {
+  margin: 0 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.dhc-embed blockquote.instagram-media,
+.dhc-modal-body blockquote.instagram-media {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.dhc-embed iframe.instagram-media,
+.dhc-modal-body iframe.instagram-media {
+  border-radius: 10px;
+  display: block;
+}
+
+/* Branded fallback card: visible until Instagram's player replaces it, and permanently if the
+   player never loads (content blockers, offline). */
+.dhc-page .dhc-fallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 420px;
+  height: 100%;
+  padding: 24px;
+  color: var(--dhc-ink);
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 25% 15%, rgba(196, 101, 58, 0.22), transparent 55%),
+    linear-gradient(180deg, var(--dhc-surface-2), var(--dhc-surface));
+  transition: background 0.3s ease;
+}
+
+.dhc-page .dhc-fallback:hover,
+.dhc-page .dhc-fallback:focus-visible {
+  color: var(--dhc-ink);
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 25% 15%, rgba(224, 122, 66, 0.32), transparent 55%),
+    linear-gradient(180deg, var(--dhc-surface-2), var(--dhc-surface));
+}
+
+.dhc-fallback-mark {
+  width: 44px;
+  height: 44px;
+  margin-bottom: auto;
+  color: var(--dhc-ink);
+}
+
+.dhc-fallback-eyebrow {
+  color: var(--dhc-accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.dhc-fallback-title {
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.dhc-fallback-cta {
+  margin-top: 6px;
+  color: var(--dhc-sub);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dhc-reel-caption {
+  padding: 0 6px 6px;
+}
+
+/* While the fallback card is showing it already carries the title, so skip the duplicate. */
+.dhc-embed[data-state="fallback"] + .dhc-reel-caption {
+  display: none;
+}
+
+.dhc-reel-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 6px 0 0;
+}
+
+.dhc-reel-blurb {
+  color: var(--dhc-sub);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+
+/* --- Latest posts (feed) -------------------------------------------------- */
+
+.dhc-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.dhc-page .dhc-feed-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--dhc-surface-2);
+  border: 1px solid var(--dhc-line);
+  color: var(--dhc-ink);
+  text-decoration: none;
+}
+
+.dhc-feed-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.dhc-feed-tile:hover img,
+.dhc-feed-tile:focus-visible img {
+  transform: scale(1.04);
+}
+
+.dhc-feed-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(20, 18, 16, 0.72);
+  color: var(--dhc-ink);
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.dhc-feed-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px 14px 12px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  font-weight: 300;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.94), rgba(20, 18, 16, 0));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.dhc-feed-tile:hover .dhc-feed-caption,
+.dhc-feed-tile:focus-visible .dhc-feed-caption,
+.dhc-feed-tile--noimage .dhc-feed-caption {
+  opacity: 1;
+}
+
+.dhc-page .dhc-feed-tile--noimage {
+  background:
+    radial-gradient(circle at 25% 15%, rgba(196, 101, 58, 0.22), transparent 55%),
+    linear-gradient(180deg, var(--dhc-surface-2), var(--dhc-surface));
+}
+
+/* --- Empty states, footer ------------------------------------------------ */
+
+.dhc-empty {
+  border: 1px dashed var(--dhc-line);
+  border-radius: 14px;
+  padding: 36px 24px;
+  text-align: center;
+}
+
+.dhc-empty p {
+  color: var(--dhc-sub);
+  font-weight: 300;
+  margin: 0 0 18px;
+}
+
+.dhc-footer {
+  max-width: 1120px;
+  margin: 64px auto 0;
+  padding: 44px 0 0;
+  border-top: 1px solid var(--dhc-line);
+  text-align: center;
+}
+
+.dhc-footer p {
+  color: var(--dhc-sub);
+  font-weight: 300;
+  margin: 0 0 20px;
+}
+
+.dhc-footer .dhc-note {
+  color: var(--dhc-gray);
+  font-size: 0.78rem;
+  margin: 24px 0 0;
+}
+
+/* --- Modal --------------------------------------------------------------- */
+
+.dhc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.dhc-modal[hidden] { display: none; }
+
+.dhc-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.84);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.dhc-modal-dialog {
+  position: relative;
+  width: min(540px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  background: #1b1815;
+  border: 1px solid rgba(241, 238, 231, 0.1);
+  border-radius: 14px;
+  padding: 52px 12px 12px;
+}
+
+.dhc-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(241, 238, 231, 0.12);
+  background: #231f1b;
+  color: #F1EEE7;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dhc-modal-close:hover,
+.dhc-modal-close:focus-visible {
+  background: #C4653A;
+  color: #141210;
+}
+
+.dhc-modal-body {
+  min-height: 120px;
+  text-align: center;
+}
+
+.dhc-modal-body .dhc-fallback {
+  display: inline-block;
+  margin: 32px 0;
+  padding: 12px 22px;
+  border: 1px solid rgba(241, 238, 231, 0.18);
+  border-radius: 999px;
+  color: #F1EEE7;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.dhc-modal-body .dhc-fallback:hover,
+.dhc-modal-body .dhc-fallback:focus-visible {
+  background: #C4653A;
+  border-color: #C4653A;
+  color: #141210;
+}
+
+body.dhc-modal-open { overflow: hidden; }
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .dhc-hero { padding: 48px 0 36px; }
+  .dhc-section { padding-top: 40px; }
+  .dhc-reel-grid { gap: 18px; }
+  .dhc-feed-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .dhc-footer { margin-top: 48px; }
+}
+
+@media (max-width: 480px) {
+  .dhc-page { padding-bottom: 56px; }
+  .dhc-lockup { flex-direction: column; gap: 12px; }
+  .dhc-wordmark { font-size: 13px; }
+  /* Instagram's player needs ~330px; drop the card padding so it fits on narrow phones. */
+  .dhc-reel { padding: 0; border-radius: 10px; }
+  .dhc-reel-caption { padding: 0 14px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dhc-page *,
+  .dhc-modal * {
+    transition: none !important;
+  }
+}

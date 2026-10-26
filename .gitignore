@@ -1,2 +1,4 @@
 node_modules/
 .env
+# Auto-refreshed Instagram token (see lib/instagram.js)
+data/instagram-token.json
