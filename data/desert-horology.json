@@ -7,34 +7,14 @@
     "Desert Horology Co. is my watch side of the internet. I collect, research, and make short videos about mechanical watches: the engineering inside them, the history behind them, and how to buy well without overpaying.",
     "Start with the most-watched videos below, then follow along on Instagram for the newest ones."
   ],
-  "_howToAddAReel": "Open the reel on Instagram, choose Share > Copy link, and paste it into the url field. Entries without a valid instagram.com/reel/... or instagram.com/p/... link are skipped, so the live page never shows a broken card. Set \"captioned\": true on an entry to show its Instagram caption under the video.",
-  "featured": [
-    {
-      "title": "The Jaeger-LeCoultre Atmos clock",
-      "topic": "Horology",
-      "url": ""
-    },
-    {
-      "title": "The Breitling Emergency: the watch with a built-in distress beacon",
-      "topic": "Tool watches",
-      "url": ""
-    },
-    {
-      "title": "The Omega Seamaster Ploprof",
-      "topic": "Dive watches",
-      "url": ""
-    },
-    {
-      "title": "Watches under $5,000: a buying guide",
-      "topic": "Buying guide",
-      "url": ""
-    }
-  ],
+  "_howToAddAReel": "With INSTAGRAM_ACCESS_TOKEN configured, the Most watched section is ranked automatically by lifetime views and this list is ignored. Without the API (or if the token lacks the insights permission) the page shows the reels listed here instead: paste the link from Share > Copy link into url. Entries without a valid instagram.com/reel/... or /p/... link are skipped, so the page never shows a broken card.",
+  "featured": [],
   "series": {
     "name": "The Quartz Crisis",
     "eyebrow": "Series",
     "description": "A multi-part series on the 1970s and 80s upheaval that nearly ended Swiss mechanical watchmaking, told one episode at a time.",
-    "_howToAddAnEpisode": "Add { \"part\": 1, \"title\": \"The Beginning\", \"url\": \"https://www.instagram.com/reel/...\" } objects to episodes. The section stays hidden until at least one episode has a valid link.",
-    "episodes": []
+    "_howToAddAnEpisode": "With the API configured, episodes are detected from captions that contain the match phrase and ordered by the part number in the caption (e.g. \"Part 03\"). Without the API, list them here as { \"part\": 1, \"title\": \"The Beginning\", \"url\": \"https://www.instagram.com/reel/...\" }. The section stays hidden until at least one episode exists.",
+    "episodes": [],
+    "match": "Quartz Crisis"
   }
 }

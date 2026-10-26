@@ -478,20 +478,38 @@ app.get('/desert-horology', async (req, res) => {
         })
         .filter(Boolean);
 
-    const featured = withValidLinks(desertHorology.featured);
     const series = desertHorology.series || {};
-    const episodes = withValidLinks(series.episodes);
 
-    let feed = { configured: false, posts: [], error: null };
+    let feed = { configured: false, posts: [], topVideos: [], series: [], error: null, insightsError: null };
     try {
-        feed = await instagram.getLatestPosts();
+        feed = await instagram.getFeed({ seriesMatch: series.match || series.name });
     } catch (error) {
         console.error('Error loading Instagram feed:', error);
     }
 
+    // "Most watched": ranked by views from the API when it is configured and insights are
+    // available; otherwise the hand-picked list in data/desert-horology.json.
+    const rankedFeatured = (feed.topVideos || []).map(video => ({
+        title: video.title || video.caption || 'Watch on Instagram',
+        eyebrow: video.viewsLabel ? `${video.viewsLabel} views` : 'Most watched',
+        url: video.permalink
+    }));
+    const manualFeatured = withValidLinks(desertHorology.featured)
+        .map(item => ({ ...item, eyebrow: item.topic || 'Reel' }));
+    const featured = rankedFeatured.length ? rankedFeatured : manualFeatured;
+
+    // Series episodes: detected from captions when the API is configured, else the manual list.
+    const detectedEpisodes = (feed.series || []).map(post => ({
+        title: post.episodeTitle || post.title || series.name,
+        part: post.part,
+        url: post.permalink
+    }));
+    const episodes = detectedEpisodes.length ? detectedEpisodes : withValidLinks(series.episodes);
+
     res.render('desert-horology', {
         dhc: desertHorology,
         featured,
+        featuredSource: rankedFeatured.length ? 'api' : 'manual',
         series,
         episodes,
         feed,

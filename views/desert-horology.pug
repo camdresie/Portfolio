@@ -70,12 +70,12 @@ block content
 
     section.dhc-section#most-watched
       .dhc-section-head
-        span.dhc-eyebrow Start here
+        span.dhc-eyebrow= featuredSource === 'api' ? 'Ranked by views' : 'Start here'
         h2.dhc-h2 Most watched
       if featured && featured.length
         .dhc-reel-grid
           each item in featured
-            +reelCard(item, item.topic || 'Reel')
+            +reelCard(item, item.eyebrow || item.topic || 'Reel')
       else
         .dhc-empty
           p The featured videos are being lined up. In the meantime, everything is on Instagram.
@@ -93,7 +93,7 @@ block content
         ol.dhc-reel-grid.dhc-series
           each ep in episodes
             li
-              +reelCard(ep, ep.part ? `Part ${padPart(ep.part)}` : (series.name || 'Episode'))
+              +reelCard(ep, ep.part !== null && ep.part !== undefined ? `Part ${padPart(ep.part)}` : (series.name || 'Episode'))
 
     if feed && feed.configured
       section.dhc-section#latest

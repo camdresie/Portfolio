@@ -91,9 +91,9 @@ app.get('/project/:id', (req, res) => {
 - Graceful error handling with 500 error page on feed failure
 
 **Desert Horology Co. Page** (`/desert-horology`):
-- Content lives in `data/desert-horology.json`: intro copy, a `featured` list of reel links ("Most watched"), and a `series.episodes` list (The Quartz Crisis). Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
+- With `INSTAGRAM_ACCESS_TOKEN` set, `lib/instagram.js` drives the page from the Instagram API with Instagram Login: "Most watched" is the top videos ranked by the lifetime `views` insight, the series section is detected from captions containing `series.match` (ordered by "Part N" in the caption), and "Latest posts" is the newest media. One fetch every 6 hours; long-lived token refreshed weekly and persisted to `INSTAGRAM_TOKEN_FILE`. Setup: `docs/instagram-feed-setup.md`
+- Without the API (or without the insights permission), the page falls back to `data/desert-horology.json`: intro copy, a manual `featured` list of reel links, and `series.episodes`. Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
 - Reels render through Instagram's official embed (blockquote + `instagram.com/embed.js`), loaded lazily by `public/js/desert-horology.js`; a branded fallback card links out if the script never loads
-- Optional "Latest posts" grid is fetched server-side by `lib/instagram.js` from the Instagram API with Instagram Login, cached for 6 hours, with automatic long-lived token refresh persisted to `INSTAGRAM_TOKEN_FILE`. Hidden unless `INSTAGRAM_ACCESS_TOKEN` is set. Setup: `docs/instagram-feed-setup.md`
 - Brand tokens (Poppins, `#141210` background, `#F1EEE7` cream, `#C4653A` rust) are scoped to `.dhc-page` in `public/css/desert-horology.css`
 
 ## Data Schemas
@@ -162,7 +162,7 @@ app.get('/project/:id', (req, res) => {
 - `/public/js/tabs.js`: Tab system functionality
 - `/public/js/desert-horology.js`: Lazy Instagram embeds and post modal for the Desert Horology page
 
-**Environment variables** (see `.env.example`): Goodreads, Letterboxd, and Last.fm settings for the consuming page; `INSTAGRAM_ACCESS_TOKEN` (plus optional `INSTAGRAM_TOKEN_FILE`, `INSTAGRAM_FEED_LIMIT`, `INSTAGRAM_CACHE_TTL_MINUTES`) for the Desert Horology feed.
+**Environment variables** (see `.env.example`): Goodreads, Letterboxd, and Last.fm settings for the consuming page; `INSTAGRAM_ACCESS_TOKEN` (plus optional `INSTAGRAM_TOKEN_FILE`, `INSTAGRAM_FEED_LIMIT`, `INSTAGRAM_CACHE_TTL_MINUTES`, `INSTAGRAM_RANK_POOL`, `INSTAGRAM_TOP_LIMIT`) for the Desert Horology feed.
 
 ## Development Notes
 
