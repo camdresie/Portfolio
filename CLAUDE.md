@@ -48,6 +48,8 @@ app.get('/projects')             // Projects portfolio (dual tabbed interface)
 app.get('/timeline')             // Professional timeline
 app.get('/leadership')           // Leadership philosophy
 app.get('/blog')                 // Blog posts from Ghost RSS feed
+app.get('/consuming')            // Currently reading/watching from Goodreads + Letterboxd feeds
+app.get('/sitemap.xml')          // Sitemap generated from the routes and data.json at request time
 app.get('/about')                // Legacy route - 301 redirects to / (the bio page)
 
 // Intelligent project routing based on ID prefix
@@ -163,7 +165,7 @@ All pages extend `layout.pug` which provides:
 Each route passes custom `pageTitle` and `pageDescription` to templates for optimized meta tags:
 - Dynamic title tags for each page and project
 - Descriptive meta descriptions for search engines
-- Sitemap available at `/sitemap.xml`
+- Sitemap served at `/sitemap.xml`, generated in `app.js` from the routes and the project IDs in `data.json` (there is no static sitemap file to keep in sync; new projects appear automatically)
 - Robots.txt configured at `/robots.txt`
 
 ### Responsive Design

@@ -294,6 +294,102 @@ async function refreshConsumingCache() {
 app.set('view engine', 'pug');
 
 /*********************
+ * Sitemap. Generated from the routes below and the project IDs in data.json so it
+ * cannot drift from the pages that actually exist. Registered before the static
+ * middleware so a stray public/sitemap.xml could never shadow it.
+*********************/
+
+const SITE_URL = 'https://camdresie.com';
+
+// Entity-escape a value for use inside an XML element.
+function escapeXml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+}
+
+// YYYY-MM-DD of the newest of the given source files. The files on disk only
+// change on deploy, so this is effectively the date of the last deploy that
+// touched the page. Falls back to today if a file cannot be read.
+function lastModified(...files) {
+    const times = files.map(file => {
+        try {
+            return fs.statSync(path.join(__dirname, file)).mtime.getTime();
+        } catch (error) {
+            return null;
+        }
+    }).filter(time => time !== null);
+    const newest = times.length ? new Date(Math.max(...times)) : new Date();
+    return newest.toISOString().slice(0, 10);
+}
+
+function buildSitemap() {
+    const page = (urlPath, sources, changefreq, priority) => ({
+        loc: SITE_URL + urlPath,
+        lastmod: lastModified(...sources),
+        changefreq,
+        priority
+    });
+
+    // Every project detail page is served at /project/<id>; PM IDs carry the pm- prefix.
+    const pmProjectPages = data.pmProjects.categories
+        .flatMap(category => category.projects)
+        .map(project => page(`/project/${project.id}`, ['data.json', 'views/pm-project.pug'], 'monthly', '0.7'));
+    const engineeringProjectPages = data.projects
+        .map(project => page(`/project/${project.id}`, ['data.json', 'views/project.pug'], 'monthly', '0.6'));
+
+    // Feed-driven pages (/blog, /consuming) signal freshness through changefreq; /about is a
+    // redirect and /book/:id pages depend on a live Goodreads feed, so neither is listed.
+    const sections = [
+        { comment: 'Homepage / Bio', pages: [page('/', ['views/bio.pug'], 'monthly', '1.0')] },
+        { comment: 'Projects Overview', pages: [page('/projects', ['views/index.pug', 'data.json'], 'monthly', '0.9')] },
+        { comment: 'Career Timeline', pages: [page('/timeline', ['views/timeline.pug'], 'monthly', '0.8')] },
+        { comment: 'Leadership Philosophy', pages: [page('/leadership', ['views/leadership.pug'], 'monthly', '0.8')] },
+        { comment: 'Blog', pages: [page('/blog', ['views/blog.pug'], 'weekly', '0.7')] },
+        { comment: 'Currently Reading & Watching', pages: [page('/consuming', ['views/consuming.pug'], 'weekly', '0.6')] },
+        { comment: 'Product Management Project Pages', pages: pmProjectPages },
+        { comment: 'Engineering Project Pages', pages: engineeringProjectPages }
+    ];
+
+    const body = sections.map(section => {
+        const entries = section.pages.map(p => [
+            '  <url>',
+            `    <loc>${escapeXml(p.loc)}</loc>`,
+            `    <lastmod>${p.lastmod}</lastmod>`,
+            `    <changefreq>${p.changefreq}</changefreq>`,
+            `    <priority>${p.priority}</priority>`,
+            '  </url>'
+        ].join('\n'));
+        return `  <!-- ${section.comment} -->\n${entries.join('\n\n')}`;
+    }).join('\n\n');
+
+    return [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+        '        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+        '        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9',
+        '                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">',
+        '',
+        body,
+        '',
+        '</urlset>',
+        ''
+    ].join('\n');
+}
+
+// The sitemap only changes on deploy, so build it once per process and reuse it.
+let sitemapXml = null;
+app.get('/sitemap.xml', (req, res) => {
+    if (!sitemapXml) {
+        sitemapXml = buildSitemap();
+    }
+    res.type('application/xml').send(sitemapXml);
+});
+
+/*********************
  * Sets up static server to supply CSS files. 
 *********************/
 
