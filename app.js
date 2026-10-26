@@ -603,8 +603,10 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     res.locals.error = err;
+    // Set the status before rendering: once render() has sent the response,
+    // a later status() call is ignored and the page goes out as a 200.
+    res.status(err.status || 500);
     res.render('error');
-    res.status(err.status);
 });
 
 /*********************
