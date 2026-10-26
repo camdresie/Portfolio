@@ -48,7 +48,7 @@ app.get('/projects')             // Projects portfolio (dual tabbed interface)
 app.get('/timeline')             // Professional timeline
 app.get('/leadership')           // Leadership philosophy
 app.get('/blog')                 // Blog posts from Ghost RSS feed
-app.get('/about')                // Legacy route - 301 redirects to /bio
+app.get('/about')                // Legacy route - 301 redirects to / (the bio page)
 
 // Intelligent project routing based on ID prefix
 app.get('/project/:id', (req, res) => {

@@ -456,9 +456,10 @@ app.get('/book/:id', async (req, res) => {
     }
 });
 
-// Keep legacy /about route for backwards compatibility, redirect to /bio
+// Keep legacy /about route for backwards compatibility. The bio page is served
+// at / (there is no /bio route), so send visitors there.
 app.get('/about', (req, res) => {
-    res.redirect(301, '/bio');
+    res.redirect(301, '/');
 })
 
 app.get('/project/:id', (req, res) => {
