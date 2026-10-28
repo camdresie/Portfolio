@@ -344,6 +344,17 @@
   margin: 8px 0 0;
 }
 
+.dhc-reel[hidden],
+.dhc-series > li[hidden] {
+  display: none !important;
+}
+
+.dhc-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
 /* --- Latest posts (feed) -------------------------------------------------- */
 
 .dhc-feed-grid {

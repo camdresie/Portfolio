@@ -11,6 +11,10 @@ block head
 block content
   - const profileUrl = dhc.profileUrl || `https://www.instagram.com/${dhc.handle}/`
   - const padPart = (n) => String(n).padStart(2, '0')
+  //- Cards beyond these counts start hidden; a "Show more" button reveals them a batch at a time
+  //- so a page with a hundred reels stays quick to load.
+  - const INITIAL_FEATURED = 9
+  - const INITIAL_EPISODES = 6
 
   //- Desert Horology clock-mountain mark (fixed brand geometry from the reel-cover template)
   mixin dhcMark(cls)
@@ -37,8 +41,8 @@ block content
   //- One reel card. The embed container holds a branded fallback card; desert-horology.js swaps
   //- in Instagram's official player when the card scrolls into view. If Instagram's script never
   //- loads, the fallback card stays and links to the post.
-  mixin reelCard(item, eyebrow)
-    figure.dhc-reel
+  mixin reelCard(item, eyebrow, hidden)
+    figure.dhc-reel(hidden=hidden ? true : null)
       .dhc-embed(data-permalink=item.url data-captioned=item.captioned ? 'true' : null)
         a.dhc-fallback(href=item.url target='_blank' rel='noopener')
           +dhcMark('dhc-fallback-mark')
@@ -72,12 +76,15 @@ block content
 
     section.dhc-section#most-watched
       .dhc-section-head
-        span.dhc-eyebrow= featuredSource === 'api' ? 'Ranked by views' : 'Start here'
+        span.dhc-eyebrow= featuredSource === 'api' ? 'Ranked by views' : 'Most watched first'
         h2.dhc-h2 Most watched
       if featured && featured.length
-        .dhc-reel-grid
-          each item in featured
-            +reelCard(item, item.eyebrow || item.topic || 'Reel')
+        .dhc-reel-grid#most-watched-grid
+          each item, i in featured
+            +reelCard(item, item.eyebrow || item.topic || 'Reel', i >= INITIAL_FEATURED)
+        if featured.length > INITIAL_FEATURED
+          .dhc-more
+            button.dhc-button.dhc-button--ghost(type='button' data-dhc-more='most-watched-grid' data-dhc-batch=INITIAL_FEATURED) Show more (#{featured.length - INITIAL_FEATURED} left)
       else
         .dhc-empty
           p The featured videos are being lined up. In the meantime, everything is on Instagram.
@@ -92,10 +99,13 @@ block content
           h2.dhc-h2= series.name
           if series.description
             p.dhc-section-desc= series.description
-        ol.dhc-reel-grid.dhc-series
-          each ep in episodes
-            li
+        ol.dhc-reel-grid.dhc-series#series-grid
+          each ep, i in episodes
+            li(hidden=i >= INITIAL_EPISODES ? true : null)
               +reelCard(ep, ep.part !== null && ep.part !== undefined ? `Part ${padPart(ep.part)}` : (series.name || 'Episode'))
+        if episodes.length > INITIAL_EPISODES
+          .dhc-more
+            button.dhc-button.dhc-button--ghost(type='button' data-dhc-more='series-grid' data-dhc-batch=INITIAL_EPISODES) Show more (#{episodes.length - INITIAL_EPISODES} left)
 
     if feed && feed.configured
       section.dhc-section#latest
