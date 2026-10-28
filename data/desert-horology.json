@@ -7,8 +7,54 @@
     "Desert Horology Co. is my watch side of the internet. I collect, research, and make short videos about mechanical watches: the engineering inside them, the history behind them, and how to buy well without overpaying.",
     "Start with the most-watched videos below, then follow along on Instagram for the newest ones."
   ],
-  "_howToAddAReel": "With INSTAGRAM_ACCESS_TOKEN configured, the Most watched section is ranked automatically by lifetime views and this list is ignored. Without the API (or if the token lacks the insights permission) the page shows the reels listed here instead: paste the link from Share > Copy link into url. Entries without a valid instagram.com/reel/... or /p/... link are skipped, so the page never shows a broken card.",
-  "featured": [],
+  "_howToAddAReel": "Easiest: run scripts/instagram-reels-snippet.js in your browser on your profile's Reels tab, then `pbpaste | node scripts/import-reels.js` (see docs/collect-reels.md). That fills featured[] with the top reels by views and series.episodes from captions. You can also add entries by hand: paste the link from Share > Copy link into url; topic is the small label above the title. Entries without a valid instagram.com/reel/... or /p/... link are skipped. With INSTAGRAM_ACCESS_TOKEN configured, the API ranks videos live and this list is ignored.",
+  "featured": [
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DehAq8ypnXT/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DdG9iUWJZvN/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DcvxaJWhpZl/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DfCfADJObvg/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/De1nVjTBiTv/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/Deov2Y-BOA0/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/Dc077FXhqKw/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DctOfrluUKk/"
+    },
+    {
+      "title": "",
+      "topic": "Reel",
+      "url": "https://www.instagram.com/p/DcQ2nWgTGug/"
+    }
+  ],
   "series": {
     "name": "The Quartz Crisis",
     "eyebrow": "Series",

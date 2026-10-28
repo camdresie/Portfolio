@@ -458,22 +458,12 @@ app.get('/book/:id', async (req, res) => {
     }
 });
 
-// Desert Horology Co. route - curated Instagram reels plus an optional live feed
-const INSTAGRAM_POST_RE = /^https?:\/\/(?:www\.)?instagram\.com\/(p|reel|reels|tv)\/([A-Za-z0-9_-]+)\/?/i;
-
-// Accepts the links Instagram's share sheet produces (with ?igsh=... etc.) and returns the
-// canonical permalink Instagram's embed script expects, or null if the link is not a post.
-function normalizeInstagramPostUrl(url) {
-    const match = typeof url === 'string' ? url.trim().match(INSTAGRAM_POST_RE) : null;
-    if (!match) return null;
-    const kind = match[1].toLowerCase() === 'reels' ? 'reel' : match[1].toLowerCase();
-    return `https://www.instagram.com/${kind}/${match[2]}/`;
-}
-
+// Desert Horology Co. route - Instagram reels, from the API when configured, else from
+// data/desert-horology.json (filled by hand or by scripts/import-reels.js)
 app.get('/desert-horology', async (req, res) => {
     const withValidLinks = (items) => (items || [])
         .map(item => {
-            const url = normalizeInstagramPostUrl(item && item.url);
+            const url = instagram.normalizePostUrl(item && item.url);
             return url ? { ...item, url } : null;
         })
         .filter(Boolean);

@@ -43,11 +43,13 @@ block content
         a.dhc-fallback(href=item.url target='_blank' rel='noopener')
           +dhcMark('dhc-fallback-mark')
           span.dhc-fallback-eyebrow= eyebrow
-          span.dhc-fallback-title= item.title
+          if item.title
+            span.dhc-fallback-title= item.title
           span.dhc-fallback-cta Watch on Instagram
       figcaption.dhc-reel-caption
         span.dhc-eyebrow= eyebrow
-        h3.dhc-reel-title= item.title
+        if item.title
+          h3.dhc-reel-title= item.title
         if item.blurb
           p.dhc-reel-blurb= item.blurb
 

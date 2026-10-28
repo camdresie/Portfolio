@@ -93,6 +93,7 @@ app.get('/project/:id', (req, res) => {
 **Desert Horology Co. Page** (`/desert-horology`):
 - With `INSTAGRAM_ACCESS_TOKEN` set, `lib/instagram.js` drives the page from the Instagram API with Instagram Login: "Most watched" is the top videos ranked by the lifetime `views` insight, the series section is detected from captions containing `series.match` (ordered by "Part N" in the caption), and "Latest posts" is the newest media. One fetch every 6 hours; long-lived token refreshed weekly and persisted to `INSTAGRAM_TOKEN_FILE`. Setup: `docs/instagram-feed-setup.md`
 - Without the API (or without the insights permission), the page falls back to `data/desert-horology.json`: intro copy, a manual `featured` list of reel links, and `series.episodes`. Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
+- No-API refresh: `scripts/instagram-reels-snippet.js` (pasted into the browser console on the profile's Reels tab) collects links, view counts, and captions; `scripts/import-reels.js` writes them into the data file, ranking by views and detecting series episodes. See `docs/collect-reels.md`
 - Reels render through Instagram's official embed (blockquote + `instagram.com/embed.js`), loaded lazily by `public/js/desert-horology.js`; a branded fallback card links out if the script never loads
 - Brand tokens (Poppins, `#141210` background, `#F1EEE7` cream, `#C4653A` rust) are scoped to `.dhc-page` in `public/css/desert-horology.css`
 
