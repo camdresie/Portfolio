@@ -91,7 +91,7 @@ app.get('/project/:id', (req, res) => {
 - Graceful error handling with 500 error page on feed failure
 
 **Desert Horology Co. Page** (`/desert-horology`):
-- With `INSTAGRAM_ACCESS_TOKEN` set, `lib/instagram.js` drives the page from the Instagram API with Instagram Login: "Most watched" is the top videos ranked by the lifetime `views` insight, the series section is detected from captions containing `series.match` (ordered by "Part N" in the caption), and "Latest posts" is the newest media. One fetch every 6 hours; long-lived token refreshed weekly and persisted to `INSTAGRAM_TOKEN_FILE`. Setup: `docs/instagram-feed-setup.md`
+- With `INSTAGRAM_ACCESS_TOKEN` set, `lib/instagram.js` drives the page from the Instagram API with Instagram Login: "Most watched" is the top videos ranked by the lifetime `views` insight, the series section is detected from captions containing `series.match` (ordered by "Part N" in the caption), and "Latest posts" is the newest media. One fetch every 6 hours; long-lived token refreshed weekly and persisted to `INSTAGRAM_TOKEN_FILE` (on Heroku that file does not survive restarts, so the token in Config Vars must be regenerated about every 60 days unless the app is taught to update its own config var; see the setup doc). Setup: `docs/instagram-feed-setup.md`
 - Without the API (or without the insights permission), the page falls back to `data/desert-horology.json`: intro copy, a manual `featured` list of reel links, and `series.episodes`. Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
 - No-API refresh: `scripts/instagram-reels-snippet.js` (pasted into the browser console on the profile's Reels tab) collects links, view counts, and captions; `scripts/import-reels.js` writes them into the data file, ranking by views and detecting series episodes. See `docs/collect-reels.md`
 - Reels render through Instagram's official embed (blockquote + `instagram.com/embed.js`), loaded lazily by `public/js/desert-horology.js`; a branded fallback card links out if the script never loads
@@ -197,10 +197,8 @@ The application supports multiple deployment platforms:
 - Uses `process.env.PORT` with fallback to 5001 for local development
 - Static assets served via Express static middleware
 - No build process required - files served directly
-- Azure Web App deployment configured via GitHub Actions (`.github/workflows/master_camportfolio.yml`)
-  - Triggers on push to `master` branch
-  - Node.js 12.x runtime
-  - Automatic CI/CD pipeline
+- Hosted on Heroku (`camportfolio.herokuapp.com`, served at camdresie.com). Deploys come from Heroku's GitHub integration on the `master` branch; there is no GitHub Actions pipeline (an old Azure workflow was removed in October 2026). The dyno runs `npm start`
+  - Heroku's filesystem is ephemeral: anything the app writes to disk is lost on each dyno restart (at least daily) and each deploy. Settings and secrets live in Config Vars (Settings > Config Vars), never in files
 
 ## Portfolio Content Strategy
 

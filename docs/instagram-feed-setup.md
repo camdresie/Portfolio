@@ -23,15 +23,21 @@ Until the token is configured, the page shows the manual lists in `data/desert-h
 5. Click **Generate token** next to the account, confirm, and copy the token. It is long-lived (60 days).
 6. Put the token in the environment:
    - Locally: add `INSTAGRAM_ACCESS_TOKEN=<token>` to `.env`, run `npm start`, and open `http://localhost:5001/desert-horology`.
-   - Production: Azure Portal > the `camportfolio` App Service > **Environment variables** (older portals call it **Configuration > Application settings**) > **Add** `INSTAGRAM_ACCESS_TOKEN`, then **Apply**. The app restarts.
+   - Production: Heroku dashboard > the `camportfolio` app > **Settings** > **Config Vars** > add `INSTAGRAM_ACCESS_TOKEN`. The dyno restarts on its own. (Or `heroku config:set INSTAGRAM_ACCESS_TOKEN=<token> -a camportfolio` from the CLI.)
 7. Reload the page. "Most watched" now shows view counts in each card's label, the series section appears if any caption contains the series phrase, and "Latest posts" fills in. The server log prints `Instagram access token refreshed` the first time the refresh succeeds (Meta only refreshes tokens that are at least 24 hours old, so that line may wait until the next day).
 
 ## How the refresh works
 
 - `lib/instagram.js` fetches up to 60 recent posts (`INSTAGRAM_RANK_POOL`), asks for the `views` insight on each video, and caches everything for 6 hours (`INSTAGRAM_CACHE_TTL_MINUTES`). That is roughly 60 API calls four times a day, far below Meta's limits.
 - On every fetch, and once a day in the background, it checks the stored token's age. Past 7 days it calls `refresh_access_token`, which returns a fresh 60-day token.
-- The refreshed token is written to `INSTAGRAM_TOKEN_FILE`. The default is `data/instagram-token.json` locally (git-ignored) and `$HOME/data/instagram-token.json` on Azure App Service, where `$HOME` is persistent storage that survives restarts and deployments.
+- The refreshed token is written to `INSTAGRAM_TOKEN_FILE` (default `data/instagram-token.json`, git-ignored).
 - Pasting a new token into `INSTAGRAM_ACCESS_TOKEN` replaces the stored one automatically.
+
+## The Heroku catch
+
+Heroku's filesystem is ephemeral: the token file is wiped on every dyno restart (Heroku restarts dynos at least once a day) and on every deploy. After a restart the app falls back to the token in `INSTAGRAM_ACCESS_TOKEN` and refreshes it again, which works for as long as that original token is still valid. Meta expires it 60 days after it was issued, so on Heroku the practical rule is: **regenerate the token (steps 4 and 5) and update the config var about every 55 days.** When it lapses, the page simply shows the imported lists from `data/desert-horology.json` and the server log says the token is invalid or expired.
+
+If you want the API route to be truly hands-off on Heroku, the app can update its own config var after each refresh through the Heroku Platform API. That needs two more config vars (`HEROKU_API_KEY`, `HEROKU_APP_NAME`) and one small addition to `lib/instagram.js`. It is not built yet; ask for it if you go the API route.
 
 ## Tuning
 
