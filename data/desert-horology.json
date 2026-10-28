@@ -10,79 +10,49 @@
   "_howToAddAReel": "Easiest: run scripts/instagram-reels-snippet.js in your browser on your profile's Reels tab, then `pbpaste | node scripts/import-reels.js` (see docs/collect-reels.md). That fills featured[] with the top reels by views and series.episodes from captions. You can also add entries by hand: paste the link from Share > Copy link into url; topic is the small label above the title. Entries without a valid instagram.com/reel/... or /p/... link are skipped. With INSTAGRAM_ACCESS_TOKEN configured, the API ranks videos live and this list is ignored.",
   "featured": [
     {
-      "title": "",
+      "title": "One clock that started running 90 years ago still hasn’t stopped, and it’s never been manually…",
+      "topic": "864K views",
+      "url": "https://www.instagram.com/reel/DdG9iUWJZvN/"
+    },
+    {
+      "title": "This is the only watch that comes with its own built-in rescue team",
       "topic": "353K views",
       "url": "https://www.instagram.com/reel/DehAq8ypnXT/"
     },
     {
-      "title": "",
+      "title": "Everyone else built a door for the helium",
       "topic": "40K views",
       "url": "https://www.instagram.com/reel/De1nVjTBiTv/"
     },
     {
-      "title": "",
+      "title": "The three most famous sports watches, fierce rivals no less, all share the same beating heart",
+      "topic": "39K views",
+      "url": "https://www.instagram.com/reel/DcvxaJWhpZl/"
+    },
+    {
+      "title": "The smallest watch movement ever made is about the size of a match stick",
+      "topic": "29K views",
+      "url": "https://www.instagram.com/reel/Dc077FXhqKw/"
+    },
+    {
+      "title": "The threshold to start dipping your toe into luxury timepieces starts just below $5k per piece",
       "topic": "19K views",
       "url": "https://www.instagram.com/reel/Deov2Y-BOA0/"
     },
     {
-      "title": "",
-      "topic": "7.4K views",
-      "url": "https://www.instagram.com/reel/Ddgr240h8y6/"
+      "title": "Another awesome microbrand, and certainly one of the most unique, @xericwatches",
+      "topic": "15K views",
+      "url": "https://www.instagram.com/reel/DctOfrluUKk/"
     },
     {
-      "title": "",
-      "topic": "6.3K views",
-      "url": "https://www.instagram.com/reel/Det41X2v9Fw/"
+      "title": "There’s a wide world of watches once you start exploring beyond major brands and get into…",
+      "topic": "11K views",
+      "url": "https://www.instagram.com/reel/DcQ2nWgTGug/"
     },
     {
-      "title": "",
-      "topic": "6.2K views",
-      "url": "https://www.instagram.com/reel/DeExYZsBAvU/"
-    },
-    {
-      "title": "",
-      "topic": "6.1K views",
-      "url": "https://www.instagram.com/reel/DdtftbYuEjz/"
-    },
-    {
-      "title": "",
-      "topic": "5.9K views",
-      "url": "https://www.instagram.com/reel/Dd6hqVsM-SD/"
-    },
-    {
-      "title": "",
-      "topic": "5.6K views",
-      "url": "https://www.instagram.com/reel/DdyqfJmM8GN/"
-    },
-    {
-      "title": "",
-      "topic": "4.8K views",
+      "title": "Before anyone could build a precise watch, someone had to measure a micron",
+      "topic": "4.9K views",
       "url": "https://www.instagram.com/reel/DfCfADJObvg/"
-    },
-    {
-      "title": "",
-      "topic": "Cam's pick",
-      "url": "https://www.instagram.com/p/DdG9iUWJZvN/"
-    },
-    {
-      "title": "",
-      "topic": "Cam's pick",
-      "url": "https://www.instagram.com/p/DcvxaJWhpZl/"
-    },
-    {
-      "title": "",
-      "topic": "Cam's pick",
-      "url": "https://www.instagram.com/p/Dc077FXhqKw/"
-    },
-    {
-      "title": "",
-      "topic": "Cam's pick",
-      "url": "https://www.instagram.com/p/DctOfrluUKk/"
-    },
-    {
-      "title": "",
-      "topic": "Cam's pick",
-      "url": "https://www.instagram.com/p/DcQ2nWgTGug/"
     }
   ],
   "series": {
@@ -90,7 +60,32 @@
     "eyebrow": "Series",
     "description": "A multi-part series on the 1970s and 80s upheaval that nearly ended Swiss mechanical watchmaking, told one episode at a time.",
     "_howToAddAnEpisode": "With the API configured, episodes are detected from captions that contain the match phrase and ordered by the part number in the caption (e.g. \"Part 03\"). Without the API, list them here as { \"part\": 1, \"title\": \"The Beginning\", \"url\": \"https://www.instagram.com/reel/...\" }. The section stays hidden until at least one episode exists.",
-    "episodes": [],
+    "episodes": [
+      {
+        "part": 1,
+        "title": "The Beginning",
+        "url": "https://www.instagram.com/reel/DdMIVjmPGa9/",
+        "keepTitle": true
+      },
+      {
+        "part": 4,
+        "title": "Établissage",
+        "url": "https://www.instagram.com/reel/DdTz1-bxPkx/",
+        "keepTitle": true
+      },
+      {
+        "part": 7,
+        "title": "The Accutron",
+        "url": "https://www.instagram.com/reel/DdbeL_OJgeA/",
+        "keepTitle": true
+      },
+      {
+        "part": 9,
+        "title": "Casio and the Casiotron",
+        "url": "https://www.instagram.com/reel/Ddgr240h8y6/",
+        "keepTitle": true
+      }
+    ],
     "match": "Quartz Crisis"
   }
 }

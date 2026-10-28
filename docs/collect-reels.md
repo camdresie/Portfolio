@@ -41,7 +41,7 @@ Paste the JSON into the Claude session and the import runs there.
 
 ## Notes
 
-- Titles come from the first sentence of each caption. Edit them in the data file if you want something shorter.
+- Titles come from the first usable sentence of each caption: comment-bait questions ("Which is your favorite? 👇") and bare part lines ("QUARTZ CRISIS PART 9 of 30.") are skipped. To hand-edit a title, change it in `data/desert-horology.json` and add `"keepTitle": true` to that entry; re-imports then leave it alone.
 - The console script reads the grid for links and counts, then tries three ways to get captions while logged in: the media-info endpoint Instagram's own web app uses, the older post JSON view, and the reel page's meta tags. It logs which one worked. Instagram changes its site often; if a run returns no captions, the links and counts still import fine. If it returns no links at all, check that the URL ends in `/reels/` and that you are logged in.
 - The grid only loads as you scroll. The script keeps scrolling until five rounds in a row add nothing; if an old reel is missing from the output, scroll to the very bottom of the Reels tab by hand first, then run it.
 - When the API token is configured (see `instagram-feed-setup.md`), the page ranks videos live and ignores the imported list, so the two approaches do not conflict.

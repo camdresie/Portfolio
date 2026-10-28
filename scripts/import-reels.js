@@ -16,6 +16,9 @@
  * input entry marked  "pinned": true  that did not make the cut. Series episodes are detected from
  * captions that contain the series phrase and ordered by the "Part N" in the caption. Input entries
  * may also carry  "title"  and  "topic"  to override what is derived from the caption.
+ *
+ * Hand-edited titles survive re-imports: add  "keepTitle": true  to an entry in the data file and
+ * its title is kept whenever that post is imported again (matched by post code).
  * Everything else in the data file (intro copy, tagline, handle) is left as it is.
  */
 const fs = require('fs');
@@ -117,14 +120,26 @@ function main() {
     const withViews = posts.filter(post => post.views !== null).sort(byViewsDesc);
     const topRanked = (withViews.length ? withViews : posts).slice(0, options.top);
     const pinned = posts.filter(post => post.pinned && !topRanked.includes(post)).sort(byViewsDesc);
+    // Titles the owner edited by hand (marked keepTitle) win over anything derived from captions.
+    const keptTitles = new Map();
+    for (const list of [data.featured || [], (data.series && data.series.episodes) || []]) {
+        for (const entry of list) {
+            const url = instagram.normalizePostUrl(entry && entry.url);
+            if (url && entry.keepTitle === true && entry.title) keptTitles.set(url.split('/')[4], entry.title);
+        }
+    }
+    const withKeptTitle = (post, title) => keptTitles.has(post.code)
+        ? { title: keptTitles.get(post.code), keepTitle: true }
+        : { title };
+
     const featured = [...topRanked, ...pinned].map(post => ({
-        title: post.title,
+        ...withKeptTitle(post, post.title),
         topic: post.topic || (post.views !== null ? `${formatViews(post.views)} views` : (post.pinned ? options.pinLabel : 'Reel')),
         url: post.permalink
     }));
     const episodes = detectSeries(posts, seriesMatch).map(post => ({
         part: post.part,
-        title: post.episodeTitle,
+        ...withKeptTitle(post, post.episodeTitle),
         url: post.permalink
     }));
 
