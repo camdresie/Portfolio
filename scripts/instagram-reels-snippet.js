@@ -17,10 +17,13 @@
  * Re-run it whenever you want the page to pick up new reels or fresh view counts.
  */
 (async () => {
-  const MAX_SCROLLS = 80;      // stops early once the grid stops growing
-  const SCROLL_WAIT_MS = 1500;
-  const ENRICH_TOP = 24;       // fetch caption + exact count for this many of the most-viewed reels
-  const ENRICH_WAIT_MS = 700;  // polite pause between those fetches
+  const MAX_SCROLLS = 150;     // stops early once the grid stops growing
+  const SCROLL_WAIT_MS = 2000;
+  const STABLE_ROUNDS = 5;     // this many scrolls with no new reels = end of the grid
+  const ENRICH_TOP = 30;       // fetch caption + exact count for this many of the most-viewed reels
+  const ENRICH_WAIT_MS = 600;  // polite pause between those fetches
+  const IG_APP_ID = '936619743392459';
+  const SHORTCODE_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const log = (...args) => console.log('[reels]', ...args);
@@ -57,16 +60,18 @@
     return found;
   }
 
-  // Caption and exact play count from Instagram's own JSON for a post (works while logged in).
-  async function fetchDetails(code) {
-    const res = await fetch(`/reel/${code}/?__a=1&__d=dis`, {
-      credentials: 'include',
-      headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
-    });
-    const type = res.headers.get('content-type') || '';
-    if (!res.ok || type.indexOf('json') === -1) return null;
-    const data = await res.json();
-    const item = (data.items && data.items[0]) || (data.graphql && data.graphql.shortcode_media) || null;
+  // A post's shortcode is its numeric media id in base64 (Instagram's own alphabet).
+  function mediaIdFromCode(code) {
+    let id = 0n;
+    for (const ch of code) {
+      const v = SHORTCODE_ALPHABET.indexOf(ch);
+      if (v < 0) return null;
+      id = id * 64n + BigInt(v);
+    }
+    return id.toString();
+  }
+
+  function detailsFromItem(item) {
     if (!item) return null;
     let caption = '';
     if (item.caption && typeof item.caption.text === 'string') caption = item.caption.text;
@@ -79,6 +84,75 @@
     return { caption, views: typeof views === 'number' ? views : null, takenAt };
   }
 
+  async function fetchJSON(url, extraHeaders) {
+    const csrf = (document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/) || [])[1] || '';
+    const res = await fetch(url, {
+      credentials: 'include',
+      headers: Object.assign({
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-IG-App-ID': IG_APP_ID,
+        'X-ASBD-ID': '129477',
+        'X-CSRFToken': csrf
+      }, extraHeaders || {})
+    });
+    const type = res.headers.get('content-type') || '';
+    if (!res.ok || type.indexOf('json') === -1) return null;
+    return res.json();
+  }
+
+  // Strategy 1: the media info endpoint Instagram's own web app uses while you are logged in.
+  async function detailsFromMediaInfo(code) {
+    const id = mediaIdFromCode(code);
+    if (!id) return null;
+    const data = await fetchJSON(`/api/v1/media/${id}/info/`);
+    return data ? detailsFromItem(data.items && data.items[0]) : null;
+  }
+
+  // Strategy 2: the older post JSON view.
+  async function detailsFromLegacyJSON(code) {
+    const data = await fetchJSON(`/reel/${code}/?__a=1&__d=dis`);
+    if (!data) return null;
+    return detailsFromItem((data.items && data.items[0]) || (data.graphql && data.graphql.shortcode_media) || null);
+  }
+
+  // Strategy 3: the reel's own page; its meta tags carry the caption.
+  async function detailsFromPage(code) {
+    const res = await fetch(`/reel/${code}/`, { credentials: 'include' });
+    if (!res.ok) return null;
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const pick = (selector) => { const el = doc.querySelector(selector); return el ? (el.getAttribute('content') || '') : ''; };
+    const sources = [pick('meta[property="og:title"]'), pick('meta[name="description"]'), pick('meta[property="og:description"]')];
+    for (const text of sources) {
+      const m = text.match(/:\s*[\u201c"](.*)[\u201d"]\s*$/s);
+      if (m && m[1].trim()) return { caption: m[1].trim(), views: null, takenAt: null };
+    }
+    return null;
+  }
+
+  const strategies = [
+    ['media info API', detailsFromMediaInfo],
+    ['post JSON', detailsFromLegacyJSON],
+    ['page meta tags', detailsFromPage]
+  ];
+  let workingStrategy = null;
+
+  async function fetchDetails(code) {
+    const order = workingStrategy ? [workingStrategy].concat(strategies.filter((s) => s !== workingStrategy)) : strategies;
+    for (const strategy of order) {
+      try {
+        const details = await strategy[1](code);
+        if (details && (details.caption || details.views !== null)) {
+          if (workingStrategy !== strategy) { workingStrategy = strategy; log(`captions via ${strategy[0]}`); }
+          return details;
+        }
+      } catch (error) {
+        // try the next strategy
+      }
+    }
+    return null;
+  }
+
   // 1. Scroll until the grid stops growing.
   const found = new Map();
   let stable = 0;
@@ -89,7 +163,7 @@
     const after = collect(found).size;
     log(`loaded ${after} reels`);
     stable = after === before ? stable + 1 : 0;
-    if (stable >= 3) break;
+    if (stable >= STABLE_ROUNDS) break;
   }
   window.scrollTo(0, 0);
 
@@ -118,7 +192,7 @@
     await sleep(ENRICH_WAIT_MS);
   }
   reels.sort((a, b) => (b.views || 0) - (a.views || 0));
-  log(`captions fetched for ${enriched} of ${Math.min(ENRICH_TOP, reels.length)} top reels`);
+  log(`captions fetched for ${enriched} of ${Math.min(ENRICH_TOP, reels.length)} top reels${enriched ? '' : ' (titles will be blank; links and counts still import fine)'}`);
 
   // 4. Output.
   const output = reels.map((reel) => ({

@@ -9,9 +9,13 @@
  *                                                           phrase that marks a series episode
  *                                                           (default: series.match in the data file)
  *   node scripts/import-reels.js reels.json --dry-run      print what would change, write nothing
+ *   node scripts/import-reels.js reels.json --pin-label "Cam's pick"
+ *                                                           label for pinned reels without a view count
  *
- * "Most watched" becomes the top reels by views, each labelled with its count. Series episodes are
- * detected from captions that contain the series phrase and ordered by the "Part N" in the caption.
+ * "Most watched" becomes the top reels by views, each labelled with its count, followed by any
+ * input entry marked  "pinned": true  that did not make the cut. Series episodes are detected from
+ * captions that contain the series phrase and ordered by the "Part N" in the caption. Input entries
+ * may also carry  "title"  and  "topic"  to override what is derived from the caption.
  * Everything else in the data file (intro copy, tagline, handle) is left as it is.
  */
 const fs = require('fs');
@@ -20,12 +24,13 @@ const instagram = require('../lib/instagram');
 const { captionTitle, detectSeries, formatViews } = instagram._internal;
 
 function parseArgs(argv) {
-    const options = { top: 6, dryRun: false, series: null, data: path.join(__dirname, '..', 'data', 'desert-horology.json'), input: null };
+    const options = { top: 6, dryRun: false, series: null, pinLabel: "Cam's pick", data: path.join(__dirname, '..', 'data', 'desert-horology.json'), input: null };
     for (let i = 0; i < argv.length; i++) {
         const arg = argv[i];
         if (arg === '--dry-run') options.dryRun = true;
         else if (arg === '--top') options.top = parseInt(argv[++i], 10);
         else if (arg === '--series') options.series = argv[++i];
+        else if (arg === '--pin-label') options.pinLabel = argv[++i];
         else if (arg === '--data') options.data = path.resolve(argv[++i]);
         else if (arg === '--help' || arg === '-h') { console.log(fs.readFileSync(__filename, 'utf8').split('*/')[0].replace(/^\/\*\s?/, '')); process.exit(0); }
         else if (arg.startsWith('--')) throw new Error(`Unknown option ${arg}`);
@@ -62,12 +67,22 @@ function toPost(entry) {
     }
     return {
         permalink: url,
+        code: url.split('/')[4],
         captionRaw,
         captionText: captionRaw.replace(/\s+/g, ' ').trim(),
         title: (typeof entry.title === 'string' && entry.title.trim()) || captionTitle(captionRaw),
+        topic: typeof entry.topic === 'string' && entry.topic.trim() ? entry.topic.trim() : null,
+        pinned: entry.pinned === true,
         views: Number.isFinite(views) && views >= 0 ? views : null,
         timestamp
     };
+}
+
+function byViewsDesc(a, b) {
+    if (a.views === null && b.views === null) return 0;
+    if (a.views === null) return 1;
+    if (b.views === null) return -1;
+    return b.views - a.views;
 }
 
 function main() {
@@ -75,29 +90,36 @@ function main() {
     const data = JSON.parse(fs.readFileSync(options.data, 'utf8'));
     const seriesMatch = options.series || (data.series && (data.series.match || data.series.name)) || '';
 
-    const byUrl = new Map();
+    // Merge entries that point at the same post (a /p/ link and a /reel/ link share the code).
+    const byCode = new Map();
     for (const entry of readInput(options.input)) {
         const post = toPost(entry);
         if (!post) continue;
-        const existing = byUrl.get(post.permalink);
-        if (!existing || (existing.views === null && post.views !== null) || (!existing.captionRaw && post.captionRaw)) {
-            byUrl.set(post.permalink, { ...existing, ...post });
-        }
+        const existing = byCode.get(post.code);
+        if (!existing) { byCode.set(post.code, post); continue; }
+        byCode.set(post.code, {
+            ...existing,
+            permalink: existing.permalink.includes('/reel/') ? existing.permalink : post.permalink,
+            captionRaw: existing.captionRaw || post.captionRaw,
+            captionText: existing.captionText || post.captionText,
+            title: existing.captionRaw ? existing.title : (post.title || existing.title),
+            topic: existing.topic || post.topic,
+            pinned: existing.pinned || post.pinned,
+            views: existing.views !== null ? existing.views : post.views,
+            timestamp: existing.timestamp || post.timestamp
+        });
     }
-    const posts = Array.from(byUrl.values());
+    const posts = Array.from(byCode.values());
     if (!posts.length) throw new Error('No valid instagram.com/reel/... links in the input.');
 
-    const ranked = posts
-        .slice()
-        .sort((a, b) => {
-            if (a.views === null && b.views === null) return 0;
-            if (a.views === null) return 1;
-            if (b.views === null) return -1;
-            return b.views - a.views;
-        });
-    const featured = ranked.slice(0, options.top).map(post => ({
+    // Top N by views, then pinned entries that did not make the cut. With no view counts at all
+    // (links pasted by hand), the input order is kept.
+    const withViews = posts.filter(post => post.views !== null).sort(byViewsDesc);
+    const topRanked = (withViews.length ? withViews : posts).slice(0, options.top);
+    const pinned = posts.filter(post => post.pinned && !topRanked.includes(post)).sort(byViewsDesc);
+    const featured = [...topRanked, ...pinned].map(post => ({
         title: post.title,
-        topic: post.views !== null ? `${formatViews(post.views)} views` : 'Reel',
+        topic: post.topic || (post.views !== null ? `${formatViews(post.views)} views` : (post.pinned ? options.pinLabel : 'Reel')),
         url: post.permalink
     }));
     const episodes = detectSeries(posts, seriesMatch).map(post => ({
@@ -107,7 +129,7 @@ function main() {
     }));
 
     console.log(`Read ${posts.length} reels (${posts.filter(p => p.views !== null).length} with view counts, ${posts.filter(p => p.captionRaw).length} with captions).`);
-    console.log(`\nMost watched (top ${options.top}):`);
+    console.log(`\nMost watched (top ${options.top}${pinned.length ? ` + ${pinned.length} pinned` : ''}):`);
     featured.forEach((item, i) => console.log(`  ${i + 1}. ${item.topic.padEnd(12)} ${item.title || '(no caption)'}\n     ${item.url}`));
     console.log(`\nSeries "${seriesMatch}": ${episodes.length} episode(s)`);
     episodes.forEach(ep => console.log(`  Part ${ep.part === null ? '??' : String(ep.part).padStart(2, '0')}  ${ep.title}\n     ${ep.url}`));

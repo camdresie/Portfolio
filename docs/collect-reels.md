@@ -31,6 +31,7 @@ The command prints what it found and writes `data/desert-horology.json`:
 - `featured` becomes the top reels by views (6 by default; `--top 8` for eight), each labelled with its view count.
 - `series.episodes` becomes every reel whose caption contains the series phrase ("Quartz Crisis" by default, `--series "..."` to change it), ordered by the "Part N" in the caption.
 - `--dry-run` shows the result without writing.
+- Entries in the JSON marked `"pinned": true` always stay on the page, after the ranked ones, labelled "Cam's pick" when they have no view count (`--pin-label` changes the label). Add `"title"` or `"topic"` to an entry to override what the caption gives.
 
 Then `npm start`, open `http://localhost:5001/desert-horology`, and commit.
 
@@ -41,5 +42,6 @@ Paste the JSON into the Claude session and the import runs there.
 ## Notes
 
 - Titles come from the first sentence of each caption. Edit them in the data file if you want something shorter.
-- The console script uses Instagram's own page and an internal JSON endpoint that works while logged in. Instagram changes its site often; if a run returns no captions, the links and grid counts still import fine. If it returns no links at all, check that the URL ends in `/reels/` and that you are logged in.
+- The console script reads the grid for links and counts, then tries three ways to get captions while logged in: the media-info endpoint Instagram's own web app uses, the older post JSON view, and the reel page's meta tags. It logs which one worked. Instagram changes its site often; if a run returns no captions, the links and counts still import fine. If it returns no links at all, check that the URL ends in `/reels/` and that you are logged in.
+- The grid only loads as you scroll. The script keeps scrolling until five rounds in a row add nothing; if an old reel is missing from the output, scroll to the very bottom of the Reels tab by hand first, then run it.
 - When the API token is configured (see `instagram-feed-setup.md`), the page ranks videos live and ignores the imported list, so the two approaches do not conflict.
