@@ -323,8 +323,9 @@
   padding: 0 6px 6px;
 }
 
-/* While the fallback card is showing it already carries the title, so skip the duplicate. */
-.dhc-embed[data-state="fallback"] + .dhc-reel-caption {
+/* The branded card carries the label and title until Instagram's player replaces it, so the
+   caption under the card only appears once the player is in place. */
+.dhc-embed:not([data-state="ready"]) + .dhc-reel-caption {
   display: none;
 }
 
