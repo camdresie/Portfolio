@@ -48,6 +48,9 @@ app.get('/projects')             // Projects portfolio (dual tabbed interface)
 app.get('/timeline')             // Professional timeline
 app.get('/leadership')           // Leadership philosophy
 app.get('/blog')                 // Blog posts from Ghost RSS feed
+app.get('/consuming')            // Books and movies from Goodreads/Letterboxd RSS
+app.get('/desert-horology')      // Desert Horology Co. watch page (curated Instagram reels + optional live feed)
+app.get('/watches')              // Alias - 301 redirects to /desert-horology
 app.get('/about')                // Legacy route - 301 redirects to /bio
 
 // Intelligent project routing based on ID prefix
@@ -67,6 +70,8 @@ app.get('/project/:id', (req, res) => {
 - `timeline.pug`: Professional timeline with scroll animations
 - `leadership.pug`: Leadership philosophy and management approach
 - `blog.pug`: Blog posts from Ghost RSS feed
+- `consuming.pug`: Currently reading and watching, from Goodreads and Letterboxd RSS
+- `desert-horology.pug`: Desert Horology Co. page in its own brand styling (`public/css/desert-horology.css`, `public/js/desert-horology.js`)
 - `project.pug`: Engineering project detail pages
 - `pm-project.pug`: Product management project detail pages
 - `error.pug`: Custom 404 and error pages
@@ -84,6 +89,13 @@ app.get('/project/:id', (req, res) => {
 - In-memory caching with 15-minute TTL to reduce external requests
 - RSS parsing via `rss-parser` dependency
 - Graceful error handling with 500 error page on feed failure
+
+**Desert Horology Co. Page** (`/desert-horology`):
+- With `INSTAGRAM_ACCESS_TOKEN` set, `lib/instagram.js` drives the page from the Instagram API with Instagram Login: "Most watched" is the top videos ranked by the lifetime `views` insight, the series section is detected from captions containing `series.match` (ordered by "Part N" in the caption), and "Latest posts" is the newest media. One fetch every 6 hours; long-lived token refreshed weekly and persisted to `INSTAGRAM_TOKEN_FILE`. Setup: `docs/instagram-feed-setup.md`
+- Without the API (or without the insights permission), the page falls back to `data/desert-horology.json`: intro copy, a manual `featured` list of reel links, and `series.episodes`. Entries without a valid `instagram.com/reel/...` or `/p/...` link are skipped, so a blank `url` never produces a broken card
+- No-API refresh: `scripts/instagram-reels-snippet.js` (pasted into the browser console on the profile's Reels tab) collects links, view counts, and captions; `scripts/import-reels.js` writes them into the data file, ranking by views and detecting series episodes. See `docs/collect-reels.md`
+- Reels render through Instagram's official embed (blockquote + `instagram.com/embed.js`), loaded lazily by `public/js/desert-horology.js`; a branded fallback card links out if the script never loads
+- Brand tokens (Poppins, `#141210` background, `#F1EEE7` cream, `#C4653A` rust) are scoped to `.dhc-page` in `public/css/desert-horology.css`
 
 ## Data Schemas
 
@@ -149,6 +161,9 @@ app.get('/project/:id', (req, res) => {
 - `/public/js/scripts.js`: Main site functionality
 - `/public/js/slideshow.js`: Image gallery functionality  
 - `/public/js/tabs.js`: Tab system functionality
+- `/public/js/desert-horology.js`: Lazy Instagram embeds and post modal for the Desert Horology page
+
+**Environment variables** (see `.env.example`): Goodreads, Letterboxd, and Last.fm settings for the consuming page; `INSTAGRAM_ACCESS_TOKEN` (plus optional `INSTAGRAM_TOKEN_FILE`, `INSTAGRAM_FEED_LIMIT`, `INSTAGRAM_CACHE_TTL_MINUTES`, `INSTAGRAM_RANK_POOL`, `INSTAGRAM_TOP_LIMIT`) for the Desert Horology feed.
 
 ## Development Notes
 

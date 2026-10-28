@@ -35,6 +35,8 @@ const letterboxdParser = new RSSParser({
 });
 const fs = require('fs');
 const path = require('path');
+const instagram = require('./lib/instagram');
+const desertHorology = require('./data/desert-horology.json');
 
 // Simple in-memory cache for blog feed
 let blogCache = { posts: [], lastFetched: 0 };
@@ -456,6 +458,60 @@ app.get('/book/:id', async (req, res) => {
     }
 });
 
+// Desert Horology Co. route - Instagram reels, from the API when configured, else from
+// data/desert-horology.json (filled by hand or by scripts/import-reels.js)
+app.get('/desert-horology', async (req, res) => {
+    const withValidLinks = (items) => (items || [])
+        .map(item => {
+            const url = instagram.normalizePostUrl(item && item.url);
+            return url ? { ...item, url } : null;
+        })
+        .filter(Boolean);
+
+    const series = desertHorology.series || {};
+
+    let feed = { configured: false, posts: [], topVideos: [], series: [], error: null, insightsError: null };
+    try {
+        feed = await instagram.getFeed({ seriesMatch: series.match || series.name });
+    } catch (error) {
+        console.error('Error loading Instagram feed:', error);
+    }
+
+    // "Most watched": ranked by views from the API when it is configured and insights are
+    // available; otherwise the hand-picked list in data/desert-horology.json.
+    const rankedFeatured = (feed.topVideos || []).map(video => ({
+        title: video.title || video.caption || 'Watch on Instagram',
+        eyebrow: video.viewsLabel ? `${video.viewsLabel} views` : 'Most watched',
+        url: video.permalink
+    }));
+    const manualFeatured = withValidLinks(desertHorology.featured)
+        .map(item => ({ ...item, eyebrow: item.topic || 'Reel' }));
+    const featured = rankedFeatured.length ? rankedFeatured : manualFeatured;
+
+    // Series episodes: detected from captions when the API is configured, else the manual list.
+    const detectedEpisodes = (feed.series || []).map(post => ({
+        title: post.episodeTitle || post.title || series.name,
+        part: post.part,
+        url: post.permalink
+    }));
+    const episodes = detectedEpisodes.length ? detectedEpisodes : withValidLinks(series.episodes);
+
+    res.render('desert-horology', {
+        dhc: desertHorology,
+        featured,
+        featuredSource: rankedFeatured.length ? 'api' : 'manual',
+        series,
+        episodes,
+        feed,
+        pageTitle: "Desert Horology Co. - Cam Dresie | Watch Collecting & Horology on Instagram",
+        pageDescription: "Desert Horology Co. is Cam Dresie's watch-collecting side project on Instagram: short videos on horological history, iconic watches like the Breitling Emergency and Omega Ploprof, and practical buying guides."
+    });
+});
+
+app.get('/watches', (req, res) => {
+    res.redirect(301, '/desert-horology');
+});
+
 // Keep legacy /about route for backwards compatibility, redirect to /bio
 app.get('/about', (req, res) => {
     res.redirect(301, '/bio');
@@ -513,6 +569,9 @@ app.use((err, req, res, next) => {
 /*********************
  * The app listens on localhost:3000. The app will also run if a user enters 'npm start' in the terminal.
 *********************/
+
+// Keeps the Instagram token fresh in the background (no-op unless INSTAGRAM_ACCESS_TOKEN is set)
+instagram.startTokenMaintenance();
 
 app.listen(process.env.PORT || 5001, () => {
     console.log('The server is running!');

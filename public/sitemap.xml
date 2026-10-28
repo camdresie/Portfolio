@@ -43,6 +43,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Desert Horology Co. (watch collecting on Instagram) -->
+  <url>
+    <loc>https://camdresie.com/desert-horology</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   
   <!-- Individual Project Pages -->
   <url>

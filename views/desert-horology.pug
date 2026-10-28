@@ -1,0 +1,138 @@
+extends layout.pug
+
+//- Desert Horology Co. page: Cam's watch-collecting Instagram, presented in the DHC brand
+//- (Poppins, cream on near-black, rust accent). Content comes from data/desert-horology.json;
+//- the optional "latest posts" section comes from lib/instagram.js when a token is configured.
+
+block head
+  link(href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href='/static/css/desert-horology.css')
+
+block content
+  - const profileUrl = dhc.profileUrl || `https://www.instagram.com/${dhc.handle}/`
+  - const padPart = (n) => String(n).padStart(2, '0')
+
+  //- Desert Horology clock-mountain mark (fixed brand geometry from the reel-cover template)
+  mixin dhcMark(cls)
+    svg(class=cls viewBox="0 0 240 240" fill="none" aria-hidden="true" focusable="false")
+      circle(cx="120" cy="120" r="95" stroke="currentColor" stroke-width="4.6")
+      line.dhc-mark-major(x1="120" y1="43" x2="120" y2="32.5" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="158.5" y1="53.32" x2="163.75" y2="44.22" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="186.68" y1="81.5" x2="195.78" y2="76.25" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-major(x1="197" y1="120" x2="207.5" y2="120" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="186.68" y1="158.5" x2="195.78" y2="163.75" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="158.5" y1="186.68" x2="163.75" y2="195.78" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-major(x1="120" y1="197" x2="120" y2="207.5" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="81.5" y1="186.68" x2="76.25" y2="195.78" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="53.32" y1="158.5" x2="44.22" y2="163.75" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-major(x1="43" y1="120" x2="32.5" y2="120" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="53.32" y1="81.5" x2="44.22" y2="76.25" stroke-width="3.6" stroke-linecap="round")
+      line.dhc-mark-minor(x1="81.5" y1="53.32" x2="76.25" y2="44.22" stroke-width="3.6" stroke-linecap="round")
+      path(d="M 56.4 149.8 L 88.6 124.0 L 102.3 132.1 L 124.0 87.0 L 143.3 128.9 L 159.4 122.4 L 178.8 136.9" stroke="currentColor" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round")
+
+  mixin instagramIcon
+    svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false")
+      path(fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z")
+
+  //- One reel card. The embed container holds a branded fallback card; desert-horology.js swaps
+  //- in Instagram's official player when the card scrolls into view. If Instagram's script never
+  //- loads, the fallback card stays and links to the post.
+  mixin reelCard(item, eyebrow)
+    figure.dhc-reel
+      .dhc-embed(data-permalink=item.url data-captioned=item.captioned ? 'true' : null)
+        a.dhc-fallback(href=item.url target='_blank' rel='noopener')
+          +dhcMark('dhc-fallback-mark')
+          span.dhc-fallback-eyebrow= eyebrow
+          if item.title
+            span.dhc-fallback-title= item.title
+          span.dhc-fallback-cta Watch on Instagram
+      figcaption.dhc-reel-caption
+        span.dhc-eyebrow= eyebrow
+        if item.title
+          h3.dhc-reel-title= item.title
+        if item.blurb
+          p.dhc-reel-blurb= item.blurb
+
+  article.dhc-page
+    header.dhc-hero
+      .dhc-lockup
+        +dhcMark('dhc-mark')
+        span.dhc-wordmark Desert Horology #[span Co.]
+      h1.dhc-title= dhc.title || 'Desert Horology Co.'
+      if dhc.tagline
+        p.dhc-tagline= dhc.tagline
+      if dhc.intro && dhc.intro.length
+        .dhc-intro
+          each para in dhc.intro
+            p= para
+      .dhc-actions
+        a.dhc-button(href=profileUrl target='_blank' rel='noopener')
+          +instagramIcon
+          span Follow @#{dhc.handle}
+
+    section.dhc-section#most-watched
+      .dhc-section-head
+        span.dhc-eyebrow= featuredSource === 'api' ? 'Ranked by views' : 'Start here'
+        h2.dhc-h2 Most watched
+      if featured && featured.length
+        .dhc-reel-grid
+          each item in featured
+            +reelCard(item, item.eyebrow || item.topic || 'Reel')
+      else
+        .dhc-empty
+          p The featured videos are being lined up. In the meantime, everything is on Instagram.
+          a.dhc-button.dhc-button--ghost(href=profileUrl target='_blank' rel='noopener')
+            +instagramIcon
+            span Open @#{dhc.handle}
+
+    if episodes && episodes.length
+      section.dhc-section#quartz-crisis
+        .dhc-section-head
+          span.dhc-eyebrow= series.eyebrow || 'Series'
+          h2.dhc-h2= series.name
+          if series.description
+            p.dhc-section-desc= series.description
+        ol.dhc-reel-grid.dhc-series
+          each ep in episodes
+            li
+              +reelCard(ep, ep.part !== null && ep.part !== undefined ? `Part ${padPart(ep.part)}` : (series.name || 'Episode'))
+
+    if feed && feed.configured
+      section.dhc-section#latest
+        .dhc-section-head
+          span.dhc-eyebrow From the feed
+          h2.dhc-h2 Latest posts
+        if feed.posts && feed.posts.length
+          .dhc-feed-grid
+            each post in feed.posts
+              a.dhc-feed-tile(class=post.thumbnail ? null : 'dhc-feed-tile--noimage' href=post.permalink data-permalink=post.permalink target='_blank' rel='noopener' aria-label=post.caption || 'Instagram post')
+                if post.thumbnail
+                  img(src=post.thumbnail alt=post.caption || '' loading='lazy' decoding='async')
+                if post.isVideo
+                  span.dhc-feed-badge(aria-hidden='true') &#9654;
+                else if post.isCarousel
+                  span.dhc-feed-badge(aria-hidden='true') &#10697;
+                if post.caption
+                  span.dhc-feed-caption= post.caption
+        else
+          .dhc-empty
+            p Latest posts are temporarily unavailable. Everything is still on Instagram.
+            a.dhc-button.dhc-button--ghost(href=profileUrl target='_blank' rel='noopener')
+              +instagramIcon
+              span Open @#{dhc.handle}
+
+    footer.dhc-footer
+      p New videos land on Instagram first.
+      a.dhc-button(href=profileUrl target='_blank' rel='noopener')
+        +instagramIcon
+        span See everything on Instagram
+      p.dhc-note Videos are hosted by Instagram and play through its embedded player.
+
+  //- Modal used by the "Latest posts" tiles so a post can play without leaving the site.
+  #dhc-modal.dhc-modal(hidden aria-hidden='true')
+    .dhc-modal-backdrop(data-dhc-close)
+    .dhc-modal-dialog(role='dialog' aria-modal='true' aria-label='Instagram post')
+      button.dhc-modal-close(type='button' data-dhc-close aria-label='Close') &times;
+      .dhc-modal-body
+
+  script(src='/static/js/desert-horology.js' defer)
