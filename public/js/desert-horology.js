@@ -158,6 +158,28 @@
     });
   }
 
+  // ---- "Show more" ------------------------------------------------------------------------------
+
+  function initShowMore() {
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest ? event.target.closest('[data-dhc-more]') : null;
+      if (!button) return;
+      var grid = document.getElementById(button.getAttribute('data-dhc-more'));
+      if (!grid) return;
+      var batch = parseInt(button.getAttribute('data-dhc-batch'), 10) || 9;
+      var hidden = Array.prototype.filter.call(grid.children, function (el) { return el.hasAttribute('hidden'); });
+      hidden.slice(0, batch).forEach(function (el) { el.removeAttribute('hidden'); });
+      var left = Math.max(0, hidden.length - batch);
+      if (left === 0) {
+        button.parentNode.removeChild(button);
+      } else {
+        button.textContent = 'Show more (' + left + ' left)';
+      }
+      // The lazy embed observer already watches the revealed cards; they load as they scroll in.
+    });
+  }
+
   initLazyEmbeds();
   initModal();
+  initShowMore();
 })();

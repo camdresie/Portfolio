@@ -9,7 +9,8 @@
  *                                  Safari  enable the Develop menu in Settings > Advanced, then Cmd+Option+C
  *   3. Paste this whole file into the console and press Enter.
  *      It scrolls the grid until every reel has loaded, reads the view counts, fetches the caption
- *      and exact count for the most-viewed ones, then prints a JSON list and copies it to the clipboard.
+ *      and exact count for each reel (about a minute per 100), then prints a JSON list and copies
+ *      it to the clipboard.
  *   4. In the repo, import it:   pbpaste | node scripts/import-reels.js
  *      (or save the JSON to a file and run  node scripts/import-reels.js reels.json)
  *
@@ -20,8 +21,8 @@
   const MAX_SCROLLS = 150;     // stops early once the grid stops growing
   const SCROLL_WAIT_MS = 2000;
   const STABLE_ROUNDS = 5;     // this many scrolls with no new reels = end of the grid
-  const ENRICH_TOP = 30;       // fetch caption + exact count for this many of the most-viewed reels
-  const ENRICH_WAIT_MS = 600;  // polite pause between those fetches
+  const ENRICH_TOP = Infinity; // fetch caption + exact count for every reel (set a number to limit it)
+  const ENRICH_WAIT_MS = 500;  // polite pause between those fetches (about a minute per 100 reels)
   const IG_APP_ID = '936619743392459';
   const SHORTCODE_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
@@ -177,7 +178,12 @@
 
   // 3. Captions and exact counts for the top of the list.
   let enriched = 0;
-  for (const reel of reels.slice(0, ENRICH_TOP)) {
+  let done = 0;
+  const toEnrich = reels.slice(0, ENRICH_TOP);
+  log(`fetching captions for ${toEnrich.length} reels, about ${Math.ceil(toEnrich.length * (ENRICH_WAIT_MS + 300) / 60000)} minute(s)...`);
+  for (const reel of toEnrich) {
+    done++;
+    if (done % 10 === 0) log(`${done} of ${toEnrich.length}`);
     try {
       const details = await fetchDetails(reel.code);
       if (details) {
@@ -192,7 +198,7 @@
     await sleep(ENRICH_WAIT_MS);
   }
   reels.sort((a, b) => (b.views || 0) - (a.views || 0));
-  log(`captions fetched for ${enriched} of ${Math.min(ENRICH_TOP, reels.length)} top reels${enriched ? '' : ' (titles will be blank; links and counts still import fine)'}`);
+  log(`captions fetched for ${enriched} of ${toEnrich.length} reels${enriched ? '' : ' (titles will be blank; links and counts still import fine)'}`);
 
   // 4. Output.
   const output = reels.map((reel) => ({

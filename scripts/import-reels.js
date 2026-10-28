@@ -4,7 +4,8 @@
  *
  *   pbpaste | node scripts/import-reels.js                 macOS: straight from the clipboard
  *   node scripts/import-reels.js reels.json                from a file
- *   node scripts/import-reels.js reels.json --top 8        show 8 reels in "Most watched" (default 6)
+ *   node scripts/import-reels.js reels.json --top 12       cap "Most watched" at 12 reels (default: all of them;
+ *                                                           the page reveals them in batches with a "Show more" button)
  *   node scripts/import-reels.js reels.json --series "Quartz Crisis"
  *                                                           phrase that marks a series episode
  *                                                           (default: series.match in the data file)
@@ -18,7 +19,9 @@
  * may also carry  "title"  and  "topic"  to override what is derived from the caption.
  *
  * Hand-edited titles survive re-imports: add  "keepTitle": true  to an entry in the data file and
- * its title is kept whenever that post is imported again (matched by post code).
+ * its title is kept whenever that post is imported again (matched by post code). Entries in the
+ * data file marked  "pinned": true  (in featured or in series.episodes) are kept even when the
+ * input does not mention them, so a hand-added episode is never lost.
  * Everything else in the data file (intro copy, tagline, handle) is left as it is.
  */
 const fs = require('fs');
@@ -27,11 +30,11 @@ const instagram = require('../lib/instagram');
 const { captionTitle, detectSeries, formatViews } = instagram._internal;
 
 function parseArgs(argv) {
-    const options = { top: 6, dryRun: false, series: null, pinLabel: "Cam's pick", data: path.join(__dirname, '..', 'data', 'desert-horology.json'), input: null };
+    const options = { top: Infinity, dryRun: false, series: null, pinLabel: "Cam's pick", data: path.join(__dirname, '..', 'data', 'desert-horology.json'), input: null };
     for (let i = 0; i < argv.length; i++) {
         const arg = argv[i];
         if (arg === '--dry-run') options.dryRun = true;
-        else if (arg === '--top') options.top = parseInt(argv[++i], 10);
+        else if (arg === '--top') { const v = argv[++i]; options.top = v === 'all' ? Infinity : parseInt(v, 10); }
         else if (arg === '--series') options.series = argv[++i];
         else if (arg === '--pin-label') options.pinLabel = argv[++i];
         else if (arg === '--data') options.data = path.resolve(argv[++i]);
@@ -39,7 +42,7 @@ function parseArgs(argv) {
         else if (arg.startsWith('--')) throw new Error(`Unknown option ${arg}`);
         else options.input = arg;
     }
-    if (!Number.isFinite(options.top) || options.top < 1) throw new Error('--top must be a positive number');
+    if (Number.isNaN(options.top) || options.top < 1) throw new Error('--top must be a positive number or "all"');
     return options;
 }
 
@@ -93,9 +96,19 @@ function main() {
     const data = JSON.parse(fs.readFileSync(options.data, 'utf8'));
     const seriesMatch = options.series || (data.series && (data.series.match || data.series.name)) || '';
 
+    // Entries pinned in the data file ride along even when the new input omits them.
+    const carried = [];
+    for (const entry of data.featured || []) {
+        if (entry && entry.pinned === true && entry.url) carried.push({ url: entry.url, title: entry.title, topic: entry.topic, pinned: true });
+    }
+    const carriedEpisodes = [];
+    for (const entry of (data.series && data.series.episodes) || []) {
+        if (entry && entry.pinned === true && entry.url) carriedEpisodes.push(entry);
+    }
+
     // Merge entries that point at the same post (a /p/ link and a /reel/ link share the code).
     const byCode = new Map();
-    for (const entry of readInput(options.input)) {
+    for (const entry of readInput(options.input).concat(carried)) {
         const post = toPost(entry);
         if (!post) continue;
         const existing = byCode.get(post.code);
@@ -137,14 +150,24 @@ function main() {
         topic: post.topic || (post.views !== null ? `${formatViews(post.views)} views` : (post.pinned ? options.pinLabel : 'Reel')),
         url: post.permalink
     }));
-    const episodes = detectSeries(posts, seriesMatch).map(post => ({
+    const detected = detectSeries(posts, seriesMatch).map(post => ({
         part: post.part,
         ...withKeptTitle(post, post.episodeTitle),
         url: post.permalink
     }));
+    const detectedCodes = new Set(detected.map(ep => ep.url.split('/')[4]));
+    const episodes = detected
+        .concat(carriedEpisodes
+            .map(ep => ({ ...ep, url: instagram.normalizePostUrl(ep.url) }))
+            .filter(ep => ep.url && !detectedCodes.has(ep.url.split('/')[4])))
+        .sort((a, b) => {
+            const pa = typeof a.part === 'number' ? a.part : Infinity;
+            const pb = typeof b.part === 'number' ? b.part : Infinity;
+            return pa - pb;
+        });
 
     console.log(`Read ${posts.length} reels (${posts.filter(p => p.views !== null).length} with view counts, ${posts.filter(p => p.captionRaw).length} with captions).`);
-    console.log(`\nMost watched (top ${options.top}${pinned.length ? ` + ${pinned.length} pinned` : ''}):`);
+    console.log(`\nMost watched (${options.top === Infinity ? 'all' : 'top ' + options.top}${pinned.length ? ` + ${pinned.length} pinned` : ''}):`);
     featured.forEach((item, i) => console.log(`  ${i + 1}. ${item.topic.padEnd(12)} ${item.title || '(no caption)'}\n     ${item.url}`));
     console.log(`\nSeries "${seriesMatch}": ${episodes.length} episode(s)`);
     episodes.forEach(ep => console.log(`  Part ${ep.part === null ? '??' : String(ep.part).padStart(2, '0')}  ${ep.title}\n     ${ep.url}`));

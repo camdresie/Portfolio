@@ -12,7 +12,7 @@ Re-run both whenever you want new reels or fresh view counts on the page. About 
 1. Log in to Instagram in Chrome, Firefox, or Safari and open `https://www.instagram.com/deserthorologyco/reels/`.
 2. Open the developer console. Chrome: Cmd+Option+J on a Mac, Ctrl+Shift+J on Windows. Firefox: Cmd+Option+K or Ctrl+Shift+K. Safari: turn on the Develop menu in Settings > Advanced, then Cmd+Option+C.
 3. Open `scripts/instagram-reels-snippet.js`, copy the whole file, paste it into the console, and press Enter.
-4. Watch the `[reels]` lines. The script scrolls until the grid stops growing, then fetches captions for the most-viewed reels. When it prints the JSON, it has also copied it to the clipboard.
+4. Watch the `[reels]` lines. The script scrolls until the grid stops growing, then fetches captions for every reel, about a minute per hundred. When it prints the JSON, it has also copied it to the clipboard.
 
 If a browser refuses the paste with a warning about pasting code, type `allow pasting` first, as it asks. That protection exists because console snippets run with your login, which is exactly why this one only reads your own page.
 
@@ -28,10 +28,11 @@ On Windows, save the JSON to a file instead and run `node scripts/import-reels.j
 
 The command prints what it found and writes `data/desert-horology.json`:
 
-- `featured` becomes the top reels by views (6 by default; `--top 8` for eight), each labelled with its view count.
+- `featured` becomes every reel, most watched first, each labelled with its view count. The page shows nine and reveals the rest in batches behind a "Show more" button. Add `--top 12` to cap the list instead.
 - `series.episodes` becomes every reel whose caption contains the series phrase ("Quartz Crisis" by default, `--series "..."` to change it), ordered by the "Part N" in the caption.
 - `--dry-run` shows the result without writing.
 - Entries in the JSON marked `"pinned": true` always stay on the page, after the ranked ones, labelled "Cam's pick" when they have no view count (`--pin-label` changes the label). Add `"title"` or `"topic"` to an entry to override what the caption gives.
+- Entries in the data file marked `"pinned": true`, in `featured` or in `series.episodes`, are kept on every re-import even if the new JSON does not mention them. That is how to add a series episode by hand when its caption lacks a part number.
 
 Then `npm start`, open `http://localhost:5001/desert-horology`, and commit.
 
