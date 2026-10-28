@@ -4,7 +4,7 @@
   "title": "Desert Horology Co.",
   "tagline": "Watch collecting, horological history, and honest buying advice",
   "intro": [
-    "Desert Horology Co. is my watch side of the internet. I collect, research, and make short videos about mechanical watches: the engineering inside them, the history behind them, and how to buy well without overpaying.",
+    "Desert Horology Co. is one of my passion projects. I collect, research, and make short videos about mechanical watches: the engineering inside them, the history behind them, and how to buy well without overpaying.",
     "Start with the most-watched videos below, then follow along on Instagram for the newest ones."
   ],
   "_howToAddAReel": "Easiest: run scripts/instagram-reels-snippet.js in your browser on your profile's Reels tab, then `pbpaste | node scripts/import-reels.js` (see docs/collect-reels.md). That fills featured[] with the top reels by views and series.episodes from captions. You can also add entries by hand: paste the link from Share > Copy link into url; topic is the small label above the title. Entries without a valid instagram.com/reel/... or /p/... link are skipped. With INSTAGRAM_ACCESS_TOKEN configured, the API ranks videos live and this list is ignored.",
