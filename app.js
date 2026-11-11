@@ -8,18 +8,7 @@ const express = require("express");
 const app = express();
 const data = require("./data.json");
 const RSSParser = require('rss-parser');
-// Configure RSS parser to extract Goodreads custom fields
-const rssParser = new RSSParser({
-    customFields: {
-        item: [
-            ['author_name', 'author_name'],
-            ['book_id', 'book_id'],
-            ['user_rating', 'user_rating'],
-            ['user_review', 'user_review'],
-            ['book_large_image_url', 'book_large_image_url']
-        ]
-    }
-});
+const rssParser = new RSSParser();
 // Configure RSS parser to extract Letterboxd custom fields
 const letterboxdParser = new RSSParser({
     customFields: {
@@ -36,6 +25,7 @@ const letterboxdParser = new RSSParser({
 const fs = require('fs');
 const path = require('path');
 const instagram = require('./lib/instagram');
+const goodreads = require('./lib/goodreads');
 const desertHorology = require('./data/desert-horology.json');
 
 // Simple in-memory cache for blog feed
@@ -55,58 +45,18 @@ const CONSUMING_CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
  * Data fetching functions for consuming page
 *********************/
 
-// Fetch books from Goodreads RSS feed
-async function fetchGoodreadsRSS() {
+// Fetch books from Goodreads. The shelf RSS feeds were retired in October 2026, so this
+// reads the public bookshelf widget instead (see lib/goodreads.js)
+async function fetchGoodreadsBooks() {
     try {
         const userId = process.env.GOODREADS_USER_ID;
         if (!userId || userId === 'your_goodreads_user_id') {
             throw new Error('Goodreads User ID not configured');
         }
 
-        // Fetch both currently-reading and recently read books
-        const currentlyReadingUrl = `https://www.goodreads.com/review/list_rss/${userId}?shelf=currently-reading`;
-        const readUrl = `https://www.goodreads.com/review/list_rss/${userId}?shelf=read&per_page=10`;
-
-        const [currentFeed, readFeed] = await Promise.all([
-            rssParser.parseURL(currentlyReadingUrl),
-            rssParser.parseURL(readUrl)
-        ]);
-
-        const parseBook = (item, status) => {
-            // Use Goodreads custom fields
-            const bookId = item.book_id || '';
-            const author = item.author_name || 'Unknown Author';
-            const imageUrl = item.book_large_image_url || item.book_medium_image_url || '';
-            const rating = item.user_rating ? parseInt(item.user_rating) : null;
-            const review = item.user_review || '';
-
-            // Construct proper book link from book ID
-            const bookLink = bookId ? `https://www.goodreads.com/book/show/${bookId}` : item.link;
-
-            return {
-                type: 'book',
-                id: bookId,
-                title: item.title || 'Unknown Title',
-                subtitle: author,
-                imageUrl: imageUrl,
-                link: bookLink,
-                status: status,
-                timestamp: item.pubDate ? new Date(item.pubDate) : new Date(),
-                rating: rating,
-                review: review.trim()
-            };
-        };
-
-        // Parse currently reading books (no limit)
-        const currentBooks = (currentFeed.items || []).map(item => parseBook(item, 'current'));
-
-        // Parse recently read books (limit to 10)
-        const readBooks = (readFeed.items || []).slice(0, 10).map(item => parseBook(item, 'recent'));
-
-        // Combine and return
-        return [...currentBooks, ...readBooks];
+        return await goodreads.fetchBooks(userId);
     } catch (error) {
-        console.error('Error fetching Goodreads RSS:', error);
+        console.error('Error fetching Goodreads shelves:', error);
         throw error;
     }
 }
@@ -266,7 +216,7 @@ async function refreshConsumingCache() {
     const now = Date.now();
 
     try {
-        const books = await fetchGoodreadsRSS();
+        const books = await fetchGoodreadsBooks();
         consumingCache.books.data = books;
         consumingCache.books.error = null;
         consumingCache.books.lastFetched = now;

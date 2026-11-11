@@ -41,7 +41,11 @@ block content
             .book-review-section
               h2.review-heading My Review
               .review-content
-                p!= book.review
+                p= book.review
+              if book.reviewTruncated && book.reviewLink
+                p.review-excerpt-note
+                  | This is an excerpt. 
+                  a(href=book.reviewLink target='_blank' rel='noopener') Read the full review on Goodreads →
           else
             .no-review
               p.empty-state I haven't written a review for this book yet.
