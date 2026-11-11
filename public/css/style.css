@@ -3304,6 +3304,12 @@ img.blog-logo {
 
 .review-content p {
   margin-bottom: 1rem;
+  white-space: pre-line;
+}
+
+.review-excerpt-note {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .no-review {

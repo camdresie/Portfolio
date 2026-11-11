@@ -48,7 +48,7 @@ app.get('/projects')             // Projects portfolio (dual tabbed interface)
 app.get('/timeline')             // Professional timeline
 app.get('/leadership')           // Leadership philosophy
 app.get('/blog')                 // Blog posts from Ghost RSS feed
-app.get('/consuming')            // Books and movies from Goodreads/Letterboxd RSS
+app.get('/consuming')            // Books from the Goodreads shelf widget, movies from Letterboxd RSS
 app.get('/desert-horology')      // Desert Horology Co. watch page (curated Instagram reels + optional live feed)
 app.get('/watches')              // Alias - 301 redirects to /desert-horology
 app.get('/about')                // Legacy route - 301 redirects to /bio
@@ -70,7 +70,7 @@ app.get('/project/:id', (req, res) => {
 - `timeline.pug`: Professional timeline with scroll animations
 - `leadership.pug`: Leadership philosophy and management approach
 - `blog.pug`: Blog posts from Ghost RSS feed
-- `consuming.pug`: Currently reading and watching, from Goodreads and Letterboxd RSS
+- `consuming.pug`: Currently reading and watching, from the Goodreads shelf widget (`lib/goodreads.js`; the shelf RSS feeds were retired in October 2026) and Letterboxd RSS
 - `desert-horology.pug`: Desert Horology Co. page in its own brand styling (`public/css/desert-horology.css`, `public/js/desert-horology.js`)
 - `project.pug`: Engineering project detail pages
 - `pm-project.pug`: Product management project detail pages
